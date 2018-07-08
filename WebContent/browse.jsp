@@ -141,14 +141,8 @@
 			<li><a href="#contact">Contact</a></li>
 		</ul>
 		
-		<form class="navbar-form navbar-right">
-			<div class="form-group">
-				<input type="text" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-group">
-				<input type="password" placeholder="Password" class="form-control">
-			</div>
-			<button type="submit" class="btn btn-success">Sign in</button>
+		<form class="navbar-form navbar-right" id="signinbtn">
+			<button type="button" class="btn btn-success" id="sign-in">个人中心</button>
 		</form>
 	</div>
 </div>
@@ -287,7 +281,10 @@
 				<div class="card mb-4 box-shadow">
 					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="140">
 					<div class="card-body">
-						<p class="card-text"><%=movie.getDescription() %></p>
+						<p class="card-text"><% if(movie.getDescription().length()>60){
+							out.print(movie.getDescription().substring(0,50)+"......");
+							}else	out.print(movie.getDescription());
+							%></p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-outline-secondary">View</button>

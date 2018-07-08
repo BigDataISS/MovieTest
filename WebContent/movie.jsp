@@ -51,6 +51,48 @@
 			});
 						
 		});
+	    
+	    $(".item  .btn").click(function() {
+			var a=$(this).parent().siblings("h2");
+	    	
+	    	console.log(a.html())
+			$.ajax({
+			    type: "POST",
+			    url: "${pageContext.request.contextPath}/movieDetailServlet",
+			    data: {"name":a.html()},
+			    /* dataType: "json", */			   
+			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+			    success: function(data){
+			    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
+			    	
+			    },
+				error: function(data){
+			    	
+			    },
+			}); 
+						
+		});
+	    
+	    $("#signinbtn .btn").click(function() {
+	    	var id="1"
+	    	console.log(id)
+			$.ajax({
+			    type: "POST",
+			    url: "${pageContext.request.contextPath}/movieRecommendServlet",
+			    data: {"userId":id},
+			    /* dataType: "json", */			   
+			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+			    success: function(data){
+			    	
+			    	window.location.href="${pageContext.request.contextPath}/person.jsp";
+			    	
+			    },
+				error: function(data){
+			    	
+			    },
+			}); 
+						
+		});
 	    		
 });
 </script>
@@ -80,14 +122,8 @@
 			<li><a href="#contact">Contact</a></li>
 		</ul>
 		
-		<form class="navbar-form navbar-right">
-			<div class="form-group">
-				<input type="text" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-group">
-				<input type="password" placeholder="Password" class="form-control">
-			</div>
-			<button type="submit" class="btn btn-success">Sign in</button>
+		<form class="navbar-form navbar-right" id="signinbtn">
+			<button type="button" class="btn btn-success" id="sign-in">个人中心</button>
 		</form>
 	</div>
 </div>
@@ -143,70 +179,38 @@
 				<!-- Example row of columns -->
 				<div class="row">
 					<!-- Three columns of text below the carousel -->
+					<!--
+						Start
+						展示电影信息
+						@author 宁志豪
+					-->
+					<% List<MovieBean> movieList = (List<MovieBean>)session.getAttribute("movieList"); 
+						if(movieList == null){
+							movieList = new ArrayList<MovieBean>();
+						}
+						for(MovieBean mv : movieList){
+					%>
+					
 					<div class="col-lg-4">
-						<img class="img-circle" src="pics/nms.jpg" alt="Generic placeholder image" width="140" height="140">
-						<h2>我不是药神</h2>
-						<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+						<img class="img-circle" src="pics/<%=mv.getName() %>.jpg" alt="Generic placeholder image" width="140" height="140">
+						<h2 id="h2"><%=mv.getName() %></h2>
+						<p><% if(mv.getDescription().length()>60){
+							out.print(mv.getDescription().substring(0,50)+"......");
+							}else	out.print(mv.getDescription());
+							%></p>
+						<p><a class="btn btn-default" href="#" role="button" >View details &raquo;</a></p>
 					</div><!-- /.col-lg-4 -->
-					<div class="col-lg-4">
-						<img class="img-circle" src="pics/spman2.jpg" alt="Generic placeholder image" width="140" height="140">
-						<h2>超人总动员2</h2>
-						<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div><!-- /.col-lg-4 -->
-					<div class="col-lg-4">
-						<img class="img-circle" src="pics/hs.jpg" alt="Generic placeholder image" width="140" height="140">
-						<h2>他是她，她是他</h2>
-						<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div><!-- /.col-lg-4 -->
+				<% } %>
+				<!--
+					End
+					@author 宁志豪
+				-->
 				</div><!-- /.row -->
 			</div>
 		
 		</div>
 		
-		<!-- 幻灯片第二页 -->
-		<div class="item">
-			
-			<div class="container marketing">
-				<!-- Example row of columns -->
-				<div class="row">
-					<!-- Three columns of text below the carousel -->
-					<div class="col-lg-4">
-						<img class="img-circle" src="pics/Background.jpg" alt="Generic placeholder image" width="140" height="140">
-						<h2>侏罗纪世界2</h2>
-						<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div><!-- /.col-lg-4 -->
-					<div class="col-lg-4">
-						<img class="img-circle" src="pics/girl.jpg" alt="Generic placeholder image" width="140" height="140">
-						<h2>最后一球</h2>
-						<p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div><!-- /.col-lg-4 -->
-					<div class="col-lg-4">
-						<img class="img-circle" src="pics/ut.jpg" alt="Generic placeholder image" width="140" height="140">
-						<h2>暹罗决：九神战甲</h2>
-						<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-					</div><!-- /.col-lg-4 -->
-				</div><!-- /.row -->
-			</div>
-			
-		</div>
-		<!-- 幻灯片第三页 -->
-		<div class="item">
-			<img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-			<div class="container">
-				<div class="carousel-caption">
-					<h1>One more for good measure.</h1>
-					<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
+		
 
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>

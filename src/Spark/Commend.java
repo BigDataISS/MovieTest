@@ -26,6 +26,12 @@ public class Commend implements Serializable{
 	private static JavaSparkContext javaSparkContext = null;
 	private static SQLContext sqlContext = null;
 	
+	/**
+	Start
+	Spark协同过滤ALS电影推荐算法
+	@代码编辑和改错 张子健，王鑫科
+	@算法分析 马雨昂
+	 **/
 	public static void commendProductsForUser(int userID) throws SQLException{
 		//Configuration
 		if(conn == null)
@@ -40,11 +46,11 @@ public class Commend implements Serializable{
 			sqlContext = new SQLContext(javaSparkContext);
 		
 		//ReadData from database
-		String url = "jdbc:mysql://127.0.0.1:3306/movie?characterEncoding=UTF-8";
+		String url = "jdbc:mysql://192.168.154.89:3306/movie?characterEncoding=UTF-8";
 		String fromTable = "ratebyuser";
 		Properties props = new Properties();
-		props.put("user", "root");
-		props.put("password", "Nimakengdie1");
+		props.put("user", "CSuser");
+		props.put("password", "123456");
 		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable,props);
 		
 		//Generating RDD
@@ -67,4 +73,10 @@ public class Commend implements Serializable{
 		}
 		System.out.println("Done.");
 	}
+	/**
+	END
+	Spark协同过滤ALS电影推荐算法
+	@代码编辑和改错 张子健，王鑫科
+	@算法分析 马雨昂
+	 **/
 }

@@ -122,13 +122,7 @@
 		</ul>
 		
 		<form class="navbar-form navbar-right" id="signinbtn">
-			<div class="form-group">
-				<input type="text" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-group">
-				<input type="password" placeholder="Password" class="form-control">
-			</div>
-			<button type="button" class="btn btn-success" id="sign-in">Sign in</button>
+			<button type="button" class="btn btn-success" id="sign-in">个人中心</button>
 		</form>
 	</div>
 </div>
@@ -186,7 +180,10 @@
 					<div class="col-lg-4">
 						<img class="img-circle" src="pics/<%=movie.getName() %>.jpg" alt="Generic placeholder image" width="140" height="140">
 						<h2 id="h2"><%=movie.getName() %></h2>
-						<p><%=movie.getDescription() %></p>
+						<p><% if(movie.getDescription().length()>60){
+							out.print(movie.getDescription().substring(0,50)+"......");
+							}else	out.print(movie.getDescription());
+							%></p>
 						<p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
 					</div><!-- /.col-lg-4 -->
 				<% } %>

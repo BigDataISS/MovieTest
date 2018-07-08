@@ -1,6 +1,7 @@
 package Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.spark.api.java.function.Function;
 import Bean.MovieBean;
@@ -33,6 +34,41 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		return getForList(sql);
 		
 	} 
+	
+	public List<MovieBean> getThreeMovieByType(String type,int movieId) {
+		// TODO Auto-generated method stub
+		String[] types;
+		types=type.split(" ");
+		List<MovieBean> mvbs=new ArrayList<MovieBean>();
+		int hasAdd=0;
+		int loopTime=0;
+		while(hasAdd<3) {
+			for(String str:types) {
+				
+				String sql = "select * from movie where type like '%"+str+"%' "
+						+ "and movieid != "+movieId
+						+ " order by ratingNum desc limit "+(loopTime+1)+" , "+(loopTime+2);
+				System.out.println(sql);
+				
+				MovieBean mvb=get(sql);
+				if(mvb!=null) {
+					mvbs.add(mvb);
+					System.out.println(mvb.getName());
+					hasAdd++;
+					System.out.println(hasAdd);
+					if(hasAdd==3)
+						break;
+				}
+			}
+			
+			loopTime++;
+			if(loopTime>3)
+				break;
+		}
+		
+		return mvbs;
+	} 
+	
 	public void deleteRecommendMovie(int i) {
 		String sql = "delete from recommend where UserId=?";
 		update(sql,i);

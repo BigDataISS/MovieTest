@@ -1,6 +1,8 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,12 +34,14 @@ public class MovieDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String name=request.getParameter("name");
-		System.out.print(name);
+		//System.out.print(name);
 		MovieService movieService=new MovieService();
 		MovieBean movie=movieService.getTheMovieByName(name);
+		List<MovieBean> movieList=movieService.getThreeMovieByType(movie.getType(),movie.getMovieId());
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("movie", movie);
+		session.setAttribute("movieList",movieList);
 	}
 
 	/**
