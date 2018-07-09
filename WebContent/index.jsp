@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" import="Bean.MovieBean" import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
+<!-- 
+	START
+	功能描述：index.jsp，主页，按关键字、类别检索电影
+	@author 毛恺 
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +36,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+    	
+    	/**
+			用户点击search按钮，传输输入栏信息，并跳转到搜索结果界面  	
+		*/
 	    $(".jumbotron .navbar-form .btn").click(function() {
 	    	var input=$(this).prev(".form-control");
 	    	
@@ -51,6 +60,9 @@
 						
 		});
 	    
+	    /**
+			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
+		*/
 	    $(".marketing .col-lg-4 .btn").click(function() {
 	    	var output=$(this).parent().siblings("h2");
 	    	
@@ -72,8 +84,11 @@
 						
 		});
 	    
+	    /**
+			用户点击个人主页按钮，跳转到个人主页页面	
+		*/
 	    $("#signinbtn .btn").click(function() {
-	    	var id="2"
+	    	var id="1"
 	    	console.log(id)
 			$.ajax({
 			    type: "POST",
@@ -238,3 +253,8 @@
 <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
+
+<!-- 
+	END
+	@author 毛恺 
+-->

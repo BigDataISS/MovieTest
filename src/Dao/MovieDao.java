@@ -1,12 +1,11 @@
 package Dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import Bean.MovieBean;
 /**
- * ï¿½Ó¿ï¿½ï¿½ï¿½
- * @author ï¿½ï¿½Ö¾ï¿½ï¿½
+ * ½Ó¿ÚÀà
+ * @author ÄþÖ¾ºÀ
  *
  */
 
@@ -15,7 +14,13 @@ public interface MovieDao {
 	public List<MovieBean> getMovieByName(String name);
 	public List<MovieBean> getMovieByType(String type);
 	public List<MovieBean> getThreeMovie();
-	public List<MovieBean> getRecommendMovie(int i) throws SQLException;
+	public List<MovieBean> getRecommendMovie(int i);
 	public MovieBean getTheMovieByName(String name);
 	public void addRecommendMovie(int m,int n);
+	List<MovieBean> getThreeMovieByType(String type, int movieId);
+	void deleteRecommendMovie(int id);
 }
+/**
+ * END
+ * @author ÄþÖ¾ºÀ
+ */

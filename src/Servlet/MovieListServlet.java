@@ -14,7 +14,9 @@ import Bean.MovieBean;
 import Service.MovieService;
 
 /**
- * Servlet implementation class MovieListServlet
+ * Start
+ * 根据类型返回相应的电影列表
+ * @author 宁志豪
  */
 @WebServlet(name="MovieListServlet",urlPatterns= {"/movieListServlet"})
 public class MovieListServlet extends HttpServlet {
@@ -51,3 +53,8 @@ public class MovieListServlet extends HttpServlet {
 	}
 
 }
+/**
+ * END
+ * @author 宁志豪
+ */
+

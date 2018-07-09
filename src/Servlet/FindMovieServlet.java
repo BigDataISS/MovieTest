@@ -55,6 +55,7 @@ public class FindMovieServlet extends HttpServlet {
 }
 /**
  * END
+ * 
  * @author ÄþÖ¾ºÀ
  */
 

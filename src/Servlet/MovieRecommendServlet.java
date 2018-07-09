@@ -1,7 +1,6 @@
 package Servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,7 +16,9 @@ import Service.MovieService;
 import Service.UserService;
 
 /**
- * Servlet implementation class MovieRecommendServlet
+ * Start
+ * 返回用户推荐电影的相关信息
+ * @author 宁志豪
  */
 @WebServlet(name="MovieRecommendServlet",urlPatterns= {"/movieRecommendServlet"})
 public class MovieRecommendServlet extends HttpServlet {
@@ -45,29 +46,17 @@ public class MovieRecommendServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id=request.getParameter("userId");
-		//String id="1";
 		System.out.println("userid"+id);
 		MovieService movieService=new MovieService();
-		//UserService userService=new UserService();
-		List<MovieBean> movieList;
-		try {
-			movieList = movieService.getRecommendMovie(Integer.parseInt(id));
-			System.out.println("listsize"+movieList.size());
-			//UserBean user=userService.getUser(id);
-			
-			//request.setAttribute("movieList", movieList);
-			//request.setAttribute("person", user);
-			
-			HttpSession session = request.getSession();
-			session.setAttribute("movieList", movieList);
-			//session.setAttribute("person", user);
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<MovieBean> movieList=movieService.getRecommendMovie(Integer.parseInt(id));
+		System.out.println("listsize"+movieList.size());
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("movieList", movieList);
 	}
 
 }
+/**
+ * END
+ * @author 宁志豪
+ */

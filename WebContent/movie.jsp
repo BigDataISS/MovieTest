@@ -3,8 +3,8 @@
 
 <!-- 
 	START
-	功能描述：movie.html, 查看单个电影具体信息
-	Created by —— 毛恺 
+	功能描述：movie.jsp, 查看单个电影具体信息
+	@author 毛恺
 -->
 <html lang="en">
 
@@ -26,16 +26,17 @@
 
 <!--
 	Start
-	传递输入栏关键字信息，实现界面跳转
+	实现信息的传输以及界面的跳转
 	@author 宁志豪
 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+    	/**
+			用户点击home按钮，返回主页
+		*/
 	    $(".collapse .active").click(function() {
-	    	var output=$(this).parent().next();
-	    	
-	    	console.log(output.html())
+	    	var output=$(this).parent().next();	    	
 			$.ajax({
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/MovieServlet",
@@ -52,6 +53,9 @@
 						
 		});
 	    
+	    /**
+			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
+		*/
 	    $(".item  .btn").click(function() {
 			var a=$(this).parent().siblings("h2");
 	    	
@@ -73,6 +77,9 @@
 						
 		});
 	    
+	    /**
+			用户点击个人主页按钮，跳转到个人主页页面	
+		*/
 	    $("#signinbtn .btn").click(function() {
 	    	var id="1"
 	    	console.log(id)
@@ -82,8 +89,7 @@
 			    data: {"userId":id},
 			    /* dataType: "json", */			   
 			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-			    success: function(data){
-			    	
+			    success: function(data){			    	
 			    	window.location.href="${pageContext.request.contextPath}/person.jsp";
 			    	
 			    },
@@ -96,6 +102,10 @@
 	    		
 });
 </script>
+<!--
+	End
+	@author 宁志豪
+-->
 
 </head>
 
@@ -138,6 +148,11 @@
 			<!-- Example row of columns -->
 			<div class="row">
 				<!-- Three columns of text below the carousel -->
+				<!--
+					Start
+					展示电影信息
+					@author 宁志豪
+				-->	
 				<div class="col-lg-4">
 					<img class="card-img" src="pics/<%=movie.getName() %>.jpg" alt="Generic placeholder image" width="140" height="200">
 					<h2><%=movie.getName() %></h2>
@@ -157,6 +172,10 @@
 					</p>
 					<p><span id="description">简介：<%=movie.getDescription() %></span></p>
 				</div><!-- /.col-lg-6 -->
+				<!--
+					End
+					@author 宁志豪
+				-->
 			</div>
 		</div>
 	</div>

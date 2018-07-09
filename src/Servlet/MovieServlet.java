@@ -1,7 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
-import org.apache.spark.api.java.function.Function;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,8 +16,8 @@ import Service.MovieService;
 
 /**
  * Start
- * ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Íµï¿½Ç°ï¿½ï¿½
- * @author ï¿½ï¿½Ö¾ï¿½ï¿½
+ * ½«µçÓ°ÐÅÏ¢·¢ËÍµ½Ç°¶Ë
+ * @author ÄþÖ¾ºÀ
  */
 @WebServlet(name="MovieServlet",urlPatterns= {"MovieServlet"})
 public class MovieServlet extends HttpServlet {
@@ -61,5 +61,5 @@ public class MovieServlet extends HttpServlet {
 }
 /**
  * End
- * @author ï¿½ï¿½Ö¾ï¿½ï¿½
+ * @author ÄþÖ¾ºÀ
  */

@@ -1,5 +1,10 @@
 package Bean;
 
+/**
+ * Start
+ * bean类，用于存储user的信息
+ * @author 宁志豪
+ **/
 public class UserBean {
 	private int UserId;
 	private String UserName;
@@ -53,3 +58,7 @@ public class UserBean {
 	
 	
 }
+/**
+ * END
+ * @author 宁志豪
+ */

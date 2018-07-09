@@ -4,8 +4,8 @@
 
 <!-- 
 	START
-	功能描述：browse.html，按关键字、类别检索电影
-	Created by —— 毛恺 
+	功能描述：browse.jsp，按关键字、类别检索电影
+	@author 毛恺
 -->
 <html lang="en">
 
@@ -33,6 +33,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+    	/**
+    		用户点击search按钮，传输输入栏信息，并跳转到搜索结果界面  	
+    	*/
     	$("#search").click(function() {
 	    	var input=$(this).prev(".form-control");
 	    	
@@ -53,6 +56,9 @@
 						
 		});
     	
+    	/**
+			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
+		*/
 	    $(".col-md-4 .btn").click(function() {
 	    	var output=$(this).parent().next();
 	    	
@@ -73,6 +79,9 @@
 						
 		});
 	    
+	    /**
+			用户点击home按钮，返回主页
+		*/
 	    $(".collapse .active").click(function() {
 	    	var output=$(this).parent().next();
 	    	
@@ -93,6 +102,9 @@
 						
 		});
 	    
+	    /**
+			用户点击不同分类按钮，返回相应电影列表，并刷新局部div信息
+		*/
 	    $(".sidebar-sticky .nav-link").click(function() {
 	    	var output=$(this).text();
 	    	output=output.trim();
@@ -112,9 +124,37 @@
 			});
 						
 		});
-	    		
+	    
+	    /**
+			用户点击个人主页按钮，跳转到个人主页页面	
+		*/
+	    $("#signinbtn .btn").click(function() {
+	    	var id="1"
+	    	console.log(id)
+			$.ajax({
+			    type: "POST",
+			    url: "${pageContext.request.contextPath}/movieRecommendServlet",
+			    data: {"userId":id},
+			    /* dataType: "json", */			   
+			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+			    success: function(data){
+			    	
+			    	window.location.href="${pageContext.request.contextPath}/person.jsp";
+			    	
+			    },
+				error: function(data){
+			    	
+			    },
+			}); 
+						
+		});
+	    
 });
 </script>
+<!-- 
+	END
+	@author 宁志豪	
+ -->
 
 </head>
 
@@ -275,13 +315,13 @@
 					movieList = new ArrayList<MovieBean>();
 				}
 				for(MovieBean movie : movieList){
-			
-				%>
+			%>
 			<div class="col-md-4">
 				<div class="card mb-4 box-shadow">
 					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="140">
 					<div class="card-body">
-						<p class="card-text"><% if(movie.getDescription().length()>60){
+						<p class="card-text">
+						<% if(movie.getDescription().length()>60){
 							out.print(movie.getDescription().substring(0,50)+"......");
 							}else	out.print(movie.getDescription());
 							%></p>

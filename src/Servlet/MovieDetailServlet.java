@@ -14,7 +14,9 @@ import Bean.MovieBean;
 import Service.MovieService;
 
 /**
- * Servlet implementation class MovieDetailServlet
+ * Start
+ * 根据当前电影名返回相应电影的具体信息
+ * @author 宁志豪
  */
 @WebServlet(name="MovieDetailServlet",urlPatterns= {"/movieDetailServlet"})
 public class MovieDetailServlet extends HttpServlet {
@@ -53,3 +55,8 @@ public class MovieDetailServlet extends HttpServlet {
 	}
 
 }
+/**
+ * END
+ * @author 宁志豪
+ */
+

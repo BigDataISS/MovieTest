@@ -1,17 +1,15 @@
 package Service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.spark.api.java.function.Function;
+
 import Bean.MovieBean;
 import Dao.Dao;
 import Dao.MovieDao;
-import Spark.Commend;
 /**
  * Start
- * ï¿½ï¿½ï¿½ï¿½sqlï¿½ï¿½ï¿½Êµï¿½Ö¶ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ä²ï¿½ï¿½ï¿½
- * @author ï¿½ï¿½Ö¾ï¿½ï¿½
+ * ÀûÓÃsqlÓï¾äÊµÏÖ¶ÔÊý¾Ý¿âµÄ²Ù×÷
+ * @author ÄþÖ¾ºÀ
  *
  */
 
@@ -19,7 +17,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 
 	@Override
 	/**
-	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ðµï¿½Ó°ï¿½ï¿½Ï¢  
+	 * ´ÓÊý¾Ý¿â»ñÈ¡ËùÓÐµçÓ°ÐÅÏ¢  
 	 */
 	public List<MovieBean> getMovie() {
 		// TODO Auto-generated method stub
@@ -28,6 +26,10 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		
 	}
 	
+	@Override
+	/**
+	 * ´ÓÊý¾Ý¿â»ñÈ¡ÈÈÃÅµçÓ°ÐÅÏ¢  
+	 */
 	public List<MovieBean> getThreeMovie() {
 		// TODO Auto-generated method stub
 		String sql = "select * from movie limit 3";
@@ -35,6 +37,10 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		
 	} 
 	
+	@Override
+	/**
+	 * ´ÓÊý¾Ý¿â»ñÈ¡Óëµ±Ç°µçÓ°Ïà¹ØµÄµçÓ°ÐÅÏ¢  
+	 */
 	public List<MovieBean> getThreeMovieByType(String type,int movieId) {
 		// TODO Auto-generated method stub
 		String[] types;
@@ -69,21 +75,21 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		return mvbs;
 	} 
 	
-	public void deleteRecommendMovie(int i) {
-		String sql = "delete from recommend where UserId=?";
-		update(sql,i);
-	}
 	
-	
-	public List<MovieBean> getRecommendMovie(int i) throws SQLException {
+	@Override
+	/**
+	 * ´ÓÊý¾Ý¿â»ñÈ¡ÍÆ¼öµçÓ°ÐÅÏ¢  
+	 */
+	public List<MovieBean> getRecommendMovie(int i) {
 		// TODO Auto-generated method stub
-		Commend.commendProductsForUser(i);
 		String sql = "select * from recommend join movie on recommend.movieid = movie.movieid where userId="+i;
 		return getForList(sql);
+		
 	}
 	
+	@Override
 	/** 
-	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹Ø¼ï¿½ï¿½Ö»ï¿½È¡ï¿½ï¿½Ó¦ï¿½Äµï¿½Ó°ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½
+	 * ¸ù¾ÝÓÃ»§ÊäÈëµÄ¹Ø¼ü×Ö»ñÈ¡ÏàÓ¦µÄµçÓ°£¨Ä£ºý²éÑ¯£©
 	 */
 	public List<MovieBean> getMovieByName(String name){		
 		String newName="%";		
@@ -99,8 +105,19 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		
 	}
 	
+	
+	@Override
 	/**
-	 * ï¿½ï¿½ï¿½Ýµï¿½Ó°ï¿½ï¿½ï¿½Í»ï¿½È¡ï¿½ï¿½Ó¦ï¿½Äµï¿½Ó°ï¿½ï¿½Ï¢
+	 * ´ÓÊý¾Ý¿âÉ¾³ýÍÆ¼öµçÓ°ÐÅÏ¢  
+	 */
+	public void deleteRecommendMovie(int id) {
+		String sql="delete from recommend where movieId=?";
+		update(sql,id);
+	}
+	
+	@Override
+	/**
+	 * ¸ù¾ÝµçÓ°ÀàÐÍ»ñÈ¡ÏàÓ¦µÄµçÓ°ÐÅÏ¢
 	 */
 	public List<MovieBean> getMovieByType(String type){
 		
@@ -115,8 +132,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		return getForList(sql);
 	}
 	
+	@Override
 	/**
-	 * ï¿½ï¿½ï¿½Ýµï¿½Ó°ï¿½ï¿½ï¿½Æ»ï¿½È¡ï¿½ï¿½Ó°
+	 * ¸ù¾ÝµçÓ°Ãû³Æ»ñÈ¡µçÓ°
 	 */
 	public MovieBean getTheMovieByName(String name) {
 		String sql="select * from movie where name = ?";
@@ -124,6 +142,11 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		
 	}
 	
+	
+	@Override
+	/**
+	 * ÏòÊý¾ÝÌí¼ÓÍÆ¼öµçÓ°ÐÅÏ¢  
+	 */
 	public void addRecommendMovie(int m,int n) {
 		String sql="insert into recommend values (?,?)";
 		update(sql,m,n);
@@ -132,7 +155,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 }
 /**
  * END
- * @author ï¿½ï¿½Ö¾ï¿½ï¿½
+ * @author ÄþÖ¾ºÀ
  */
  
 
