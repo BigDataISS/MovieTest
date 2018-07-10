@@ -21,7 +21,27 @@ public class UserService extends Dao<UserBean> implements UserDao {
 		String sql = "select * from user where id=?";
 		return get(sql, i);
 	}
+	
+	@Override
+	/**
+	 * 将用户注册的信息插入到数据库
+	 */
+	public void addUser(UserBean user) {
+		// TODO Auto-generated method stub
+		String sql = "insert into user(UserName,Sex,Age,Profession,Record,password) values (?,?,?,?,?,?)";
+		update(sql, user.getUserName(), user.getSex(), user.getAge(), user.getProfession(), user.getRecord(),
+				user.getPassword());
 
+	}
+	
+	@Override
+	/**
+	 * 根据用户名名从数据库获得用户信息
+	 */
+	public UserBean getUserByName(String name) {
+		String sql="select * from user where UserName=?";
+		return get(sql,name);
+	}
 }
 /**
  * END

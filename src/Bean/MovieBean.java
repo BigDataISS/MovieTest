@@ -9,7 +9,7 @@ public class MovieBean {
 	private String Name;
 	private String Description;
 	private String Scenarist;
-	private double RatingNum;
+	private String RatingNum;
 	private String Direction;
 	private String Actors;
 	private String Type;
@@ -42,10 +42,10 @@ public class MovieBean {
 	public void setScenarist(String scenarist) {
 		Scenarist = scenarist;
 	}
-	public double getRatingNum() {
+	public String getRatingNum() {
 		return RatingNum;
 	}
-	public void setRatingNum(double ratingNum) {
+	public void setRatingNum(String ratingNum) {
 		RatingNum = ratingNum;
 	}
 	public String getDirection() {

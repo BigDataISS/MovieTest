@@ -19,7 +19,7 @@ import Service.MovieService;
  * 将电影信息发送到前端
  * @author 宁志豪
  */
-@WebServlet(name="MovieServlet",urlPatterns= {"MovieServlet"})
+@WebServlet(name="MovieServlet",urlPatterns= {"/MovieServlet"})
 public class MovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

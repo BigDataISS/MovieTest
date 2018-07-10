@@ -9,10 +9,11 @@ public class UserBean {
 	private int UserId;
 	private String UserName;
 	private String Sex;
-	private int age;
+	private int Age;
 	private String Profession;
-	private String record;
-	private String password;
+	private String Record;
+	private String Password;
+	private String Description;
 	public int getUserId() {
 		return UserId;
 	}
@@ -31,30 +32,37 @@ public class UserBean {
 	public void setSex(String sex) {
 		Sex = sex;
 	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
 	public String getProfession() {
 		return Profession;
 	}
 	public void setProfession(String profession) {
 		Profession = profession;
 	}
+	public int getAge() {
+		return Age;
+	}
+	public void setAge(int age) {
+		Age = age;
+	}
 	public String getRecord() {
-		return record;
+		return Record;
 	}
 	public void setRecord(String record) {
-		this.record = record;
+		Record = record;
 	}
 	public String getPassword() {
-		return password;
+		return Password;
 	}
 	public void setPassword(String password) {
-		this.password = password;
+		Password = password;
 	}
+	public String getDescription() {
+		return Description;
+	}
+	public void setDescription(String description) {
+		Description = description;
+	}
+	
 	
 	
 }

@@ -21,7 +21,7 @@ public class TestGetMovie {
 			MovieBean movie=new MovieBean();
 			movie.setName(arr.get(i));
 			movie.setReleaseDate(arr.get(i));
-			movie.setRatingNum((float) (1.5+i));
+			movie.setRatingNum(Integer.toString(1+i));
 			movie.setType(arr.get(i));
 			movie.setDescription(arr.get(i)+arr.get(5-i));
 			movie.setRuntime(Integer.toString(100+10*i));

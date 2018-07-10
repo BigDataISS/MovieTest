@@ -70,13 +70,30 @@
 			    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
 			    	
 			    },
-				error: function(data){
-			    	
+				error: function(data){			    	
 			    },
-			}); 
-						
+			}); 						
 		});
 	   
+	    /**
+		用户点击search按钮，传输输入栏信息，并跳转到搜索结果界面  	
+		*/
+    	$("#search").click(function() {
+    		
+			$.ajax({
+			    type: "POST",
+			    url: "${pageContext.request.contextPath}/findMovie",
+			    data: {"name":""},
+			    /* dataType: "json", */			   
+			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+				success: function(data){
+			    	window.location.href="${pageContext.request.contextPath}/browse.jsp";
+		  		},
+				error: function(data){
+		    	
+			    },
+			}); 					
+		});
 	    		
 });
 </script>
@@ -109,7 +126,9 @@
 			<li><a href="#about">About</a></li>
 			<li><a href="#contact">Contact</a></li>
 		</ul>
-		
+		<form class="navbar-form navbar-right">
+			<button type="button" class="btn btn-success" id="search">search</button>
+		</form>
 		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
 			<button class="btn btn-success" type="submit">个人中心<tton>
 		</form>
