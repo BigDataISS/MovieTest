@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" import="Bean.MovieBean,Bean.UserBean" import="java.util.ArrayList" pageEncoding="UTF-8" %>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 
 <!-- 
@@ -88,8 +89,7 @@
 			用户点击个人主页按钮，刷新个人主页页面	
 		*/
 	    $("#signinbtn .btn").click(function() {
-	    	var id="1"
-	    	console.log(id)
+	    	
 			$.ajax({
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/movieRecommendServlet",
@@ -105,8 +105,9 @@
 			}); 
 						
 		});
-});
+	});
 </script>
+
 <!--
 	End
 	@author 宁志豪
@@ -142,8 +143,6 @@
 			</div>
 		</div>
 	</nav>
-
-
 
 
 	<!-- 左侧导航栏 -->
@@ -190,6 +189,8 @@
 	</div>
 	<!--end container-->
 
+	
+	
 	<!--jumbotron 超大屏幕，内容居中显示，两边用底层内容补齐btn btn-primary btn-lg -->
 	<!--电影推荐-->
 	<div class="jumbotron" id="movie-recommend">
@@ -200,42 +201,73 @@
 				<!--
 					Start
 					展示电影信息
+					@author 毛恺 
 					@author 宁志豪
 				-->
 				<%
-					List<MovieBean> movieList = (List<MovieBean>) session.getAttribute("movieList");
-
-					if (movieList == null) {
-						movieList = new ArrayList<MovieBean>();
-					}
-					for (MovieBean movie : movieList) {
-						//System.out.println(movie.getMovieId());
-				%>
-				<div class="col-md-4">
-					<div class="card mb-4 box-shadow">
-						<img class="card-img-top" src="pics/<%=movie.getName()%>.jpg"
-							alt="Card image cap" width="288" height="140">
-						<div class="card-body">
-							<p class="card-text">
-							<% if(movie.getDescription().length()>60){
-									out.print(movie.getDescription().substring(0,50)+"......");
-								}
-								else	out.print(movie.getDescription());
-							%></p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-									<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+					try{
+						//连接到mysql数据库
+						Class.forName("org.gjt.mm.mysql.Driver").newInstance();  
+						String url ="jdbc:mysql://192.168.154.89/movie"; 
+						Connection conn= DriverManager.getConnection(url,"CSuser","123456"); 
+						Statement stmt=conn.createStatement();
+						
+						//获取当前用户用户名
+						String user=(String)session.getAttribute("username");
+						
+						//执行查询建立ResultSet,获取推荐电影movieid
+						ResultSet rs=stmt.executeQuery("select movieid from recommend join user on recommend.userid = user.userid where username = '"
+							+user+"'");
+						//获取推荐电影具体信息
+						while(rs!=null && rs.next()){
+							String mvid = rs.getString("movieid");
+							Statement stmt2=conn.createStatement();
+							ResultSet movieInfo = stmt2.executeQuery("select * from movie where movieid = "
+							+mvid+"");
+							while(movieInfo!=null && movieInfo.next()){
+							%>
+							<div class="col-md-4">
+								<div class="card mb-4 box-shadow">
+									<img class="card-img-top" src="pics/<%=movieInfo.getString("Name")%>.jpg"
+										alt="Card image cap" width="288" height="140">
+									<div class="card-body">
+										<p class="card-text">
+										<% if(movieInfo.getString("Description").length()>60){
+												out.print(movieInfo.getString("Description").substring(0,50)+"......");
+											}
+											else	out.print(movieInfo.getString("Description"));
+										%></p>
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+											</div>
+											<small class="text-muted"><%=movieInfo.getString("Name")%></small>
+										</div>
+									</div>
 								</div>
-								<small class="text-muted"><%=movie.getName()%></small>
 							</div>
-						</div>
-					</div>
-				</div>
-				<%
+						<%
+							}
+							movieInfo.close();
+							stmt2.close();
+						}
+						
+						//关闭连接、释放资源
+						rs.close();
+						stmt.close();
+						conn.close();
+					}catch(ClassNotFoundException cnfe){
+						out.print(cnfe);
+					}catch(SQLException sqle){
+						out.print(sqle);
+					}catch(Exception e){
+						out.print(e);
 					}
 				%>
+				
 				<!--
 					End
+					@author 毛恺 
 					@author 宁志豪
 				-->
 

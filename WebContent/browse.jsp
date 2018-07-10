@@ -125,29 +125,7 @@
 						
 		});
 	    
-	    /**
-			用户点击个人主页按钮，跳转到个人主页页面	
-		*/
-	    $("#signinbtn .btn").click(function() {
-	    	var id="1"
-	    	console.log(id)
-			$.ajax({
-			    type: "POST",
-			    url: "${pageContext.request.contextPath}/movieRecommendServlet",
-			    data: {"userId":id},
-			    /* dataType: "json", */			   
-			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-			    success: function(data){
-			    	
-			    	window.location.href="${pageContext.request.contextPath}/person.jsp";
-			    	
-			    },
-				error: function(data){
-			    	
-			    },
-			}); 
-						
-		});
+	   
 	    
 });
 </script>
@@ -181,8 +159,8 @@
 			<li><a href="#contact">Contact</a></li>
 		</ul>
 		
-		<form class="navbar-form navbar-right" id="signinbtn">
-			<button type="button" class="btn btn-success" id="sign-in">个人中心</button>
+		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
+			<button class="btn btn-success" type="submit">个人中心<tton>
 		</form>
 	</div>
 </div>

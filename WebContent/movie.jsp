@@ -76,29 +76,7 @@
 			}); 
 						
 		});
-	    
-	    /**
-			用户点击个人主页按钮，跳转到个人主页页面	
-		*/
-	    $("#signinbtn .btn").click(function() {
-	    	var id="1"
-	    	console.log(id)
-			$.ajax({
-			    type: "POST",
-			    url: "${pageContext.request.contextPath}/movieRecommendServlet",
-			    data: {"userId":id},
-			    /* dataType: "json", */			   
-			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-			    success: function(data){			    	
-			    	window.location.href="${pageContext.request.contextPath}/person.jsp";
-			    	
-			    },
-				error: function(data){
-			    	
-			    },
-			}); 
-						
-		});
+	   
 	    		
 });
 </script>
@@ -132,8 +110,8 @@
 			<li><a href="#contact">Contact</a></li>
 		</ul>
 		
-		<form class="navbar-form navbar-right" id="signinbtn">
-			<button type="button" class="btn btn-success" id="sign-in">个人中心</button>
+		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
+			<button class="btn btn-success" type="submit">个人中心<tton>
 		</form>
 	</div>
 </div>
@@ -213,9 +191,9 @@
 					<div class="col-lg-4">
 						<img class="img-circle" src="pics/<%=mv.getName() %>.jpg" alt="Generic placeholder image" width="140" height="140">
 						<h2 id="h2"><%=mv.getName() %></h2>
-						<p><% if(mv.getDescription().length()>60){
-							out.print(mv.getDescription().substring(0,50)+"......");
-							}else	out.print(mv.getDescription());
+						<p><% if(movie.getDescription().length()>60){
+							out.print(movie.getDescription().substring(0,50)+"......");
+							}else	out.print(movie.getDescription());
 							%></p>
 						<p><a class="btn btn-default" href="#" role="button" >View details &raquo;</a></p>
 					</div><!-- /.col-lg-4 -->
