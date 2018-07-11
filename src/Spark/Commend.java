@@ -1,58 +1,35 @@
 package Spark;
-import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SQLContext;
-
-import Service.DbConnectionService;
 import Service.MovieService;
 
 import org.apache.spark.mllib.recommendation.ALS;
 import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
 import org.apache.spark.mllib.recommendation.Rating;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.sql.*;
 
-public class Commend implements Serializable{
-	
-	private static Connection conn = null;
-	private static SparkConf sparkConf = null;
-	private static JavaSparkContext javaSparkContext = null;
-	private static SQLContext sqlContext = null;
-	
+@SuppressWarnings("serial")
+public class Commend extends AppConf implements Serializable{
 	/**
 	Start
 	Spark协同过滤ALS电影推荐算法
 	@代码编辑和改错 张子健，王鑫科
 	@算法分析 马雨昂
 	 **/
-	public static void commendProductsForUser(int userID) throws SQLException{
-		//Configuration
-		if(conn == null)
-			conn = DbConnectionService.getConnection();
-		String wareHouseLocation = System.getProperty("user.dir");
-		if(sparkConf == null)
-			sparkConf = new SparkConf().setMaster("local").
-				setAppName("MovieCommend").set("spark.sql.warehouse.dir", wareHouseLocation);
-		if(javaSparkContext == null)
-			javaSparkContext = new JavaSparkContext(sparkConf);
-		if(sqlContext == null)
-			sqlContext = new SQLContext(javaSparkContext);
-		
+	
+	private static MatrixFactorizationModel model;
+	private static String url = "jdbc:mysql://192.168.154.89:3306/movie?characterEncoding=UTF-8";
+	private static String fromTable = "ratebyuser";
+	
+	public static void initialization() {
+		AppConf.initialization();
 		//ReadData from database
-		String url = "jdbc:mysql://192.168.154.89:3306/movie?characterEncoding=UTF-8";
-		String fromTable = "ratebyuser";
-		Properties props = new Properties();
-		props.put("user", "CSuser");
-		props.put("password", "123456");
-		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable,props);
-		
+		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable,prop);
+				
 		//Generating RDD
 		JavaRDD<Row> RatingDatas = rows.javaRDD();
 		JavaRDD<Rating> ratings = RatingDatas.map(new Function<Row,Rating>(){
@@ -60,16 +37,36 @@ public class Commend implements Serializable{
 				return new Rating((int)row.get(1),(int)row.get(2),(double)row.get(0));
 			}
 		});
-		
+		System.out.println("Training from "+ratings.count()+" data");
 		//Generating Model
-		List<Rating> ratingList = new ArrayList<Rating>();
-		MatrixFactorizationModel model = ALS.train(ratings.rdd(), 50, 5, 0.01);
-		
+		model = ALS.train(ratings.rdd(), 25, 5, 0.15);
+	}
+	
+	public static void commendProductsForUser(int userID) throws SQLException{
+		if(javaSparkContext == null)
+			Commend.initialization();
 		//Update recommend table
 		MovieService ms = new MovieService();
 		ms.deleteRecommendMovie(userID);
-		for(Rating temp: model.recommendProducts(userID, 5)) {
-			ms.addRecommendMovie(temp.user(), temp.product());	
+		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable,prop).where("userId="+userID);
+		JavaRDD<Row> RatingDatas = rows.javaRDD();
+		JavaRDD<Integer> markedMovies = RatingDatas.map(new Function<Row,Integer>(){
+			public Integer call(Row row) {
+				return new Integer((int) row.get(2));
+			}
+		});
+		List<Integer> markedMoviesList = markedMovies.collect();
+		int markedMoviesNum = (int)markedMovies.count();
+		//Filt movies the client has marked
+		int num = 0;
+		for(Rating temp: model.recommendProducts(userID, markedMoviesNum+6)) {
+			if(!markedMoviesList.contains(temp.product())) {
+				num++;
+				ms.addRecommendMovie(temp.user(), temp.product());	
+				System.out.println(temp.user()+"  "+temp.product());
+				if(num == 6)
+					break;
+			}
 		}
 		System.out.println("Done.");
 	}

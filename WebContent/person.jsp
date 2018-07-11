@@ -108,12 +108,11 @@
 	    /**
 			用户点击个人主页按钮，刷新个人主页页面	
 		*/
-	    $("#signinbtn .btn").click(function() {
+	    $("#signinbtn").click(function() {
 	    	
 			$.ajax({
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/movieRecommendServlet",
-			    data: {"userId":id},
 			    /* dataType: "json", */			   
 			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
 			    success: function(data){			    	
@@ -156,7 +155,7 @@
 				</ul>
 
 				<form class="navbar-form navbar-right">
-					<button class="btn btn-success" type="button" id="search">search<tton>
+					<button class="btn btn-success" type="button" id="signinbtn">search</button>
 				</form>
 			</div>
 		</div>
