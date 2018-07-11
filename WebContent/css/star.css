@@ -1,0 +1,89 @@
+ul{padding:0;margin: 0;}
+ li{list-style: none;}
+ /*星星评分*/
+ .scoremark .star {
+  display: block;
+  position: relative;
+  width: 116px;
+  height: 20px;
+  background: url(../image/star.png) no-repeat 0px 0px;
+ }
+ .scoremark .ystar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 20px;
+  background: url(../image/star.png) no-repeat 0px 0px;
+ }
+ .scoremark .star ul {
+  width: 120px;
+  height: 20px;
+  position: absolute;
+ }
+ .scoremark .star ul:hover {
+  background: url(../image/star.png) no-repeat 0px -20px;
+ }
+ .scoremark .star li {
+  float: left;
+  width: 24px;
+  height: 20px;
+ }
+ .scoremark .star li a {
+  display: block;
+  width: 24px;
+  height: 20px;
+  overflow: hidden;
+  text-indent: -9999px;
+  position: absolute;
+  z-index: 5;
+ }
+ .scoremark .star li a:hover {
+  background: url(../image/star.png) no-repeat 0px 0px;
+  z-index: 3;
+  left: 0
+ }
+ .scoremark .star a.one-star {
+  left: 0;
+ }
+ .scoremark .star a.one-star:hover {
+  width: 24px
+ }
+ .scoremark .star a.two-stars {
+  left: 24px;
+ }
+ .scoremark .star a.two-stars:hover {
+  width: 48px
+ }
+ .scoremark .star a.three-stars {
+  left: 48px;
+ }
+ .scoremark .star a.three-stars:hover {
+  width: 72px
+ }
+ .scoremark .star a.four-stars {
+  left: 72px;
+ }
+ .scoremark .star a.four-stars:hover {
+  width: 96px
+ }
+ .scoremark .star a.five-stars {
+  left: 96px;
+ }
+ .scoremark .star a.five-stars:hover {
+  width: 120px;
+ }
+ .scoremark .tips {
+  position: absolute;
+  top: -28px;
+  left: 0;
+  width: 40px;
+  height: 21px;
+  color: #333;
+  line-height: 20px;
+  padding: 0 0 5px 0;
+  text-align: center;
+  background: url(../image/ico.png) no-repeat;
+  z-index: 6;
+  font-size: 12px;
+ }
