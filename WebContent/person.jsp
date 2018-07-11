@@ -86,6 +86,26 @@
 		});
 	    
 	    /**
+			用户点击search按钮,跳转到搜索界面  	
+		*/
+		$("#search").click(function() {
+			$.ajax({
+	    		type: "POST",
+	   	 		url: "${pageContext.request.contextPath}/findMovie",
+	    		data: {"name":""},
+	    		/* dataType: "json", */			   
+	    		/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+	    		success: function(data){
+	    			window.location.href="${pageContext.request.contextPath}/browse.jsp";
+	    		},
+				error: function(data){
+	    	
+	    		},
+			}); 
+				
+		});
+	    
+	    /**
 			用户点击个人主页按钮，刷新个人主页页面	
 		*/
 	    $("#signinbtn .btn").click(function() {
@@ -133,12 +153,10 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#contact">Contact</a></li>
 				</ul>
 
-				<form class="navbar-form navbar-right" id="signinbtn">
-					<button type="button" class="btn btn-success" id="sign-in">个人中心</button>
+				<form class="navbar-form navbar-right">
+					<button class="btn btn-success" type="button" id="search">search<tton>
 				</form>
 			</div>
 		</div>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" import="Bean.MovieBean" import="java.util.ArrayList" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 
 <!-- 
@@ -17,6 +18,7 @@
 <link href="css/movie.css" rel="stylesheet" type="text/css">
 
 <link href="css/jumbotron.css" rel="stylesheet">
+<link href="css/star.css" rel="stylesheet">
 
 <script src="js/html5shiv.min.js"></script>
 <script src="js/respond.min.js"></script>
@@ -70,31 +72,56 @@
 			    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
 			    	
 			    },
-				error: function(data){			    	
+				error: function(data){
+			    	
 			    },
-			}); 						
+			}); 
+						
+		});
+	    
+	    /**
+			用户点击search按钮，跳转到搜索结果界面  	
+		*/
+    	$("#search").click(function() {
+			$.ajax({
+		    	type: "POST",
+		   	 	url: "${pageContext.request.contextPath}/findMovie",
+		    	data: {"name":""},
+		    	/* dataType: "json", */			   
+		    	/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    	success: function(data){
+		    		window.location.href="${pageContext.request.contextPath}/browse.jsp";
+		    	},
+				error: function(data){
+		    	
+		    	},
+			}); 
+					
 		});
 	   
 	    /**
-		用户点击search按钮，传输输入栏信息，并跳转到搜索结果界面  	
+			传输用户的评分数据
 		*/
-    	$("#search").click(function() {
-    		
-			$.ajax({
-			    type: "POST",
-			    url: "${pageContext.request.contextPath}/findMovie",
-			    data: {"name":""},
-			    /* dataType: "json", */			   
-			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-				success: function(data){
-			    	window.location.href="${pageContext.request.contextPath}/browse.jsp";
-		  		},
-				error: function(data){
+  	  	$(".stars").click(function() {
+			var movie=$("#movieName").html()
+  	  		
+    		console.log(movie)
+    		if(confirm("确定要给这电影打分吗？")){
+				$.ajax({
+		 		   	type: "POST",
+		   	 		url: "${pageContext.request.contextPath}/rateServlet",
+		    		data: {"rate":$(this).html(),"moviename":movie},
+		    		/* dataType: "json", */			   
+		    		/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    		success: function(data){
+		    			window.location.href="${pageContext.request.contextPath}/movie.jsp";		    		
+		   			},
+					error: function(data){
 		    	
-			    },
-			}); 					
-		});
-	    		
+		    		},
+				}); 
+    		}	
+			});
 });
 </script>
 <!--
@@ -123,14 +150,11 @@
 	<div id="navbar" class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#about">About</a></li>
-			<li><a href="#contact">Contact</a></li>
 		</ul>
-		<form class="navbar-form navbar-right">
-			<button type="button" class="btn btn-success" id="search">search</button>
-		</form>
+		
 		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
-			<button class="btn btn-success" type="submit">个人中心<tton>
+			<button class="btn btn-success" type="button" id="search">search</button>
+			<button class="btn btn-success" type="submit">个人中心</button>
 		</form>
 	</div>
 </div>
@@ -152,13 +176,56 @@
 				-->	
 				<div class="col-lg-4">
 					<img class="card-img" src="pics/<%=movie.getName() %>.jpg" alt="Generic placeholder image" width="140" height="200">
-					<h2><%=movie.getName() %></h2>
+					<h2 id="movieName"><%=movie.getName() %></h2>
 					<p><span><%=movie.getCountry() %></span>
 					<br><span><%=movie.getReleaseDate() %></span>
 					</p>
 				</div><!-- /.col-lg-4 -->
 				<div class="col-lg-8">
 					<h2>评分：<%=movie.getRatingNum() %></h2>
+					<!--
+						Start
+						星星评分
+						@author 毛恺
+					-->	
+					<div id="scoremark" class="scoremark">
+						<%
+							int israte=(int)session.getAttribute("israte");
+							if(israte==0)
+								out.print("对它评分:");
+							else if(israte==6)
+								out.print("评分请先登录:");
+							else
+								out.print("你的评分: </span><ul>");							
+						%>
+						
+						<%	
+							if(israte==0){								
+						%>
+						<span class="star">
+							<span class="ystar" style="width:80%"></span>
+							<ul>
+								<li><a href="#" data-name="很差" class="one-star stars">1</a></li>
+								<li><a href="#" data-name="较差" class="two-stars stars">2</a></li>
+								<li><a href="#" data-name="一般" class="three-stars stars">3</a></li>
+								<li><a href="#" data-name="较好" class="four-stars stars">4</a></li>
+								<li><a href="#" data-name="很好" class="five-stars stars">5</a></li>
+							</ul>
+						</span>
+						<div style="left: 0px; display: none;" class="tips"></div>
+						
+						<%	}
+							else{
+								for(int i=0;i<israte&&i<5;i++)
+									out.println("<img src=\"pics/star.png\"></img>");
+							}
+						%>
+					</div>
+					
+					<!--
+						End
+						@author 毛恺
+					-->
 					<p>
 					<font size="3">导演：<%=movie.getDirection() %>&nbsp </font>
 					<font size="3">语言：<%=movie.getLanguage() %>&nbsp </font>
@@ -210,9 +277,9 @@
 					<div class="col-lg-4">
 						<img class="img-circle" src="pics/<%=mv.getName() %>.jpg" alt="Generic placeholder image" width="140" height="140">
 						<h2 id="h2"><%=mv.getName() %></h2>
-						<p><% if(movie.getDescription().length()>60){
-							out.print(movie.getDescription().substring(0,50)+"......");
-							}else	out.print(movie.getDescription());
+						<p><% if(mv.getDescription().length()>60){
+							out.print(mv.getDescription().substring(0,50)+"......");
+							}else	out.print(mv.getDescription());
 							%></p>
 						<p><a class="btn btn-default" href="#" role="button" >View details &raquo;</a></p>
 					</div><!-- /.col-lg-4 -->
@@ -253,6 +320,7 @@
 
 <script src="js/jquery-2.1.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
 
 <script src="js/holder.min.js"></script>
 <script src="js/ie10-viewport-bug-workaround.js"></script>

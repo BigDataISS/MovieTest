@@ -45,13 +45,14 @@ public class MovieRecommendServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id=request.getParameter("userId");
-		System.out.println("userid"+id);
+		HttpSession session = request.getSession();
+		String name=(String) session.getAttribute("username");
 		MovieService movieService=new MovieService();
-		List<MovieBean> movieList=movieService.getRecommendMovie(Integer.parseInt(id));
+		UserService userService=new UserService();
+		UserBean user=userService.getUserByName(name);
+		List<MovieBean> movieList=movieService.getRecommendMovie(user.getUserId());
 		System.out.println("listsize"+movieList.size());
 		
-		HttpSession session = request.getSession();
 		session.setAttribute("movieList", movieList);
 	}
 

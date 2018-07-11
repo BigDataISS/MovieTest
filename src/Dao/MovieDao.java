@@ -3,6 +3,7 @@ package Dao;
 import java.util.List;
 
 import Bean.MovieBean;
+import Bean.UserBean;
 /**
  * 接口类
  * @author 宁志豪
@@ -17,8 +18,9 @@ public interface MovieDao {
 	public List<MovieBean> getRecommendMovie(int i);
 	public MovieBean getTheMovieByName(String name);
 	public void addRecommendMovie(int m,int n);
-	List<MovieBean> getThreeMovieByType(String type, int movieId);
-	void deleteRecommendMovie(int id);
+	public List<MovieBean> getThreeMovieByType(String type, int movieId);
+	public void deleteRecommendMovie(int id);
+
 }
 /**
  * END

@@ -45,9 +45,7 @@ public class FindMovieServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String name=request.getParameter("name");
 		MovieService movieService = new MovieService();
-		//System.out.print(name);
 		List<MovieBean> movieList=movieService.getMovieByName(name);
-		System.out.print(movieList.size());
 		HttpSession session = request.getSession();
 		session.setAttribute("movieList", movieList);
 	}

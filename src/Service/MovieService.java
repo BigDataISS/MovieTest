@@ -83,8 +83,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	public List<MovieBean> getRecommendMovie(int i) {
 		// TODO Auto-generated method stub
 		String sql = "select * from recommend join movie on recommend.movieid = movie.movieid where userId="+i;
-		return getForList(sql);
-		
+		return getForList(sql);		
 	}
 	
 	@Override
@@ -101,8 +100,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 				+ "type like '"+newName+"' or description like '"+newName+"' or"
 				+ " direction  like '"+newName+"' or actors like '"+newName+"' or scenarist like '"+newName+"'";
 		
-		return getForList(sql);
-		
+		return getForList(sql);		
 	}
 	
 	
@@ -115,9 +113,11 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		update(sql,id);
 	}
 	
+	
+	
 	@Override
 	/**
-	 * 根据电影类型获取相应的电影信息
+	 * 根据电影类型获取相应的电影信息	
 	 */
 	public List<MovieBean> getMovieByType(String type){
 		

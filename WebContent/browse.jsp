@@ -155,8 +155,6 @@
 	<div id="navbar" class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#about">About</a></li>
-			<li><a href="#contact">Contact</a></li>
 		</ul>
 		
 		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
@@ -224,10 +222,6 @@
 					</a>
 				</li>
 			</ul>
-
-			<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-				<span>Saved reports</span>
-			</h6>
 			<ul class="nav flex-column mb-2">
 				<li class="nav-item">
 					<a class="nav-link" href="#">

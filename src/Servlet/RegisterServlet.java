@@ -57,7 +57,7 @@ public class RegisterServlet extends HttpServlet {
 			out.print(jsonObject);
 			return;
 		}
-		else if(!StringUtils.isNumeric(age)) {
+		else if(!StringUtils.isNumeric(age)||age.length()>3) {
 			jsonObject.put("error", "2");
 			response.setContentType("application/json");
 			out.print(jsonObject);

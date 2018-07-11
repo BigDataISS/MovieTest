@@ -61,6 +61,26 @@
 		});
 	    
 	    /**
+			用户点击不同的分类，跳转到不同的分类电影信息界面  	
+		*/
+    	$(".jumbotron .my-2").click(function() {  		
+			$.ajax({
+		    	type: "POST",
+		    	url: "${pageContext.request.contextPath}/movieListServlet",
+		    	data: {"type":$(this).html()},
+		    	/* dataType: "json", */			   
+		    	/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    	success: function(data){
+		    		window.location.href="${pageContext.request.contextPath}/browse.jsp";
+		    	},
+				error: function(data){
+		    	
+		    	},
+			}); 
+					
+		});
+    	
+	    /**
 			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
 		*/
 	    $(".marketing .col-lg-4 .btn").click(function() {
@@ -108,8 +128,6 @@
 	<div id="navbar" class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#about">About</a></li>
-			<li><a href="#contact">Contact</a></li>
 		</ul>
 		
 		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
@@ -133,9 +151,18 @@
 			<a class="btn btn-success" href="#" role="button" id="#search">Search &raquo;</a>
 		</form>
 		</p>
-		<a href="http://www.baidu.com" class="btn btn-secondary my-2">百度</a>
-		<a href="https://cn.bing.com/" class="btn btn-secondary my-2">必应</a>
-		<a href="http://www.whu.edu.cn/" class="btn btn-secondary my-2">武大</a>
+		<a class="btn btn-secondary my-2">剧情</a>
+		<a class="btn btn-secondary my-2">喜剧</a>
+		<a class="btn btn-secondary my-2">动作</a>
+		<a class="btn btn-secondary my-2">爱情</a>
+		<a class="btn btn-secondary my-2">科幻</a>
+		<a class="btn btn-secondary my-2">动画</a>
+		<a class="btn btn-secondary my-2">悬疑</a>
+		<a class="btn btn-secondary my-2">惊悚</a>
+		<a class="btn btn-secondary my-2">恐怖</a>
+		<a class="btn btn-secondary my-2">纪录片</a>
+		<a class="btn btn-secondary my-2">短片</a>
+		<a class="btn btn-secondary my-2">音乐</a>
 		</center>
 	</div>
 </div>

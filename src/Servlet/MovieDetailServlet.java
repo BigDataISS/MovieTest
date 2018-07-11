@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Bean.MovieBean;
+import Bean.RateBean;
+import Bean.UserBean;
 import Service.MovieService;
+import Service.RateService;
+import Service.UserService;
 
 /**
  * Start
@@ -35,13 +39,30 @@ public class MovieDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		String name=request.getParameter("name");
-		//System.out.print(name);
+		
 		MovieService movieService=new MovieService();
+		UserService userService=new UserService();
+		RateService rateService=new RateService();
+		
 		MovieBean movie=movieService.getTheMovieByName(name);
 		List<MovieBean> movieList=movieService.getThreeMovieByType(movie.getType(),movie.getMovieId());
 		
-		HttpSession session = request.getSession();
+		String userName=(String) session.getAttribute("username");
+		if (userName != null) {
+			UserBean user = userService.getUserByName(userName);
+			RateBean rateBean = rateService.getRate(user.getUserId(), movie.getMovieId());
+			
+			if (rateBean != null) {
+				session.setAttribute("israte", new Double(rateBean.getRatingNum()).intValue());
+			} else {
+				session.setAttribute("israte", 0);
+			}
+		}
+		else {
+			session.setAttribute("israte", 6);
+		}
 		session.setAttribute("movie", movie);
 		session.setAttribute("movieList",movieList);
 	}
