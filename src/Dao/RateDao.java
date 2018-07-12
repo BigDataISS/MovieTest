@@ -3,8 +3,9 @@ package Dao;
 import Bean.RateBean;
 
 /**
- * �ӿ���
- * @author ��־��
+ * Start
+ * 接口类，提供对评分表进行相关操作的方法
+ * @author 宁志豪
  *
  */
 public interface RateDao {
@@ -13,5 +14,5 @@ public interface RateDao {
 }
 /**
  * END
- * @author ��־��
+ * @author 宁志豪
  */

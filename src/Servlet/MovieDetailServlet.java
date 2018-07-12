@@ -19,8 +19,8 @@ import Service.UserService;
 
 /**
  * Start
- * ¸ù¾İµ±Ç°µçÓ°Ãû·µ»ØÏàÓ¦µçÓ°µÄ¾ßÌåĞÅÏ¢
- * @author ÄşÖ¾ºÀ
+ * é€šè¿‡ç•Œé¢ä¼ æ¥çš„ç”µå½±åç§°è¿”å›ç”µå½±å…·ä½“ä¿¡æ¯
+ * @author å®å¿—è±ª
  */
 @WebServlet(name="MovieDetailServlet",urlPatterns= {"/movieDetailServlet"})
 public class MovieDetailServlet extends HttpServlet {
@@ -78,6 +78,6 @@ public class MovieDetailServlet extends HttpServlet {
 }
 /**
  * END
- * @author ÄşÖ¾ºÀ
+ * @author å®å¿—è±ª
  */
 

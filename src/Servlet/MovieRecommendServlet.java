@@ -18,8 +18,8 @@ import Service.UserService;
 
 /**
  * Start
- * �����û��Ƽ���Ӱ�������Ϣ
- * @author ��־��
+ * 根据用户id传递推荐电影信息
+ * @author 宁志豪
  */
 @WebServlet(name="MovieRecommendServlet",urlPatterns= {"/movieRecommendServlet"})
 public class MovieRecommendServlet extends HttpServlet {
@@ -66,5 +66,5 @@ public class MovieRecommendServlet extends HttpServlet {
 }
 /**
  * END
- * @author ��־��
+ * @author 宁志豪
  */

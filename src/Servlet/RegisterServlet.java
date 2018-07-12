@@ -17,8 +17,8 @@ import net.sf.json.JSONObject;
 
 /**
  * Start
- * ע���û���Ϣ
- * @author ��־��
+ * 接收用户注册的信息并添加到数据库
+ * @author ��־��
  */
 @WebServlet(name="RegisterServlet",urlPatterns= {"/registerServlet"})
 public class RegisterServlet extends HttpServlet {
@@ -51,24 +51,36 @@ public class RegisterServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		UserService userService=new UserService();
 		UserBean checkuser=userService.getUserByName(name);
+		/**
+		 * 如果用户名已存在，设置error=1
+		 */
 		if(checkuser!=null) {
 			jsonObject.put("error", "1");
 			response.setContentType("application/json");
 			out.print(jsonObject);
 			return;
 		}
+		/**
+		 * 如果用户年龄输入不是整数则设置error=2
+		 */
 		else if(!StringUtils.isNumeric(age)||age.length()>3) {
 			jsonObject.put("error", "2");
 			response.setContentType("application/json");
 			out.print(jsonObject);
 			return;
 		}
+		/**
+		 * 若一切正常，则error为空
+		 */
 		else {
 			UserBean user=new UserBean();
 			user.setUserName(name);	
 			user.setPassword(request.getParameter("password"));
 			user.setSex(request.getParameter("sex"));
-			if(age!="")
+			//若输入的age为空字符串，则默认设置age为0
+			if(age.length()==0)
+				user.setAge(0);
+			else
 				user.setAge(Integer.parseInt(age));
 			user.setProfession(request.getParameter("profession"));
 			user.setDescription(request.getParameter("description"));
@@ -81,3 +93,7 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 }
+/**
+ * End
+ * @author 宁志豪
+ */

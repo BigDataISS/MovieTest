@@ -3,8 +3,9 @@ package Dao;
 import Bean.UserBean;
 
 /**
- * ½Ó¿ÚÀà
- * @author ÄşÖ¾ºÀ
+ * Start
+ * æ¥å£ç±»ï¼Œæä¾›å¯¹userè¡¨è¿›è¡Œæ“ä½œçš„æ–¹æ³•
+ * @author ï¿½ï¿½Ö¾ï¿½ï¿½
  *
  */
 public interface UserDao {
@@ -17,5 +18,5 @@ public interface UserDao {
 
 /**
  * END
- * @author ÄşÖ¾ºÀ
+ * @author å®å¿—è±ª
  */

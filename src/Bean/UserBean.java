@@ -2,8 +2,8 @@ package Bean;
 
 /**
  * Start
- * beanÀà£¬ÓÃÓÚ´æ´¢userµÄĞÅÏ¢
- * @author ÄşÖ¾ºÀ
+ * å®ä½“ç±»ï¼Œç”¨äºå­˜å‚¨userçš„ç›¸å…³ä¿¡æ¯
+ * @author å®å¿—è±ª
  **/
 public class UserBean {
 	private int UserId;
@@ -68,5 +68,5 @@ public class UserBean {
 }
 /**
  * END
- * @author ÄşÖ¾ºÀ
+ * @author å®å¿—è±ª
  */

@@ -8,9 +8,9 @@ import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
- * Start ·â×°¶ÔÊı¾İ¿âµÄÁ¬½ÓÓë¹Ø±Õ·½·¨
- * 
- * @author ÄşÖ¾ºÀ
+ * Start 
+ * æä¾›å¯¹æ•°æ®åº“è¿æ¥çš„æ–¹æ³• 
+ * @author å®å¿—è±ª
  *
  */
 
@@ -23,9 +23,8 @@ public class DbConnectionService {
 	}
 
 	/**
-	 *	Á¬½Óµ½Êı¾İ¿â
-	 *
-	 * @return Á¬½ÓµÄĞÅÏ¢
+	 *	è¿æ¥åˆ°æ•°æ®åº“
+	 * @return è¿æ¥
 	 * @throws SQLException
 	 */
 	public static Connection getConnection() throws SQLException {
@@ -40,8 +39,7 @@ public class DbConnectionService {
 	}
 
 	/**
-	 * ¹Ø±ÕÓëÊı¾İ¿âµÄÁ¬½Ó
-	 * 
+	 * å…³é—­ä¸æ•°æ®åº“çš„è¿æ¥
 	 * @throws SQLException
 	 */
 	public static void closeConnection(Connection connection) {
@@ -58,8 +56,7 @@ public class DbConnectionService {
 	}
 
 	/**
-	 * »Ø¹ö²Ù×÷
-	 * 
+	 * å›æ»š
 	 * @throws SQLException
 	 */
 	public static void rollback(Connection connection) {
@@ -76,5 +73,5 @@ public class DbConnectionService {
 
 /**
  * END 
- * @author ÄşÖ¾ºÀ
+ * @author å®å¿—è±ª
  */

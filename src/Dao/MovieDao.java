@@ -6,8 +6,9 @@ import java.util.List;
 import Bean.MovieBean;
 import Bean.UserBean;
 /**
- * �ӿ���
- * @author ��־��
+ * Start
+ * 接口类，提供对movie相关表进行操作的方法
+ * @author 宁志豪
  *
  */
 
@@ -25,5 +26,5 @@ public interface MovieDao {
 }
 /**
  * END
- * @author ��־��
+ * @author 宁志豪
  */

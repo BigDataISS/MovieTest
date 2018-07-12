@@ -10,8 +10,8 @@ import Dao.MovieDao;
 import Spark.Commend;
 /**
  * Start
- * ����sql���ʵ�ֶ����ݿ�Ĳ���
- * @author ��־��
+ * 通过sql实现对movie相关表的操作
+ * @author 锟斤拷志锟斤拷
  *
  */
 
@@ -19,7 +19,8 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 
 	@Override
 	/**
-	 * �����ݿ��ȡ���е�Ӱ��Ϣ  
+	 * 获得movie表的所有信息并存储在List中
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getMovie() {
 		// TODO Auto-generated method stub
@@ -30,7 +31,8 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * �����ݿ��ȡ���ŵ�Ӱ��Ϣ  
+	 * 获得热门电影信息，即当前movie表的前三部电影，存储在List中
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getThreeMovie() {
 		// TODO Auto-generated method stub
@@ -41,15 +43,23 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * �����ݿ��ȡ�뵱ǰ��Ӱ��صĵ�Ӱ��Ϣ  
+	 * 获得与当前电影同类型的高分电影
+	 * @param type:当前电影类型
+	 * @param movieId:当前电影的ID
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getThreeMovieByType(String type,int movieId) {
 		// TODO Auto-generated method stub
 		String[] types;
-		types=type.split(" ");
+		types=type.split(" ");		//当前电影的类型可能会有多个，对它进行分割获得多个小标签
 		List<MovieBean> mvbs=new ArrayList<MovieBean>();
 		int hasAdd=0;
 		int loopTime=0;
+		
+		/**
+		 * 若当前电影有多个标签，则每个标签轮流取一个
+		 * 直至取到三部电影
+		 */
 		while(hasAdd<3) {
 			for(String str:types) {
 				
@@ -68,7 +78,10 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 						break;
 				}
 			}
-			
+			/**
+			 * 循环多次后依然无法取得三部，
+			 * 说明数据库已无数据，打破循环
+			 */
 			loopTime++;
 			if(loopTime>3)
 				break;
@@ -80,19 +93,23 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * �����ݿ��ȡ�Ƽ���Ӱ��Ϣ  
+	 * 从推荐表中获得推荐电影
+	 * @param i:当前session用户的id
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getRecommendMovie(int i) throws SQLException {
 		// TODO Auto-generated method stub
-		System.out.println("Start Recommending!");
-		Commend.commendProductsForUser(i);
+		//System.out.println("Start Recommending!");
+		//Commend.commendProductsForUser(i);
 		String sql = "select * from recommend join movie on recommend.movieid = movie.movieid where userId="+i;
 		return getForList(sql);		
 	}
 	
 	@Override
 	/** 
-	 * �����û�����Ĺؼ��ֻ�ȡ��Ӧ�ĵ�Ӱ��ģ����ѯ��
+	 * 根据电影的相关信息获得一系列电影，存储在List中
+	 * @param name:用户输入的关键字
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getMovieByName(String name){		
 		String newName="%";		
@@ -110,7 +127,8 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * �����ݿ�ɾ���Ƽ���Ӱ��Ϣ  
+	 * 删除推荐表中用户的推荐信息
+	 * @param id:当前session中的用户id
 	 */
 	public void deleteRecommendMovie(int id) {
 		String sql="delete from recommend where userId=?";
@@ -121,7 +139,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * ���ݵ�Ӱ���ͻ�ȡ��Ӧ�ĵ�Ӱ��Ϣ	
+	 * 获取同类型的所有电影
+	 * @param type:电影类型
+	 * @return 同类型电影的List
 	 */
 	public List<MovieBean> getMovieByType(String type){
 		
@@ -138,7 +158,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * ���ݵ�Ӱ���ƻ�ȡ��Ӱ
+	 * 通过电影名称获取该部电影的所有信息
+	 * @param name:电影名称
+	 * @return 存储电影信息的MovieBean类
 	 */
 	public MovieBean getTheMovieByName(String name) {
 		String sql="select * from movie where name = ?";
@@ -149,7 +171,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * ����������Ƽ���Ӱ��Ϣ  
+	 * 向推荐表中加入推荐的电影
+	 * @param m:用户id
+	 * @param n:电影id
 	 */
 	public void addRecommendMovie(int m,int n) {
 		String sql="insert into recommend values (?,?)";
@@ -159,7 +183,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 }
 /**
  * END
- * @author ��־��
+ * @author 宁志豪
  */
  
 

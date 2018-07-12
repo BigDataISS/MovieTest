@@ -15,8 +15,8 @@ import Service.MovieService;
 
 /**
  * Start
- * ����Ӱ��Ϣ���͵�ǰ��
- * @author ��־��
+ * 初始界面，传递热门电影信息
+ * @author 宁志豪
  */
 @WebServlet(name="MovieServlet",urlPatterns= {"/MovieServlet"})
 public class MovieServlet extends HttpServlet {
@@ -61,5 +61,5 @@ public class MovieServlet extends HttpServlet {
 }
 /**
  * End
- * @author ��־��
+ * @author 宁志豪
  */

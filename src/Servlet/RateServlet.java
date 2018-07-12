@@ -15,7 +15,10 @@ import Service.RateService;
 import Service.UserService;
 
 /**
- * Servlet implementation class RateServlet
+ * Start
+ * 接受用户传来的评分信息
+ * 从数据库查询评分并返回
+ * @author 宁志豪
  */
 @WebServlet(name="rateServlet",urlPatterns= {"/rateServlet"})
 public class RateServlet extends HttpServlet {
@@ -60,3 +63,7 @@ public class RateServlet extends HttpServlet {
 	}
 
 }
+/**
+ * End
+ * @author 宁志豪
+ */
