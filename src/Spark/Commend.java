@@ -24,7 +24,15 @@ public class Commend extends AppConf implements Serializable{
 	private static MatrixFactorizationModel model;
 	private static String url = "jdbc:mysql://192.168.154.89:3306/movie?characterEncoding=UTF-8";
 	private static String fromTable = "ratebyuser";
+	private static String fromTable2 = "ratebyuser2";
+	@SuppressWarnings("rawtypes")
+	private static Function ratingMap = new Function<Row,Rating>(){
+		public Rating call(Row row) {
+			return new Rating((int)row.get(0),(int)row.get(1),(double)row.get(2));
+		}
+	};
 	
+	@SuppressWarnings("unchecked")
 	public static void initialization() {
 		AppConf.initialization();
 		//ReadData from database
@@ -32,29 +40,28 @@ public class Commend extends AppConf implements Serializable{
 				
 		//Generating RDD
 		JavaRDD<Row> RatingDatas = rows.javaRDD();
-		JavaRDD<Rating> ratings = RatingDatas.map(new Function<Row,Rating>(){
-			public Rating call(Row row) {
-				return new Rating((int)row.get(1),(int)row.get(2),(double)row.get(0));
-			}
-		});
-		System.out.println("Training from "+ratings.count()+" data");
-		//Generating Model
-		model = ALS.train(ratings.rdd(), 25, 5, 0.15);
-	}
+		ratingRdd = RatingDatas.map(ratingMap);
+		ratingRdd.cache();
+    }
 	
+	@SuppressWarnings("unchecked")
 	public static void commendProductsForUser(int userID) throws SQLException{
+		long startTime = System.currentTimeMillis();
 		if(javaSparkContext == null)
 			Commend.initialization();
-		//Update recommend table
+		
+		//Union two tables
+		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable2,prop).repartition(8);
+		JavaRDD<Row> RatingDatas = rows.javaRDD();
+		JavaRDD<Rating> ratingRdd2 = RatingDatas.map(ratingMap);
+		JavaRDD<Rating> ratings = ratingRdd2.union(ratingRdd);
+		//Generating Model
+		model = ALS.train(ratings.rdd(), 25, 5, 0.15);
 		MovieService ms = new MovieService();
 		ms.deleteRecommendMovie(userID);
-		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable,prop).where("userId="+userID);
-		JavaRDD<Row> RatingDatas = rows.javaRDD();
-		JavaRDD<Integer> markedMovies = RatingDatas.map(new Function<Row,Integer>(){
-			public Integer call(Row row) {
-				return new Integer((int) row.get(2));
-			}
-		});
+		Dataset<Row> rows2 = sqlContext.read().jdbc(url,fromTable2,prop).where("userId="+userID);
+		JavaRDD<Row> RatingDatas2 = rows2.javaRDD();
+		JavaRDD<Integer> markedMovies = RatingDatas2.map(ratingMap);
 		List<Integer> markedMoviesList = markedMovies.collect();
 		int markedMoviesNum = (int)markedMovies.count();
 		//Filt movies the client has marked
@@ -68,6 +75,8 @@ public class Commend extends AppConf implements Serializable{
 					break;
 			}
 		}
+		long endTime = System.currentTimeMillis();
+		System.out.println(endTime-startTime+"ms consumed");
 		System.out.println("Done.");
 	}
 	/**

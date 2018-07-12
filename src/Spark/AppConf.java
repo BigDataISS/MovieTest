@@ -2,7 +2,9 @@ package Spark;
 
 import java.util.Properties;
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.mllib.recommendation.Rating;
 import org.apache.spark.sql.SQLContext;
 
 	/**
@@ -20,6 +22,7 @@ public class AppConf {
 	protected static SQLContext sqlContext;
 	//protected static HiveContext hiveContext;
 	protected static String wareHouseLocation = System.getProperty("user.dir");
+	protected static JavaRDD<Rating> ratingRdd;
 	
 	
 	//JDBC connection properties

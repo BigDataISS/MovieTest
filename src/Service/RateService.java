@@ -18,11 +18,7 @@ public class RateService extends Dao<RateBean> implements RateDao {
 	 */
 	public RateBean getRate(int userId, int movieId) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
-		String sql="select * from ratingbyuser where userId=? and movieId=?";
-=======
-		String sql="select * from ratebyuser where userId=? and movieId=?";
->>>>>>> edcb20628bc7d340e0f4e0eb53f0513ce7e7b60e
+		String sql="select * from ratebyuser2 where userId=? and movieId=?";
 		return get(sql,userId,movieId);		
 	}
 	
@@ -31,13 +27,8 @@ public class RateService extends Dao<RateBean> implements RateDao {
 	 * ����û������ֵ����ֱ�
 	 */
 	public void addRatingByUser(int userId,int movieId,double rate){
-<<<<<<< HEAD
-		String sql="insert into RatingByUser values (?,?,?)";
+		String sql="insert into ratebyuser2 values (?,?,?)";
 		update(sql,userId,movieId,rate);
-=======
-		String sql="insert into ratebyuser values (?,?,?)";
-		update(sql,rate,userId,movieId);
->>>>>>> edcb20628bc7d340e0f4e0eb53f0513ce7e7b60e
 	}
 }
 /**
