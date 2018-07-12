@@ -108,7 +108,7 @@
 	    /**
 			用户点击个人主页按钮，刷新个人主页页面	
 		*/
-	    $("#signinbtn").click(function() {
+	    $("#recommend").click(function() {
 	    	
 			$.ajax({
 			    type: "POST",
@@ -206,7 +206,7 @@
 	<div class="jumbotron" id="movie-recommend">
 		<div class="album py-5 bg-light">
 			<center>
-				<h1>电影推荐</h1>
+				<div class="container" id="main-title"><font size="20px">电影推荐</font></div>
 				<!-- 所推荐电影，最多6个，每个col-md-4为一个电影 -->
 				<!--
 					Start
@@ -228,9 +228,25 @@
 						//执行查询建立ResultSet,获取推荐电影movieid
 						ResultSet rs=stmt.executeQuery("select movieid from recommend join user on recommend.userid = user.userid where username = '"
 							+user+"'");
-						if(rs==null){
-								
-						}					
+						if(!rs.next()||rs==null){
+							System.out.print("dsgfuysdil");
+							%>
+							<div class="container">
+							<div class="row">
+							<font color="darkgray" size="5">对不起，我们还没有获得关于您的信息，
+							<br/>无法为您提供推荐。
+							<br/>请先对一些电影进行评分！</font>
+							</div>
+							</div>
+							<%
+						}
+						else{
+							%>
+							<script>
+							$("#main-title").append("<button id=	\"recommend\" class=\"btn btn-link\"><img src=\"image/reflesh.png\"></img></button>");
+							</script>
+							<%
+						}
 						//获取推荐电影具体信息
 						while(rs!=null && rs.next()){
 							String mvid = rs.getString("movieid");
