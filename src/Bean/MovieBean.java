@@ -1,8 +1,8 @@
 package Bean;
 /**
  * Start
- * beanÀà£¬ÓÃÓÚ´æ´¢movieµÄĞÅÏ¢
- * @author ÄşÖ¾ºÀ
+ * å®ä½“ç±»ï¼Œç”¨äºå­˜å‚¨movieçš„ç›¸å…³ä¿¡æ¯
+ * @author å®å¿—è±ª
  **/
 public class MovieBean {
 	private int MovieId;
@@ -101,5 +101,5 @@ public class MovieBean {
 
 /**
  * END
- * @author ÄşÖ¾ºÀ
+ * @author å®å¿—è±ª
  */

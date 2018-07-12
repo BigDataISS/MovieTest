@@ -5,16 +5,18 @@ import Dao.Dao;
 import Dao.UserDao;
 
 /**
- * Start Ìá¹©¶ÔÓÃ»§±í½øĞĞµÄÏà¹ØµÄ²Ù×÷µÄ·½·¨
- * 
- * @author ÄşÖ¾ºÀ
+ * Start 
+ * æä¾›å¯¹userè¡¨æ“ä½œçš„ç›¸å…³æ–¹æ³• 
+ * @author å®å¿—è±ª
  *
  */
 public class UserService extends Dao<UserBean> implements UserDao {
 
 	@Override
 	/**
-	 * ´ÓÊı¾İ¿â»ñÈ¡µ±Ç°ÓÃ»§µÄĞÅÏ¢
+	 * é€šè¿‡idè·å–å½“å‰ç”¨æˆ·ä¿¡æ¯
+	 * @param i:ç”¨æˆ·id
+	 * @return å­˜å‚¨ç”¨æˆ·ä¿¡æ¯çš„UserBeanç±»
 	 */
 	public UserBean getUser(String i) {
 		// TODO Auto-generated method stub
@@ -24,7 +26,8 @@ public class UserService extends Dao<UserBean> implements UserDao {
 	
 	@Override
 	/**
-	 * ½«ÓÃ»§×¢²áµÄĞÅÏ¢²åÈëµ½Êı¾İ¿â
+	 * æ·»åŠ ç”¨æˆ·åˆ°userè¡¨
+	 * @param user:å­˜æœ‰ç”¨æˆ·ä¿¡æ¯çš„UserBean
 	 */
 	public void addUser(UserBean user) {
 		// TODO Auto-generated method stub
@@ -36,7 +39,9 @@ public class UserService extends Dao<UserBean> implements UserDao {
 	
 	@Override
 	/**
-	 * ¸ù¾İÓÃ»§ÃûÃû´ÓÊı¾İ¿â»ñµÃÓÃ»§ĞÅÏ¢
+	 * é€šè¿‡ç”¨æˆ·åç§°è·å¾—ç”¨æˆ·ä¿¡æ¯
+	 * @param name:ç”¨æˆ·åç§°
+	 * @return å­˜å‚¨ç”¨æˆ·ä¿¡æ¯çš„UserBeanç±»
 	 */
 	public UserBean getUserByName(String name) {
 		String sql="select * from user where UserName=?";
@@ -45,6 +50,5 @@ public class UserService extends Dao<UserBean> implements UserDao {
 }
 /**
  * END
- * 
- * @author ÄşÖ¾ºÀ
+ * @author å®å¿—è±ª
  */

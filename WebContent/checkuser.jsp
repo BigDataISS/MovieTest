@@ -49,7 +49,7 @@
 
    if(userExisted == 1){//验证用户信息
 	  session.setAttribute("username",username);
-	  response.sendRedirect("person.jsp");//进入欢迎页面
+	  response.sendRedirect("index.jsp");//进入欢迎页面
    }
    else{
 	  response.sendRedirect("signin.jsp");//进入登陆页面

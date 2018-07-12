@@ -155,7 +155,7 @@
 				</ul>
 
 				<form class="navbar-form navbar-right">
-					<button class="btn btn-success" type="button" id="signinbtn">search</button>
+					<button class="btn btn-success" type="button" id="search">search</button>
 				</form>
 			</div>
 		</div>
@@ -184,13 +184,6 @@
 						</a></li>
 					</ul>
 
-					<h6
-						class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-						<span>Saved reports</span> <a
-							class="d-flex align-items-center text-muted" href="#"> <span
-							data-feather="plus-circle"></span>
-						</a>
-					</h6>
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item"><a class="nav-link"
 							href="#contact-service"> <span data-feather="file-text"></span>
@@ -235,6 +228,9 @@
 						//执行查询建立ResultSet,获取推荐电影movieid
 						ResultSet rs=stmt.executeQuery("select movieid from recommend join user on recommend.userid = user.userid where username = '"
 							+user+"'");
+						if(rs==null){
+								
+						}					
 						//获取推荐电影具体信息
 						while(rs!=null && rs.next()){
 							String mvid = rs.getString("movieid");

@@ -1,5 +1,10 @@
 package Bean;
 
+/**
+ * Start
+ * 实体类，用于存储评分表的相关信息
+ * @author 宁志豪
+ **/
 public class RateBean {
 	private int UserId;
 	private int MovieId;
@@ -24,3 +29,7 @@ public class RateBean {
 	}
 	
 }
+/**
+ * END
+ * @author 宁志豪
+ */

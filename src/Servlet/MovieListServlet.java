@@ -15,8 +15,8 @@ import Service.MovieService;
 
 /**
  * Start
- * ¸ù¾İÀàĞÍ·µ»ØÏàÓ¦µÄµçÓ°ÁĞ±í
- * @author ÄşÖ¾ºÀ
+ * é€šè¿‡ç•Œé¢ä¼ æ¥çš„ç±»å‹è¿”å›movieListä¿¡æ¯
+ * @author å®å¿—è±ª
  */
 @WebServlet(name="MovieListServlet",urlPatterns= {"/movieListServlet"})
 public class MovieListServlet extends HttpServlet {
@@ -53,6 +53,6 @@ public class MovieListServlet extends HttpServlet {
 }
 /**
  * END
- * @author ÄşÖ¾ºÀ
+ * @author å®å¿—è±ª
  */
 
