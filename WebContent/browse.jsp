@@ -62,11 +62,11 @@
 	    $(".col-md-4 .btn").click(function() {
 	    	var output=$(this).parent().next();
 	    	
-	    	console.log(output.html())
+	    	console.log(output.attr("name"))
 			$.ajax({
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/movieDetailServlet",
-			    data: {"name":output.html()},
+			    data: {"name":output.attr("name")},
 			    /* dataType: "json", */			   
 			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
 			    success: function(data){
@@ -293,16 +293,26 @@
 					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="140">
 					<div class="card-body">
 						<p class="card-text">
-						<% if(movie.getDescription().length()>60){
-							out.print(movie.getDescription().substring(0,50)+"......");
-							}else	out.print(movie.getDescription());
+						<% if(movie.getDescription().length()>65){
+							out.print(movie.getDescription().substring(0,60)+"......");
+							}else{
+								out.print(movie.getDescription());
+							}
 							%></p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
 								
 							</div>
-							<small class="text-muted"><%=movie.getName() %></small>
+							<small class="text-muted" name="<%=movie.getName() %>">
+							<%
+								if(movie.getName().length()>20){
+									out.print(movie.getName().substring(0,15)+"......");
+								}else{
+									out.print(movie.getName());
+								}
+							%>
+							</small>
 						</div>
 					</div>
 				</div>
