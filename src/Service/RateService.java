@@ -6,32 +6,41 @@ import Dao.RateDao;
 
 /**
  * Start
- * ÀûÓÃsqlÓï¾äÊµÏÖ¶ÔÊý¾Ý¿âµÄ²Ù×÷
- * @author ÄþÖ¾ºÀ
+ * ï¿½ï¿½ï¿½ï¿½sqlï¿½ï¿½ï¿½Êµï¿½Ö¶ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½Ä²ï¿½ï¿½ï¿½
+ * @author ï¿½ï¿½Ö¾ï¿½ï¿½
  *
  */
 public class RateService extends Dao<RateBean> implements RateDao {
 
 	@Override
 	/**
-	 * »ñÈ¡ÓÃ»§µÄÆÀ·Ö
+	 * ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public RateBean getRate(int userId, int movieId) {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		String sql="select * from ratingbyuser where userId=? and movieId=?";
+=======
+		String sql="select * from ratebyuser where userId=? and movieId=?";
+>>>>>>> edcb20628bc7d340e0f4e0eb53f0513ce7e7b60e
 		return get(sql,userId,movieId);		
 	}
 	
 	@Override
 	/**
-	 * Ìí¼ÓÓÃ»§µÄÆÀ·Öµ½ÆÀ·Ö±í
+	 * ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 	 */
 	public void addRatingByUser(int userId,int movieId,double rate){
+<<<<<<< HEAD
 		String sql="insert into RatingByUser values (?,?,?)";
 		update(sql,userId,movieId,rate);
+=======
+		String sql="insert into ratebyuser values (?,?,?)";
+		update(sql,rate,userId,movieId);
+>>>>>>> edcb20628bc7d340e0f4e0eb53f0513ce7e7b60e
 	}
 }
 /**
  * END
- * @author ÄþÖ¾ºÀ
+ * @author ï¿½ï¿½Ö¾ï¿½ï¿½
  */

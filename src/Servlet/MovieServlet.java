@@ -1,7 +1,6 @@
 package Servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,8 +15,8 @@ import Service.MovieService;
 
 /**
  * Start
- * ½«µçÓ°ÐÅÏ¢·¢ËÍµ½Ç°¶Ë
- * @author ÄþÖ¾ºÀ
+ * ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Íµï¿½Ç°ï¿½ï¿½
+ * @author ï¿½ï¿½Ö¾ï¿½ï¿½
  */
 @WebServlet(name="MovieServlet",urlPatterns= {"/MovieServlet"})
 public class MovieServlet extends HttpServlet {
@@ -30,6 +29,7 @@ public class MovieServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,5 +61,5 @@ public class MovieServlet extends HttpServlet {
 }
 /**
  * End
- * @author ÄþÖ¾ºÀ
+ * @author ï¿½ï¿½Ö¾ï¿½ï¿½
  */

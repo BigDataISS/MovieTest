@@ -1,25 +1,22 @@
 package Servlet;
 
 import java.util.List;
+import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
+import org.apache.spark.mllib.recommendation.Rating;
 
 import Bean.MovieBean;
 import Service.MovieService;
+import Spark.AppConf;
 
-//²âÊÔÀà
-public class Test {
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+public class Test extends AppConf{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String str="aa a 1";
-		String[] s1;
-		String[] s2;
-		s1=str.split(" ");
-		s2=str.split(" ");
-		for(int i=0;i<5;i++) {
-			if(i<2)
-				System.out.println("s1: "+s1[i]);
-			if(!s2[i].equals(null))
-				System.out.println("s2: "+s2[i]);
+		AppConf.initialization();
+		MatrixFactorizationModel model = MatrixFactorizationModel.load(javaSparkContext.sc(), "/home/hadoop5/eclipse-workspace/MyWebApp/model");
+		for(Rating temp: model.recommendProducts(1, 5)) {
+			System.out.println(temp.user()+" "+temp.product());
 		}
 	}
 
