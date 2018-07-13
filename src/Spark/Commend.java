@@ -22,7 +22,7 @@ public class Commend extends AppConf implements Serializable{
 	 **/
 	
 	private static MatrixFactorizationModel model;
-	private static String url = "jdbc:mysql://192.168.154.89:3306/movie?characterEncoding=UTF-8";
+	private static String url = "jdbc:mysql://localhost:3306/movie?characterEncoding=UTF-8";
 	private static String fromTable = "ratebyuser";
 	private static String fromTable2 = "ratebyuser2";
 	@SuppressWarnings("rawtypes")
@@ -68,8 +68,19 @@ public class Commend extends AppConf implements Serializable{
 		model = ALS.train(ratings.rdd(), 25, 5, 0.15);
 		Dataset<Row> rows2 = sqlContext.read().jdbc(url,fromTable2,prop).where("userId="+userID);
 		JavaRDD<Row> RatingDatas2 = rows2.javaRDD();
-		JavaRDD<Integer> markedMovies = RatingDatas2.map(ratingMap);
-		List<Integer> markedMoviesList = markedMovies.collect();
+		JavaRDD<Rating> markedMovies = RatingDatas2.map(ratingMap);
+		JavaRDD<Integer> markedMovieId = markedMovies.map(
+				new Function<Rating,Integer>(){
+
+					@Override
+					public Integer call(Rating r) throws Exception {
+						// TODO Auto-generated method stub
+						return new Integer(r.product());
+					}
+					
+				}
+				);
+		List<Integer> markedMoviesList = markedMovieId.collect();
 		int markedMoviesNum = (int)markedMovies.count();
 		//Clear the recommend table where userID = userId
 		MovieService ms = new MovieService();
@@ -90,7 +101,7 @@ public class Commend extends AppConf implements Serializable{
 		rows.unpersist();rows2.unpersist();
 		RatingDatas.unpersist();RatingDatas2.unpersist();
 		ratingRdd2.unpersist();markedMovies.unpersist();
-		ratings.unpersist();
+		ratings.unpersist();markedMovieId.unpersist();
 		System.out.println(endTime-startTime+"ms consumed");
 		System.out.println("Done.");
 	}

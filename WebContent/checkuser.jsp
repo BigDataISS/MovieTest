@@ -20,9 +20,9 @@
 		//瑁�杞介┍�ㄧ�搴�
 		Class.forName("org.gjt.mm.mysql.Driver").newInstance();
 		//杩��ュ��绗�涓�	  
-		String url ="jdbc:mysql://192.168.154.89/movie"; 
+		String url ="jdbc:mysql://localhost/movie"; 
 		//寤虹��杩���
-		Connection conn= DriverManager.getConnection(url,"CSuser","123456"); 
+		Connection conn= DriverManager.getConnection(url,"root","Nimakengdie1"); 
 		//寤虹��Statement
 		Statement stmt=conn.createStatement();
 		//�ц��ヨ�㈠缓绔�ResultSet

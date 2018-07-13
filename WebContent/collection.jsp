@@ -58,27 +58,27 @@
 		});
 	    
 	    /**
-			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
-		*/
-	    $(".col-md-4 .btn").click(function() {
-	    	var a=$(this).parent().next();
-	    	
-	    	console.log(a.html())
-			$.ajax({
-			    type: "POST",
-			    url: "${pageContext.request.contextPath}/movieDetailServlet",
-			    data: {"name":a.html()},
-			    /* dataType: "json", */			   
-			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-			    success: function(data){
-			    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
-			    },
-				error: function(data){
-			    	alert("失败");
-			    },
-			}); 
-						
-		});
+		用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
+	*/
+    $(".col-md-4 .btn").click(function() {
+    	var a=$(this).parent().next();
+    	
+    	console.log(a.attr("name"))
+		$.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/movieDetailServlet",
+		    data: {"name":a.attr("name")},
+		    /* dataType: "json", */			   
+		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    success: function(data){
+		    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
+		    },
+			error: function(data){
+		    	alert("失败");
+		    },
+		}); 
+					
+	});
 	    
 	    /**
 			用户点击search按钮,跳转到搜索界面  	

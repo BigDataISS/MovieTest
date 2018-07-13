@@ -27,9 +27,9 @@ public class AppConf {
 	
 	//JDBC connection properties
 	protected static String jdbc = 
-			"jdbc:mysql://192.168.154.89:3306/movie?characterEncoding=UTF-8";
-	protected static String username = "CSuser";
-	protected static String password = "123456";
+			"jdbc:mysql://localhost:3306/movie?characterEncoding=UTF-8";
+	protected static String username = "root";
+	protected static String password = "Nimakengdie1";
 	protected static Properties prop = new Properties();
 	
 	public static void initialization() {

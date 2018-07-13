@@ -303,8 +303,8 @@
 					try{
 						//连接到mysql数据库
 						Class.forName("org.gjt.mm.mysql.Driver").newInstance();  
-						String url ="jdbc:mysql://192.168.154.89/movie"; 
-						Connection conn= DriverManager.getConnection(url,"CSuser","123456"); 
+						String url ="jdbc:mysql://localhost/movie"; 
+						Connection conn= DriverManager.getConnection(url,"root","Nimakengdie1"); 
 						Statement stmt=conn.createStatement();
 						
 						//获取当前用户用户名
@@ -313,9 +313,25 @@
 						//执行查询建立ResultSet,获取推荐电影movieid
 						ResultSet rs=stmt.executeQuery("select movieid from recommend join user on recommend.userid = user.userid where username = '"
 							+user+"'");
-						if(rs==null){
-								
-						}					
+						if(!rs.next()||rs==null){
+							System.out.print("dsgfuysdil");
+							%>
+							<div class="container">
+							<div class="row">
+							<font color="darkgray" size="5">对不起，我们还没有获得关于您的信息，
+							<br/>无法为您提供推荐。
+							<br/>请先对一些电影进行评分！</font>
+							</div>
+							</div>
+							<%
+						}
+						else{
+							%>
+							<script>
+							$("#main-title").append("<button id=	\"recommend\" class=\"btn btn-link\"><img src=\"image/reflesh.png\"></img></button>");
+							</script>
+							<%
+						}				
 						//获取推荐电影具体信息
 						while(rs!=null && rs.next()){
 							String mvid = rs.getString("movieid");
