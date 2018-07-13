@@ -16,6 +16,7 @@ import Service.MovieService;
 import Service.RateService;
 import Service.UserService;
 import Spark.Commend;
+import Spark.CommendThread;
 
 /**
  * Start
@@ -55,12 +56,9 @@ public class RateServlet extends HttpServlet {
 		System.out.println(user.getUserName()+":  "+movie.getRatingNum());
 		rateService.addRatingByUser(user.getUserId(), movie.getMovieId(), rate);
 		session.setAttribute("israte", (new Double(rate)).intValue());
-		//try {
-			//Commend.commendProductsForUser(user.getUserId());
-		//} catch (SQLException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+		CommendThread ct = new CommendThread("Commend",user.getUserId());
+		ct.start();
+		System.out.println("Ending..");
 	}
 
 	/**

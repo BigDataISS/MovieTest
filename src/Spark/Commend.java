@@ -32,24 +32,33 @@ public class Commend extends AppConf implements Serializable{
 		}
 	};
 	
-	@SuppressWarnings("unchecked")
 	public static void initialization() {
+		long startTime = System.currentTimeMillis();
 		AppConf.initialization();
+		long startTime2 = System.currentTimeMillis();
+		System.out.println(startTime2-startTime+"ms AppConf initialization..");
+    }
+	
+	@SuppressWarnings("unchecked")
+	public static void loadRdd() {
 		//ReadData from database
 		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable,prop);
-				
+		long startTime2 = System.currentTimeMillis();
 		//Generating RDD
 		JavaRDD<Row> RatingDatas = rows.javaRDD();
 		ratingRdd = RatingDatas.map(ratingMap);
 		ratingRdd.cache();
-    }
+		long startTime3 = System.currentTimeMillis();
+		System.out.println(startTime3-startTime2+"ms RDD loading...");
+	}
 	
 	@SuppressWarnings("unchecked")
-	public static void commendProductsForUser(int userID) throws SQLException{
+	public static synchronized void commendProductsForUser(int userID) throws SQLException{
 		long startTime = System.currentTimeMillis();
-		if(javaSparkContext == null)
+		if(sqlContext == null)
 			Commend.initialization();
-		
+		if(ratingRdd == null)
+			loadRdd();
 		//Union two tables
 		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable2,prop).repartition(8);
 		JavaRDD<Row> RatingDatas = rows.javaRDD();
