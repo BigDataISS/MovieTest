@@ -39,23 +39,24 @@ public class SignInServlet extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		PrintWriter out = response.getWriter();
 		
-		String username=request.getParameter("username");
+		//String username=request.getParameter("username");
+		int uesrId = Integer.parseInt(request.getParameter("userid"));
 		String password=request.getParameter("password");
 
-		System.out.println("username: " + username + " password: "+password);
+		//System.out.println("username: " + username + " password: "+password);
 		
 		UserService userService = new UserService();
-		UserBean userBean = userService.getUserByName(username);
+		UserBean userBean = userService.getUser(uesrId);
 		
 		System.out.println(userBean.getUserId());
 		
 		if(userBean!=null && password.equals(userBean.getPassword())) {
 			jsonObject.put("error", 0);
 			
-			System.out.println("username: " + username + " password: "+password);
+			//System.out.println("username: " + username + " password: "+password);
 			HttpSession session = request.getSession();
-			UserBean user=userService.getUserByName(username);
-			session.setAttribute("username", username);
+			UserBean user=userService.getUser(uesrId);
+			//session.setAttribute("username", username);
 			session.setAttribute("userid", user.getUserId());
 		}
 		else {

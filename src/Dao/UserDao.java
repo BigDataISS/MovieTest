@@ -9,11 +9,15 @@ import Bean.UserBean;
  *
  */
 public interface UserDao {
-	public UserBean getUser(String i);
+	public UserBean getUser(int i);
 
 	void addUser(UserBean user);
 
 	UserBean getUserByName(String name);
+	
+	void UpdateUserWithnewname(int i, String UserName, String Password, String sex, int age, String Profession, String Description);
+	
+	void UpdateUserWitholdname(int i, String Password, String sex, int age, String Profession, String Description);
 }
 
 /**

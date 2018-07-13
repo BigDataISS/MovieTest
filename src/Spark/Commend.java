@@ -66,16 +66,17 @@ public class Commend extends AppConf implements Serializable{
 		JavaRDD<Rating> ratings = ratingRdd2.union(ratingRdd);
 		//Generating Model
 		model = ALS.train(ratings.rdd(), 25, 5, 0.15);
-		MovieService ms = new MovieService();
-		ms.deleteRecommendMovie(userID);
 		Dataset<Row> rows2 = sqlContext.read().jdbc(url,fromTable2,prop).where("userId="+userID);
 		JavaRDD<Row> RatingDatas2 = rows2.javaRDD();
 		JavaRDD<Integer> markedMovies = RatingDatas2.map(ratingMap);
 		List<Integer> markedMoviesList = markedMovies.collect();
 		int markedMoviesNum = (int)markedMovies.count();
-		//Filt movies the client has marked
+		//Clear the recommend table where userID = userId
+		MovieService ms = new MovieService();
+		ms.deleteRecommendMovie(userID);
 		int num = 0;
 		for(Rating temp: model.recommendProducts(userID, markedMoviesNum+6)) {
+			//Filt movies the client has marked
 			if(!markedMoviesList.contains(temp.product())) {
 				num++;
 				ms.addRecommendMovie(temp.user(), temp.product());	
@@ -85,6 +86,11 @@ public class Commend extends AppConf implements Serializable{
 			}
 		}
 		long endTime = System.currentTimeMillis();
+		//Rdd回收
+		rows.unpersist();rows2.unpersist();
+		RatingDatas.unpersist();RatingDatas2.unpersist();
+		ratingRdd2.unpersist();markedMovies.unpersist();
+		ratings.unpersist();
 		System.out.println(endTime-startTime+"ms consumed");
 		System.out.println("Done.");
 	}

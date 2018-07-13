@@ -5,29 +5,26 @@ import Dao.Dao;
 import Dao.UserDao;
 
 /**
- * Start 
- * 提供对user表操作的相关方法 
- * @author 宁志豪
+ * Start �ṩ���û�����е���صĲ����ķ���
+ * 
+ * @author ��־��
  *
  */
 public class UserService extends Dao<UserBean> implements UserDao {
 
 	@Override
 	/**
-	 * 通过id获取当前用户信息
-	 * @param i:用户id
-	 * @return 存储用户信息的UserBean类
+	 * �����ݿ��ȡ��ǰ�û�����Ϣ
 	 */
-	public UserBean getUser(String i) {
+	public UserBean getUser(int i) {
 		// TODO Auto-generated method stub
-		String sql = "select * from user where id=?";
-		return get(sql, i);
+		String sql = "select * from user where UserID=?";
+		return get(sql,i);
 	}
 	
 	@Override
 	/**
-	 * 添加用户到user表
-	 * @param user:存有用户信息的UserBean
+	 * ���û�ע�����Ϣ���뵽���ݿ�
 	 */
 	public void addUser(UserBean user) {
 		// TODO Auto-generated method stub
@@ -37,11 +34,33 @@ public class UserService extends Dao<UserBean> implements UserDao {
 
 	}
 	
+	public void UpdateUserWithnewname(int i, String UserName, String Password, String sex, int age, String Profession, String Description) {
+		String sql = "UPDATE user SET UserName='" + UserName +"',"
+								+" Password='" + Password + "',"
+								+" Sex='" + sex + "',"
+								+" Age=" + age + ","
+								+" Profession='" + Profession + "',"
+								+" Description='" + Description + "' WHERE UserID=" + i + ";";
+		update(sql);
+		System.out.println("COMPLETE updating user information by using " + sql);
+	}
+	
+	public void UpdateUserWitholdname(int i, String Password, String sex, int age, String Profession, String Description) {
+		String sql = "UPDATE user SET"
+								+" Password='" + Password + "',"
+								+" Sex='" + sex + "',"
+								+" Age=" + age + ","
+								+" Profession='" + Profession + "',"
+								+" Description='" + Description + "' WHERE UserID=" + i + ";";
+		update(sql);
+		System.out.println("COMPLETE updating user information by using " + sql);
+	}
+	
+	
+	
 	@Override
 	/**
-	 * 通过用户名称获得用户信息
-	 * @param name:用户名称
-	 * @return 存储用户信息的UserBean类
+	 * �����û����������ݿ����û���Ϣ
 	 */
 	public UserBean getUserByName(String name) {
 		String sql="select * from user where UserName=?";
@@ -50,5 +69,6 @@ public class UserService extends Dao<UserBean> implements UserDao {
 }
 /**
  * END
- * @author 宁志豪
+ * 
+ * @author ��־��
  */

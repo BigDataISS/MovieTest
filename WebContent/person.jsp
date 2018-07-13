@@ -105,10 +105,31 @@
 				
 		});
 	    
+		 /**
+		用户点击浏览记录，	跳转到显示用户浏览记录界面
+	*/
+    
+	$("#view-record").click(function() {
+		$.ajax({
+    		type: "POST",
+   	 		url: "${pageContext.request.contextPath}/viewRecord",
+    		data: {"name":""},
+    		/* dataType: "json", */			   
+    		/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+    		success: function(data){
+    			window.location.href="${pageContext.request.contextPath}/viewRecord.jsp";
+    		},
+			error: function(data){
+    	
+    		},
+		}); 
+			
+	});
+	    
 	    /**
 			用户点击个人主页按钮，刷新个人主页页面	
 		*/
-	    $("#recommend").click(function() {
+	    $("#signinbtn").click(function() {
 	    	
 			$.ajax({
 			    type: "POST",
@@ -124,6 +145,65 @@
 			}); 
 						
 		});
+	    
+	    
+	    /**
+		用户点击我的收藏，跳转到显示用户收藏电电影界面
+		*/
+    
+	$("#collect").click(function() {
+		$.ajax({
+    		type: "POST",
+   	 		url: "${pageContext.request.contextPath}/collect",
+    		data: {"name":""},
+    		/* dataType: "json", */			   
+    		/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+    		success: function(data){
+    			window.location.href="${pageContext.request.contextPath}/collection.jsp";
+    		},
+			error: function(data){
+    	
+    			},
+			}); 
+		});
+	    
+	    
+	    
+	/**
+	用户点击个人资料按钮，跳转到用户的个人资料信息页面
+	*/
+	$("#personal-info").click(function() {
+		$.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/UserInfoServlet",
+		    /* dataType: "json", */			   
+		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    success: function(data){			    	
+		    	window.location.href="${pageContext.request.contextPath}/personInfo.jsp";			    	
+		    },
+			error: function(data){
+		    	
+		    },
+		}); 
+					
+	});
+    
+	$("#change-info").click(function() {
+		$.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/UserChangeServlet",
+		    /* dataType: "json", */			   
+		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    success: function(data){			    	
+		    	window.location.href="${pageContext.request.contextPath}/ChangeInfo.jsp";			    	
+		    },
+			error: function(data){
+		    	
+		    },
+		});   
+    });
+	    
+	    
 	});
 </script>
 
@@ -175,13 +255,18 @@
 						<li class="nav-item"><a class="nav-link" href="#"
 							id="personal-info"> <span data-feather="file"></span> 个人资料
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#info-edit">
+						<li class="nav-item"><a class="nav-link" href="#info-edit" id="change-info">
 								<span data-feather="shopping-cart"></span> 编辑资料
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="#browse-record"> <span data-feather="users"></span>
+							href="#browse-record" id="view-record"> <span data-feather="users"></span>
 								浏览记录
 						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="#browse-record" id="collect"> <span data-feather="users"></span>
+								我的收藏
+						</a></li>
+						
 					</ul>
 
 					<ul class="nav flex-column mb-2">
@@ -206,7 +291,7 @@
 	<div class="jumbotron" id="movie-recommend">
 		<div class="album py-5 bg-light">
 			<center>
-				<div class="container" id="main-title"><font size="20px">电影推荐</font></div>
+				<h1>电影推荐</h1>
 				<!-- 所推荐电影，最多6个，每个col-md-4为一个电影 -->
 				<!--
 					Start
@@ -228,25 +313,9 @@
 						//执行查询建立ResultSet,获取推荐电影movieid
 						ResultSet rs=stmt.executeQuery("select movieid from recommend join user on recommend.userid = user.userid where username = '"
 							+user+"'");
-						if(!rs.next()||rs==null){
-							System.out.print("dsgfuysdil");
-							%>
-							<div class="container">
-							<div class="row">
-							<font color="darkgray" size="5">对不起，我们还没有获得关于您的信息，
-							<br/>无法为您提供推荐。
-							<br/>请先对一些电影进行评分！</font>
-							</div>
-							</div>
-							<%
-						}
-						else{
-							%>
-							<script>
-							$("#main-title").append("<button id=	\"recommend\" class=\"btn btn-link\"><img src=\"image/reflesh.png\"></img></button>");
-							</script>
-							<%
-						}
+						if(rs==null){
+								
+						}					
 						//获取推荐电影具体信息
 						while(rs!=null && rs.next()){
 							String mvid = rs.getString("movieid");

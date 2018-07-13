@@ -1,39 +1,41 @@
-<%@ page contentType="text/html; charset=gb2312" language="java"%> 
+<%@ page contentType="text/html; charset=gb2312" import="Bean.UserBean" import="Service.UserService" language="java"%> 
 <%@ page import="java.sql.*"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>用户身份验证</title>
+<title>�ㄦ�疯韩浠介��璇�</title>
 </head>
 
 <body>
 <%
-	//从signin页面传入的用户名和密码
+	//浠�signin椤甸��浼��ョ���ㄦ�峰����瀵���
 	String username=request.getParameter("username");
 	String password=request.getParameter("password");
+	int userid= 0;
 	if(username==null) username="";
 	if(password==null) password="";
 	int userExisted = 0;
 
 	try{
-		//装载驱动程序
+		//瑁�杞介┍�ㄧ�搴�
 		Class.forName("org.gjt.mm.mysql.Driver").newInstance();
-		//连接字符串	  
+		//杩��ュ��绗�涓�	  
 		String url ="jdbc:mysql://192.168.154.89/movie"; 
-		//建立连接
+		//寤虹��杩���
 		Connection conn= DriverManager.getConnection(url,"CSuser","123456"); 
-		//建立Statement
+		//寤虹��Statement
 		Statement stmt=conn.createStatement();
-		//执行查询建立ResultSet
-		ResultSet rs=stmt.executeQuery("select username,password from user where username = '"
+		//�ц��ヨ�㈠缓绔�ResultSet
+		ResultSet rs=stmt.executeQuery("select userid,username,password from user where username = '"
 			+username+"'");
-		//判断用户是否存在以及密码是否正确
+		//�ゆ���ㄦ�锋����瀛��ㄤ互��瀵�������姝ｇ‘
 		while(rs!=null && rs.next()){
 			if(password.equals(rs.getString("password"))){
 				userExisted = 1;
+				userid=rs.getInt("userid");
 			}
 		}
-		//关闭连接、释放资源
+		//�抽��杩��ャ�����捐�婧�
 		rs.close();
 		stmt.close();
 		conn.close();
@@ -46,13 +48,14 @@
 	}
 %>
   <%
-
-   if(userExisted == 1){//验证用户信息
+	
+   if(userExisted == 1){//楠�璇��ㄦ�蜂俊��
 	  session.setAttribute("username",username);
-	  response.sendRedirect("index.jsp");//进入欢迎页面
+	  session.setAttribute("userid",userid);
+	  response.sendRedirect("index.jsp");//杩��ユ�㈣�椤甸��
    }
-   else{
-	  response.sendRedirect("signin.jsp");//进入登陆页面
+   else{ 
+	  response.sendRedirect("signin.jsp");//杩��ョ�婚��椤甸��
    }
   %>
 </body>

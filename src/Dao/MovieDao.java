@@ -7,8 +7,8 @@ import Bean.MovieBean;
 import Bean.UserBean;
 /**
  * Start
- * 接口类，提供对movie相关表进行操作的方法
- * @author 宁志豪
+ * 鎺ュ彛绫伙紝鎻愪緵瀵筸ovie鐩稿叧琛ㄨ繘琛屾搷浣滅殑鏂规硶
+ * @author 瀹佸織璞�
  *
  */
 
@@ -22,9 +22,13 @@ public interface MovieDao {
 	public void addRecommendMovie(int m,int n);
 	public List<MovieBean> getThreeMovieByType(String type, int movieId);
 	public void deleteRecommendMovie(int id);
+	public void addViewRecordMovie(int userId,int movieId,String time);
+	public List<MovieBean> getAllMovieFromViewRecord(int userId);
+	public void addCollectMovie(int userId,int movieId);
+	public List<MovieBean> getAllMovieFromCollect(int userId);
 
 }
 /**
  * END
- * @author 宁志豪
+ * @author 瀹佸織璞�
  */

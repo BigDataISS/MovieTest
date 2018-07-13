@@ -122,6 +122,30 @@
 				}); 
     		}	
 			});
+	    
+  	  /**
+		用户点击Collect按钮，收藏该电影
+		*/
+    $("#collect").click(function() {
+    	var movie=$("#movieName").html()	
+    	
+		$.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/collectDetail",
+		    data: {"rate":$(this).html(),"moviename":movie},
+		    /* dataType: "json", */			   
+		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    success: function(data){
+		    	//window.location.href="${pageContext.request.contextPath}/index.jsp";
+		    	alert("收藏成功");
+		    },
+			error: function(data){
+		    	alert("失败");
+		    },
+		});
+					
+	});
+	    
 });
 </script>
 <!--
@@ -150,6 +174,10 @@
 	<div id="navbar" class="collapse navbar-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
+		</ul>
+		
+		<ul class="nav navbar-nav">
+			<li class="actives"><a href="#" id ="collect">Collect</a></li>
 		</ul>
 		
 		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">

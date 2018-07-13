@@ -42,6 +42,7 @@ public class MovieServlet extends HttpServlet {
 		List<MovieBean> movieList = movieService.getThreeMovie();
 		HttpSession session = request.getSession();
 		session.setAttribute("movieList", movieList);
+		//session.setAttribute("userid", 0);
 		request.getRequestDispatcher("index.jsp").forward(request,response);
 	}
 

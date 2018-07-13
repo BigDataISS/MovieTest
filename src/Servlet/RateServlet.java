@@ -1,7 +1,6 @@
 package Servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +14,6 @@ import Bean.UserBean;
 import Service.MovieService;
 import Service.RateService;
 import Service.UserService;
-import Spark.Commend;
 import Spark.CommendThread;
 
 /**

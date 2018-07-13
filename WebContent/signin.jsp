@@ -24,6 +24,7 @@
 			<% 
 				if(!session.isNew()){
 					String name=(String)session.getAttribute("username");
+					
 					if(name==null) name="";
 				}
 				out.println("<span>Session ID:"+session.getId()+"</span>");//输出会话编号

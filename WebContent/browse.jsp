@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" import="Bean.MovieBean" import="java.util.ArrayList" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" import = "java.util.Date" import = "java.text.SimpleDateFormat" import="Bean.MovieBean" import="java.util.ArrayList" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 
@@ -61,7 +61,6 @@
 		*/
 	    $(".col-md-4 .btn").click(function() {
 	    	var output=$(this).parent().next();
-	    	
 	    	console.log(output.attr("name"))
 			$.ajax({
 			    type: "POST",

@@ -2,6 +2,8 @@ package Servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,18 +43,35 @@ public class MovieDetailServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String name=request.getParameter("name");
+		System.out.println(name);
 		
 		MovieService movieService=new MovieService();
 		UserService userService=new UserService();
 		RateService rateService=new RateService();
 		
 		MovieBean movie=movieService.getTheMovieByName(name);
-		List<MovieBean> movieList=movieService.getThreeMovieByType(movie.getType(),movie.getMovieId());
 		
-		String userName=(String) session.getAttribute("username");
-		if (userName != null) {
-			UserBean user = userService.getUserByName(userName);
+		System.out.println(movie.getCountry());
+		List<MovieBean> movieList=movieService.getThreeMovieByType(movie.getType(),movie.getMovieId());
+		int userid;
+		try {
+			userid=(int) session.getAttribute("userid");
+			System.out.println("zhengquy:" + userid);
+		}catch(Exception e) {
+			userid = 0;
+		}
+		
+		if (userid != 0) {
+			//UserBean user = userService.getUserByName(userName);
+			UserBean user = userService.getUser(userid);
 			RateBean rateBean = rateService.getRate(user.getUserId(), movie.getMovieId());
+			
+			//获取响应view按钮的当前时间并格式化(有用户登入的情况下)
+			Date date=new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   //创建一个格式化日期对象
+			String time = simpleDateFormat.format(date);//格式化后的时间
+			
+			movieService.addViewRecordMovie(user.getUserId(), movie.getMovieId(),time);			//将用户id、浏览的电影id以及浏览的时间存入数据库
 			
 			if (rateBean != null) {
 				session.setAttribute("israte", new Double(rateBean.getRatingNum()).intValue());
