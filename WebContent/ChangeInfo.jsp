@@ -31,6 +31,28 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
 
+	$(document).ready(function(){
+		/**
+			用户点击home按钮，返回主页
+		*/
+	    $(".collapse .active").click(function() {
+	    	var output=$(this).parent().next();	    	
+			$.ajax({
+			    type: "POST",
+			    url: "${pageContext.request.contextPath}/MovieServlet",
+			    
+			    /* dataType: "json", */			   
+			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+			    success: function(data){
+			    	window.location.href="${pageContext.request.contextPath}/index.jsp";
+			    },
+				error: function(data){
+			    	alert("失败");
+			    },
+			});
+						
+		})
+	});
     function check() {
 	       var name=$("#username").val();
 	       if(name==""||$.trim(name)==""){
@@ -98,7 +120,7 @@
 </script>
 <!--
 	End
-	@author 宁志豪
+	@author 马雨昂
 -->
 
 </head>
