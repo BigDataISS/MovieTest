@@ -176,9 +176,6 @@
 			<li class="active"><a href="#">Home</a></li>
 		</ul>
 		
-		<ul class="nav navbar-nav">
-			<li class="actives"><a href="#" id ="collect">Collect</a></li>
-		</ul>
 		
 		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
 			<button class="btn btn-success" type="button" id="search">search</button>
@@ -210,7 +207,8 @@
 					</p>
 				</div><!-- /.col-lg-4 -->
 				<div class="col-lg-8">
-					<h2>评分：<%=movie.getRatingNum() %></h2>
+						<font size=6>评分：<%=movie.getRatingNum() %></font>
+						<button class="btn btn-info" id ="collect" onclick="switchUser()">收藏</button>
 					<!--
 						Start
 						星星评分
