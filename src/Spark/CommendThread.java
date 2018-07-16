@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 	/**
 	Start
-	Java多线程的实现
+	Java推荐线程的实现
 	@author 张子健
     **/
 
@@ -44,6 +44,6 @@ public class CommendThread implements Runnable{
 
 	/**
 	End
-	Java多线程的实现
+	Java推荐线程的实现
 	@author 张子健
 	 **/

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import Bean.MovieBean;
 import Service.MovieService;
+import Spark.InitializationThread;
 
 /**
  * Start
@@ -56,7 +57,8 @@ public class MovieServlet extends HttpServlet {
 	
 	public void init() throws ServletException {
         super.init();
-       
+        InitializationThread it = new InitializationThread("SparkContext init..");
+        it.start();
     }
 
 }

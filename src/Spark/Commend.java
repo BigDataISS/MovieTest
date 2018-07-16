@@ -3,6 +3,8 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.storage.StorageLevel;
+
 import Service.MovieService;
 
 import org.apache.spark.mllib.recommendation.ALS;
@@ -47,7 +49,8 @@ public class Commend extends AppConf implements Serializable{
 		//Generating RDD
 		JavaRDD<Row> RatingDatas = rows.javaRDD();
 		ratingRdd = RatingDatas.map(ratingMap);
-		ratingRdd.cache();
+		StorageLevel newLevel = new StorageLevel();
+		ratingRdd.persist(newLevel);
 		long startTime3 = System.currentTimeMillis();
 		System.out.println(startTime3-startTime2+"ms RDD loading...");
 	}
@@ -59,13 +62,6 @@ public class Commend extends AppConf implements Serializable{
 			Commend.initialization();
 		if(ratingRdd == null)
 			loadRdd();
-		//Union two tables
-		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable2,prop).repartition(8);
-		JavaRDD<Row> RatingDatas = rows.javaRDD();
-		JavaRDD<Rating> ratingRdd2 = RatingDatas.map(ratingMap);
-		JavaRDD<Rating> ratings = ratingRdd2.union(ratingRdd);
-		//Generating Model
-		model = ALS.train(ratings.rdd(), 25, 5, 0.15);
 		Dataset<Row> rows2 = sqlContext.read().jdbc(url,fromTable2,prop).where("userId="+userID);
 		JavaRDD<Row> RatingDatas2 = rows2.javaRDD();
 		JavaRDD<Rating> markedMovies = RatingDatas2.map(ratingMap);
@@ -82,6 +78,13 @@ public class Commend extends AppConf implements Serializable{
 				);
 		List<Integer> markedMoviesList = markedMovieId.collect();
 		int markedMoviesNum = (int)markedMovies.count();
+		//Union two tables
+		Dataset<Row> rows = sqlContext.read().jdbc(url,fromTable2,prop);
+		JavaRDD<Row> RatingDatas = rows.javaRDD();
+		JavaRDD<Rating> ratingRdd2 = RatingDatas.map(ratingMap);
+		JavaRDD<Rating> ratings = ratingRdd2.union(ratingRdd);
+		//Generating Model
+		model = ALS.train(ratings.rdd(), 25, 5, 0.15);
 		//Clear the recommend table where userID = userId
 		MovieService ms = new MovieService();
 		ms.deleteRecommendMovie(userID);
@@ -102,7 +105,7 @@ public class Commend extends AppConf implements Serializable{
 		RatingDatas.unpersist();RatingDatas2.unpersist();
 		ratingRdd2.unpersist();markedMovies.unpersist();
 		ratings.unpersist();markedMovieId.unpersist();
-		System.out.println(endTime-startTime+"ms consumed");
+		System.out.println("Traning "+(endTime-startTime)+"ms consumed");
 		System.out.println("Done.");
 	}
 	/**
