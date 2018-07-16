@@ -318,11 +318,13 @@
 						//获取当前用户用户名
 						String user=(String)session.getAttribute("username");
 						//等待推荐线程写入数据库结束
-						long start = System.currentTimeMillis();
-						while(RateServlet.ct.isAlive())
-							;
-						long end = System.currentTimeMillis();
-						System.out.println(end-start+"ms");
+						if(RateServlet.ct != null){
+							long start = System.currentTimeMillis();
+							while(RateServlet.ct.isAlive())
+								;
+							long end = System.currentTimeMillis();
+							System.out.println(end-start+"ms");
+						}
 						//执行查询建立ResultSet,获取推荐电影movieid
 						ResultSet rs=stmt.executeQuery("select movieid from recommend join user on recommend.userid = user.userid where username = '"
 							+user+"'");
@@ -346,6 +348,7 @@
 							<%
 						}				
 						//获取推荐电影具体信息
+						rs.previous();
 						while(rs!=null && rs.next()){
 							String mvid = rs.getString("movieid");
 							Statement stmt2=conn.createStatement();

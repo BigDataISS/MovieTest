@@ -39,6 +39,7 @@ public class MovieListServlet extends HttpServlet {
 		MovieService movieService = new MovieService();
 		List<MovieBean> movieList=movieService.getMovieByType(type);
 		HttpSession session = request.getSession();
+		session.setAttribute("notfound", "1");
 		session.setAttribute("movieList", movieList);
 	}
 
