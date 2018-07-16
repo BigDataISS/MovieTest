@@ -31,9 +31,18 @@
     });
 	
 	function switchUser(){
-		<% session.setAttribute("username",null);%>
-		<% session.setAttribute("userid",null);%>
-		window.location.href='signin.jsp';
+		$.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/switchUserServlet",
+		    /* dataType: "json", */			   
+		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    success: function(data){			    	
+		    	window.location.href="${pageContext.request.contextPath}/checkstatus.jsp";			    	
+		    },
+			error: function(data){
+		    	
+		    },
+		});   
 	}
 </script>
 
