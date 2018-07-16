@@ -14,7 +14,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Movie</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
 <link href="css/movie.css" rel="stylesheet" type="text/css">
 
 <link href="css/jumbotron.css" rel="stylesheet">
@@ -316,9 +320,17 @@
 				-->
 				</div><!-- /.row -->
 			</div>
+		</div>
+		
+		<!-- 幻灯片第二页 -->
+		<div class="item">
 		
 		</div>
 		
+		<!-- 幻灯片第二页 -->
+		<div class="item">
+		
+		</div>
 		
 
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -344,8 +356,7 @@
 </div>
 
 
-<script src="js/jquery-2.1.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+
 
 
 <script src="js/holder.min.js"></script>
