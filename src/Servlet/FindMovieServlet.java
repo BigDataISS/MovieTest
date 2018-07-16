@@ -47,6 +47,14 @@ public class FindMovieServlet extends HttpServlet {
 		MovieService movieService = new MovieService();
 		List<MovieBean> movieList=movieService.getMovieByName(name);
 		HttpSession session = request.getSession();
+		
+		System.out.println(movieList.size());
+		if(movieList.size()==0) {
+			String str="很抱歉，未找到与 '"+name+"' 相关的电影";
+			session.setAttribute("notfound", str);
+		}
+		else
+			session.setAttribute("notfound","1");
 		session.setAttribute("movieList", movieList);
 	}
 

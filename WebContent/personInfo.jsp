@@ -148,8 +148,6 @@
 			
 	});
 		
-		
-		
 	/**
 	用户点击我的收藏，跳转到显示用户收藏电电影界面
 */
@@ -172,6 +170,11 @@ $("#collect").click(function() {
 });
 		
     });
+
+function switchUser(){
+	var username="<%=session.getAttribute("username")%>";
+	alert(username);
+}
 </script>
 
 </head>
@@ -259,7 +262,12 @@ $("#collect").click(function() {
 	<div class="jumbotron" id="movie-recommend">
 		<div class="album py-5 bg-light">
 			<center>
-				<h1>个人资料</h1>
+				<div class="container">
+				<div class="row">
+				<font size=7>个人资料</font>
+				<button class="btn btn-info" onclick="switchUser()">切换用户</button>
+				</div>
+				</div>
 				<div class="container marketing">
 			<div class="row">
 				<!-- left column;picture,time -->
