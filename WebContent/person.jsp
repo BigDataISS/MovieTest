@@ -343,7 +343,7 @@
 							<div class="col-md-4">
 								<div class="card mb-4 box-shadow">
 									<img class="card-img-top" src="pics/<%=movieInfo.getString("Name")%>.jpg"
-										alt="Card image cap" width="288" height="140">
+										alt="Card image cap" width="288" height="400">
 									<div class="card-body">
 										<p class="card-text">
 										<% if(movieInfo.getString("Description").length()>60){
@@ -353,7 +353,7 @@
 										%></p>
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="btn-group">
-												<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+												<button type="button" class="btn btn-sm btn-default">View</button>
 											</div>
 											<small class="text-muted"><%=movieInfo.getString("Name")%></small>
 										</div>

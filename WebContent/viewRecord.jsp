@@ -306,7 +306,7 @@
 			%>
 			<div class="col-md-4">
 				<div class="card mb-4 box-shadow">
-					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="140">
+					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="400">
 					<div class="card-body">
 						<p class="card-text">
 						<% if(movie.getDescription().length()>65){
