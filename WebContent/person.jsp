@@ -105,9 +105,16 @@
 				
 		});
 	    
+		/**
+			用户点击电影推荐按钮,跳转到搜索界面  	
+		*/
+		$("#movierecommend").click(function() {
+			window.location.href="${pageContext.request.contextPath}/person.jsp";
+		});
+	    
 		 /**
-		用户点击浏览记录，	跳转到显示用户浏览记录界面
-	*/
+			用户点击浏览记录，	跳转到显示用户浏览记录界面
+		*/
     
 	$("#view-record").click(function() {
 		$.ajax({
@@ -117,7 +124,7 @@
     		/* dataType: "json", */			   
     		/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
     		success: function(data){
-    			window.location.href="${pageContext.request.contextPath}/viewRecord.jsp";
+    			$("#mainbody").load("${pageContext.request.contextPath}/viewRecord.jsp");
     		},
 			error: function(data){
     	
@@ -159,7 +166,7 @@
     		/* dataType: "json", */			   
     		/* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
     		success: function(data){
-    			window.location.href="${pageContext.request.contextPath}/collection.jsp";
+    			$("#mainbody").load("${pageContext.request.contextPath}/collection.jsp");
     		},
 			error: function(data){
     	
@@ -170,7 +177,7 @@
 	    
 	    
 	/**
-	用户点击个人资料按钮，跳转到用户的个人资料信息页面
+		用户点击个人资料按钮，跳转到用户的个人资料信息页面
 	*/
 	$("#personal-info").click(function() {
 		$.ajax({
@@ -179,7 +186,7 @@
 		    /* dataType: "json", */			   
 		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
 		    success: function(data){			    	
-		    	window.location.href="${pageContext.request.contextPath}/personInfo.jsp";			    	
+		    	$("#mainbody").load("${pageContext.request.contextPath}/personInfo.jsp");	    	
 		    },
 			error: function(data){
 		    	
@@ -285,7 +292,7 @@
 	<!--end container-->
 
 	
-	
+<div id="mainbody">	
 	<!--jumbotron 超大屏幕，内容居中显示，两边用底层内容补齐btn btn-primary btn-lg -->
 	<!--电影推荐-->
 	<div class="jumbotron" id="movie-recommend">
@@ -389,7 +396,7 @@
 			</center>
 		</div>
 	</div>
-
+</div>
 
 
 	<script src="js/jquery-2.1.3.min.js"></script>
