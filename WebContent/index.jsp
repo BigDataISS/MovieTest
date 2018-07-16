@@ -196,7 +196,8 @@
 						if(movieList == null){
 							movieList = new ArrayList<MovieBean>();
 						}
-						for(MovieBean movie : movieList){
+						for(int i=0;i<3;i++){
+							MovieBean movie=movieList.get(i);
 			%>
 					
 					<div class="col-lg-4">
@@ -219,20 +220,63 @@
 		</div>
 		<!-- 幻灯片第二页 -->
 		<div class="item">
-
-			
-		
+		<div class="container marketing">
+		<div class="row">
+			<% 
+				for(int i=3;i<6;i++){
+					MovieBean movie=movieList.get(i);
+			%>
+			<div class="col-lg-4">
+				<img class="img-circle" src="pics/<%=movie.getName()%>.jpg"
+					alt="Generic placeholder image" width="140" height="140">
+				<h2 id="h2"><%=movie.getName()%></h2>
+				<p>
+					<%
+						if (movie.getDescription().length() > 60) {
+								out.print(movie.getDescription().substring(0, 50) + "......");
+							} else
+								out.print(movie.getDescription());
+					%>
+				</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details
+						&raquo;</a>
+				</p>
+			</div>
+			<!-- /.col-lg-4 -->
+			<% } %>
+			</div>
+			</div>
 		</div>
 		<!-- 幻灯片第三页 -->
 		<div class="item">
-			<img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-			<div class="container">
-				<div class="carousel-caption">
-					<h1>One more for good measure.</h1>
-					<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-					<p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-				</div>
+		<div class="container marketing">
+		<div class="row">
+			<% 
+				for(int i=6;i<9;i++){
+					MovieBean movie=movieList.get(i);
+			%>
+			<div class="col-lg-4">
+				<img class="img-circle" src="pics/<%=movie.getName()%>.jpg"
+					alt="Generic placeholder image" width="140" height="140">
+				<h2 id="h2"><%=movie.getName()%></h2>
+				<p>
+					<%
+						if (movie.getDescription().length() > 60) {
+								out.print(movie.getDescription().substring(0, 50) + "......");
+							} else
+								out.print(movie.getDescription());
+					%>
+				</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View details
+						&raquo;</a>
+				</p>
 			</div>
+			<!-- /.col-lg-4 -->
+			<% } %>
+		</div>
+		</div>
 		</div>
 	</div>
 

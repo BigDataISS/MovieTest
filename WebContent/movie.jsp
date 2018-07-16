@@ -301,15 +301,16 @@
 						if(movieList == null){
 							movieList = new ArrayList<MovieBean>();
 						}
-						for(MovieBean mv : movieList){
+						for(int i=0;i<3;i++){
+							MovieBean mv=movieList.get(i);
 					%>
 					
 					<div class="col-lg-4">
 						<img class="img-circle" src="pics/<%=mv.getName() %>.jpg" alt="Generic placeholder image" width="140" height="140">
 						<h2 id="h2"><%=mv.getName() %></h2>
 						<p><% if(mv.getDescription().length()>60){
-							out.print(mv.getDescription().substring(0,50)+"......");
-							}else	out.print(mv.getDescription());
+									out.print(mv.getDescription().substring(0,50)+"......");
+								}else	out.print(mv.getDescription());
 							%></p>
 						<p><a class="btn btn-default" href="#" role="button" >View details &raquo;</a></p>
 					</div><!-- /.col-lg-4 -->
@@ -324,12 +325,64 @@
 		
 		<!-- 幻灯片第二页 -->
 		<div class="item">
+		<div class="container marketing">
+		<div class="row">
+				<%
+					for (int i = 3; i < 6; i++) {
+						MovieBean mv = movieList.get(i);
+				%>
+				<div class="col-lg-4">
+					<img class="img-circle" src="pics/<%=mv.getName()%>.jpg"
+						alt="Generic placeholder image" width="140" height="140">
+					<h2 id="h2"><%=mv.getName()%></h2>
+					<p>
+						<%
+							if (mv.getDescription().length() > 60) {
+									out.print(mv.getDescription().substring(0, 50) + "......");
+								} else
+									out.print(mv.getDescription());
+						%>
+					</p>
+					<p>
+						<a class="btn btn-default" href="#" role="button">View
+							details &raquo;</a>
+					</p>
+				</div>
+				<!-- /.col-lg-4 -->
+				<% } %>
+			</div>
+			</div>
+			</div>
 		
-		</div>
-		
-		<!-- 幻灯片第二页 -->
+		<!-- 幻灯片第三页 -->
 		<div class="item">
-		
+		<div class="container marketing">
+		<div class="row">
+			<%
+				for (int i = 6; i < 9; i++) {
+					MovieBean mv = movieList.get(i);
+			%>
+			<div class="col-lg-4">
+				<img class="img-circle" src="pics/<%=mv.getName()%>.jpg"
+					alt="Generic placeholder image" width="140" height="140">
+				<h2 id="h2"><%=mv.getName()%></h2>
+				<p>
+					<%
+						if (mv.getDescription().length() > 60) {
+								out.print(mv.getDescription().substring(0, 50) + "......");
+							} else
+								out.print(mv.getDescription());
+					%>
+				</p>
+				<p>
+					<a class="btn btn-default" href="#" role="button">View
+						details &raquo;</a>
+				</p>
+			</div>
+			<!-- /.col-lg-4 -->
+			<% } %>
+		</div>
+		</div>
 		</div>
 		
 

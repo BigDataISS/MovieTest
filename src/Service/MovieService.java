@@ -33,9 +33,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	 * 鑾峰緱鐑棬鐢靛奖淇℃伅锛屽嵆褰撳墠movie琛ㄧ殑鍓嶄笁閮ㄧ數褰憋紝瀛樺偍鍦↙ist涓�
 	 * @return 瀛樺偍movie淇℃伅鐨凩ist
 	 */
-	public List<MovieBean> getThreeMovie() {
+	public List<MovieBean> getListMovie() {
 		// TODO Auto-generated method stub
-		String sql = "select * from movie limit 3";
+		String sql = "select * from movie limit 9";
 		return getForList(sql);
 		
 	} 
@@ -47,7 +47,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	 * @param movieId:褰撳墠鐢靛奖鐨処D
 	 * @return 瀛樺偍movie淇℃伅鐨凩ist
 	 */
-	public List<MovieBean> getThreeMovieByType(String type,int movieId) {
+	public List<MovieBean> getListMovieByType(String type,int movieId) {
 		// TODO Auto-generated method stub
 		String[] types;
 		types=type.split(" ");		//褰撳墠鐢靛奖鐨勭被鍨嬪彲鑳戒細鏈夊涓紝瀵瑰畠杩涜鍒嗗壊鑾峰緱澶氫釜灏忔爣绛�
@@ -59,7 +59,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		 * 鑻ュ綋鍓嶇數褰辨湁澶氫釜鏍囩锛屽垯姣忎釜鏍囩杞祦鍙栦竴涓�
 		 * 鐩磋嚦鍙栧埌涓夐儴鐢靛奖
 		 */
-		while(hasAdd<3) {
+		while(hasAdd<9) {
 			for(String str:types) {
 				
 				String sql = "select * from movie where type like '%"+str+"%' "
@@ -73,7 +73,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 					System.out.println(mvb.getName());
 					hasAdd++;
 					System.out.println(hasAdd);
-					if(hasAdd==3)
+					if(hasAdd==9)
 						break;
 				}
 			}
@@ -82,7 +82,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 			 * 璇存槑鏁版嵁搴撳凡鏃犳暟鎹紝鎵撶牬寰幆
 			 */
 			loopTime++;
-			if(loopTime>3)
+			if(loopTime>9)
 				break;
 		}
 		

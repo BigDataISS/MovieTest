@@ -52,7 +52,7 @@ public class MovieDetailServlet extends HttpServlet {
 		MovieBean movie=movieService.getTheMovieByName(name);
 		
 		System.out.println(movie.getCountry());
-		List<MovieBean> movieList=movieService.getThreeMovieByType(movie.getType(),movie.getMovieId());
+		List<MovieBean> movieList=movieService.getListMovieByType(movie.getType(),movie.getMovieId());
 		int userid;
 		try {
 			userid=(int) session.getAttribute("userid");

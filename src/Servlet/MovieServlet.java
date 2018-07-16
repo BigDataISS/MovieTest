@@ -40,7 +40,7 @@ public class MovieServlet extends HttpServlet {
 		
 		//MovieService movieService = new MovieService();
 		MovieService movieService = new MovieService();
-		List<MovieBean> movieList = movieService.getThreeMovie();
+		List<MovieBean> movieList = movieService.getListMovie();
 		HttpSession session = request.getSession();
 		session.setAttribute("movieList", movieList);
 		//session.setAttribute("userid", 0);
