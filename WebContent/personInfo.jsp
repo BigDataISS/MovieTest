@@ -173,6 +173,7 @@ $("#collect").click(function() {
 
 function switchUser(){
 	<% session.setAttribute("username",null);%>
+	<% session.setAttribute("userid",null);%>
 	window.location.href='signin.jsp';
 }
 </script>
