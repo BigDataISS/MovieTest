@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import Bean.MovieBean;
-import Bean.UserBean;
 /**
  * Start
  * 鎺ュ彛绫伙紝鎻愪緵瀵筸ovie鐩稿叧琛ㄨ繘琛屾搷浣滅殑鏂规硶

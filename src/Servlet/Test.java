@@ -1,11 +1,7 @@
 package Servlet;
 
-import java.util.List;
 import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
 import org.apache.spark.mllib.recommendation.Rating;
-
-import Bean.MovieBean;
-import Service.MovieService;
 import Spark.AppConf;
 
 //������
