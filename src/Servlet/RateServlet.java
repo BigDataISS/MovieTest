@@ -25,7 +25,7 @@ import Spark.CommendThread;
 @WebServlet(name="rateServlet",urlPatterns= {"/rateServlet"})
 public class RateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    public static CommendThread ct;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -54,7 +54,7 @@ public class RateServlet extends HttpServlet {
 		System.out.println(user.getUserName()+":  "+movie.getRatingNum());
 		rateService.addRatingByUser(user.getUserId(), movie.getMovieId(), rate);
 		session.setAttribute("israte", (new Double(rate)).intValue());
-		CommendThread ct = new CommendThread("Commend",user.getUserId());
+		ct = new CommendThread("Commend",user.getUserId());
 		ct.start();
 		System.out.println("Ending..");
 	}

@@ -12,8 +12,6 @@ public class CommendThread implements Runnable{
 	private Thread t;
 	private int userId;
 	private String threadName;
-	public static long pid = 0;
-	public static boolean isFirst = true;
 	
 	public CommendThread(String name,int userId){
 		threadName = name;
@@ -36,10 +34,12 @@ public class CommendThread implements Runnable{
 		if(t == null) {
 			t = new Thread(this,threadName);
 			t.start();
-			pid = t.getId();
 		}
 	}
-
+	
+	public boolean isAlive() {
+		return t.isAlive();
+	}
 }
 
 	/**

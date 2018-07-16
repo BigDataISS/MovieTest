@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" import="Bean.MovieBean,Bean.UserBean" import="java.util.ArrayList" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*"%>
+<%@ page import="Servlet.RateServlet"%>
 <!DOCTYPE html>
 
 <!-- 
@@ -316,7 +317,12 @@
 						
 						//获取当前用户用户名
 						String user=(String)session.getAttribute("username");
-						
+						//等待推荐线程写入数据库结束
+						long start = System.currentTimeMillis();
+						while(RateServlet.ct.isAlive())
+							;
+						long end = System.currentTimeMillis();
+						System.out.println(end-start+"ms");
 						//执行查询建立ResultSet,获取推荐电影movieid
 						ResultSet rs=stmt.executeQuery("select movieid from recommend join user on recommend.userid = user.userid where username = '"
 							+user+"'");
