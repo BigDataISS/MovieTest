@@ -208,7 +208,7 @@
 				</div><!-- /.col-lg-4 -->
 				<div class="col-lg-8">
 						<font size=6>评分：<%=movie.getRatingNum() %></font>
-						<button class="btn btn-info" id ="collect" onclick="switchUser()">收藏</button>
+						<button class="btn btn-warning" id ="collect" onclick="switchUser()">收藏</button>
 					<!--
 						Start
 						星星评分
