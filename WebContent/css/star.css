@@ -6,7 +6,7 @@ ul{padding:0;margin: 0;}
   position: relative;
   width: 116px;
   height: 20px;
-  background: url(../image/star.png) no-repeat 0px 0px;
+  background: url(../image/star.png) no-repeat 0px -20px;
  }
  .scoremark .ystar {
   position: absolute;

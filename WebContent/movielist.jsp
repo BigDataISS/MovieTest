@@ -44,11 +44,14 @@
 		展示电影信息		
 	-->
 	<%
-		List<MovieBean> movieList = (List<MovieBean>) session.getAttribute("movieList");
-		if (movieList == null) {
-			movieList = new ArrayList<MovieBean>();
-		}
-		for (MovieBean movie : movieList) {
+		String notfound = (String) session.getAttribute("notfound");
+		System.out.println(notfound);
+		if (notfound == "1") {
+			List<MovieBean> movieList = (List<MovieBean>) session.getAttribute("movieList");
+			if (movieList == null) {
+				movieList = new ArrayList<MovieBean>();
+			}
+			for (MovieBean movie : movieList) {
 	%>
 	<div class="col-md-4">
 		<div class="card mb-4 box-shadow">
@@ -56,34 +59,42 @@
 				alt="Card image cap" width="288" height="140">
 			<div class="card-body">
 				<p class="card-text">
-				<p class="card-text">
-				<% if(movie.getDescription().length()>65){
-					out.print(movie.getDescription().substring(0,60)+"......");
-					}else{
-						out.print(movie.getDescription());
-					}
-				%></p>
+					<%
+						if (movie.getDescription().length() > 65) {
+									out.print(movie.getDescription().substring(0, 60) + "......");
+								} else {
+									out.print(movie.getDescription());
+								}
+					%>
+				</p>
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
 
 					</div>
-					<small class="text-muted" name="<%=movie.getName() %>">
+					<small class="text-muted" name="<%=movie.getName()%>"> 
 					<%
-						if(movie.getName().length()>20){
-							out.print(movie.getName().substring(0,15)+"......");
-						}else{
-							out.print(movie.getName());
-						}
-					%>
+ 						if (movie.getName().length() > 20) {
+ 							out.print(movie.getName().substring(0, 15) + "......");
+ 						} else {
+ 							out.print(movie.getName());
+ 						}
+ 					%>
 					</small>
 				</div>
 			</div>
 		</div>
 	</div>
 	<%
+		} //endfor
+		} //endif
+		else {
+	%>
+	<font color="darkgray" size="5"><%=notfound%></font>
+	<%
 		}
 	%>
+
 </body>
 </html>
 <!--
