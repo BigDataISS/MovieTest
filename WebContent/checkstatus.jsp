@@ -2,13 +2,13 @@
 <%@ page import="java.sql.*"%>
 <!-- 
 	START
-	���芥��杩帮�checkstatus.jsp锛�妫�娴��诲��舵��
-	@author 姣��� 
+	检查登录状态
+	@author 毛恺 
 -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>�诲��舵��楠�璇�</title>
+<title>check status</title>
 </head>
 
 <body>
@@ -32,5 +32,5 @@
 </html>
 <!-- 
 	END
-	@author 姣��� 
+	@author 毛恺 
 -->

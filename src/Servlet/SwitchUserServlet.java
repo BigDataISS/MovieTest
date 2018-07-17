@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/**
+ * Start
+ * 	切换用户
+ * @author 毛恺
+ */
 /**
  * Servlet implementation class SwitchUserServlet
  */
@@ -45,3 +49,7 @@ public class SwitchUserServlet extends HttpServlet {
 	}
 
 }
+/**
+ * END
+ * @author 毛恺
+ */

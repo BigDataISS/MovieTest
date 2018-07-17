@@ -16,8 +16,8 @@ import net.sf.json.JSONObject;
 
 /**
  * Start
- * �û���½
- * @author ë��
+ * 	登录
+ * @author 毛恺
  */
 @WebServlet(name="SignInServlet",urlPatterns= {"/signInServlet"})
 public class SignInServlet extends HttpServlet {
@@ -78,5 +78,5 @@ public class SignInServlet extends HttpServlet {
 }
 /**
  * END
- * @author ë��
+ * @author 毛恺
  */

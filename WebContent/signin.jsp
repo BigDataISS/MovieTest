@@ -38,9 +38,6 @@
 		<label for="inputPassword" class="sr-only">Password</label>
 		<input type="password" name="password"id="inputPassword" class="form-control" placeholder="密码" required></input>
 		<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" value="remember-me"> 记住用户</input>
-			</label>
 			<a href="signup.jsp" class="btn btn-secondary my-2">注册</a>
 		</div>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
