@@ -217,7 +217,7 @@
 	
 	<hr class="mb-4">
 	<button class="btn btn-lg btn-primary" onclick="ajaxAll()" type="button" id="signup">修改</button>
-	<a class="btn btn-lg btn-primary" href="persion.jsp">返回</a>
+	<a class="btn btn-lg btn-primary" href="person.jsp">返回</a>
 	<div class="invalid-feedback" style="color:red" id="sucAppointment"></div>
 	</form>
 	</div>
