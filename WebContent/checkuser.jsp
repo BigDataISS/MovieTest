@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 
+<link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
 <title>验证用户</title>
 </head>
 

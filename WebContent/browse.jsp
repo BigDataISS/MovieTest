@@ -14,6 +14,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
 <title>Browse</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -341,6 +343,8 @@
 
 </main>
 
+<div class="btn btn-default" id="up-to-top">回到顶端</div>
+
 <!-- footer -->
 <footer class="text-muted">
 	<div class="container">
@@ -363,5 +367,5 @@
 </html>
 <!-- 
 	END
-	Created by —— 毛恺 
+	@author 毛恺 
 -->

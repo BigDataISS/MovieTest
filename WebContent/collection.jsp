@@ -10,6 +10,9 @@
 <html lang="en">
 
 <head>
+
+<link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+<title>我的收藏</title>
 <!--
 	Start
 	实现信息的传输以及界面的跳转

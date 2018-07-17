@@ -9,6 +9,9 @@
 <html lang="en">
 
 <head>
+
+<link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+<title>浏览记录</title>
 <!--
 	Start
 	实现信息的传输以及界面的跳转

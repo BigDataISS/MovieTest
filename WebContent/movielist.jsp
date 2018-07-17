@@ -8,7 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+
+<link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
+<title>电影列表</title>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
