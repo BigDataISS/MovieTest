@@ -184,7 +184,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	 * ���û��������¼�������ݿ� 
 	 */
 	public void addViewRecordMovie(int userId,int movieId,String time) {
-		String sql="insert into viewRecord values (?,?,?)";
+		String sql="insert into viewrecord values (?,?,?)";
 		update(sql,userId,movieId,time);
 	}
 	
@@ -193,7 +193,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	 * 从viewRecord表中读取用户浏览的电影列表
 	 */
 	public List<MovieBean> getAllMovieFromViewRecord(int userId) {
-		String sql = "select * from viewRecord join movie on viewRecord.movieid = movie.movieid where userId="+userId +" ORDER BY viewtime DESC";
+		String sql = "select * from viewrecord join movie on viewrecord.movieid = movie.movieid where userId="+userId +" ORDER BY viewtime DESC limit 9";
 		//String sql = "select * from movie where movieid in (SELECT viewRecord.movieid from viewRecord where userId=" +userId + "ORDER BY viewRecord.viewtime)" ;
 		return getForList(sql);	
 	}
@@ -217,8 +217,14 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		return getForList(sql);	
 	}
 	
-	
-	
+	@Override
+	/**
+	 * 从collection表中删除指定的电影
+	 */	
+	public void cancelCollectMovie(int movieId) {
+		String sql = "delete from collection where movieId=?";
+		update(sql,movieId);
+	}
 }
 /**
  * END

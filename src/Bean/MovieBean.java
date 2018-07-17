@@ -18,6 +18,7 @@ public class MovieBean {
 	private String Tags;
 	private String ReleaseDate;
 	private String Runtime;
+	private String viewTime = null;
 	public int getMovieId() {
 		return MovieId;
 	}
@@ -95,6 +96,12 @@ public class MovieBean {
 	}
 	public void setRuntime(String runtime) {
 		Runtime = runtime;
+	}
+	public String getViewTime() {
+		return viewTime;
+	}
+	public void setViewTime(String viewtime) {
+		viewTime = viewtime;
 	}
 	
 }

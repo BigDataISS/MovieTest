@@ -127,30 +127,34 @@
     		}	
 			});
 	    
-  	  /**
-		用户点击Collect按钮，收藏该电影
-		*/
-    $("#collect").click(function() {
-    	var movie=$("#movieName").html()	
-    	
-		$.ajax({
-		    type: "POST",
-		    url: "${pageContext.request.contextPath}/collectDetail",
-		    data: {"rate":$(this).html(),"moviename":movie},
-		    /* dataType: "json", */			   
-		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-		    success: function(data){
-		    	//window.location.href="${pageContext.request.contextPath}/index.jsp";
-		    	alert("收藏成功");
-		    },
-			error: function(data){
-		    	alert("失败");
-		    },
-		});
-					
-	});
+  	  
 	    
 });
+    /**
+    	collect按钮绑定的方法
+    */
+    
+    
+    function ajaxAll() {
+    	var movie=$("#movieName").html()
+    	
+    	$.ajax({      	 
+        	type: "POST",
+        	url: "${pageContext.request.contextPath}/collectDetail",
+        	 data: {"moviename":movie},
+        	dataType: "json",
+        	contentType: "application/x-www-form-urlencoded; charset=utf-8",
+       	 	success: function (data) {
+				if(data.isCollect==="1"){
+				 	alert("该电影已收藏") 
+				}//endif
+				else{
+					alert("收藏成功");
+				}
+        	}//endsuccess
+    	});//endajax
+}//endfunction
+    
 </script>
 <!--
 	End
@@ -212,7 +216,14 @@
 				</div><!-- /.col-lg-4 -->
 				<div class="col-lg-8">
 						<font size=6>评分：<%=movie.getRatingNum() %></font>
-						<button class="btn btn-warning" id ="collect" onclick="switchUser()">收藏</button>
+						<%
+							int isLogin = (int)session.getAttribute("israte");
+							if(isLogin!=6){ %>
+						
+						<button class="btn btn-warning" id ="collect" onclick="ajaxAll()">收藏</button>
+						<% 
+							}
+							%>
 					<!--
 						Start
 						星星评分
@@ -245,6 +256,9 @@
 						<div style="left: 0px; display: none;" class="tips"></div>
 						
 						<%	}
+							else if(israte==6){
+								out.println("<img src=\"image/star2.png\"></img>");
+							}
 							else{
 								for(int i=0;i<israte&&i<5;i++)
 									out.println("<img src=\"pics/star.png\"></img>");

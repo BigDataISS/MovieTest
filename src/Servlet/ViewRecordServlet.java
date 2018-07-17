@@ -17,7 +17,9 @@ import Service.RateService;
 import Service.UserService;
 
 /**
- * Servlet implementation class ViewRecord
+ * Start
+ * 返回该用户浏览过的电影的表单
+ * @author 李耀鹏
  */
 @WebServlet(name="ViewRecordServlet",urlPatterns= {"/viewRecord"})
 public class ViewRecordServlet extends HttpServlet {

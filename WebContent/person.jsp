@@ -177,6 +177,7 @@
 	    
 	    
 	    
+	    
 	/**
 		用户点击个人资料按钮，跳转到用户的个人资料信息页面
 	*/
@@ -256,7 +257,7 @@
 			<nav class="col-md-2 d-none d-md-block bg-light sidebar">
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
-						<li class="nav-item"><a class="nav-link"
+						<li class="nav-item"><a class="nav-link" id="movierecommend"
 							href="#movie-recommend"> <span data-feather="home"></span>
 								电影推荐 <span class="sr-only">(current)</span>
 						</a></li>
@@ -277,12 +278,6 @@
 						
 					</ul>
 
-					<ul class="nav flex-column mb-2">
-						<li class="nav-item"><a class="nav-link"
-							href="#contact-service"> <span data-feather="file-text"></span>
-								联系客服
-						</a></li>
-					</ul>
 				</div>
 
 

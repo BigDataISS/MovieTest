@@ -3,12 +3,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>�ㄦ�疯韩浠介��璇�</title>
+<title>��濮�锟斤拷����锟斤拷锟解��锟芥�锟介���ゆ�凤拷锟介��锟�</title>
 </head>
 
 <body>
 <%
-	//浠�signin椤甸��浼��ョ���ㄦ�峰����瀵���
+	//濞达拷��锟�signin濡���锟介�╂�烽���ュ�奸���ゆ�凤拷��烽���ゆ�凤拷锟介�����查���ゆ�烽���ゆ�凤拷纰��烽���ゆ��
 	String username=request.getParameter("username");
 	String password=request.getParameter("password");
 	int userid= 0;
@@ -17,25 +17,25 @@
 	int userExisted = 0;
 
 	try{
-		//瑁�杞介┍�ㄧ�搴�
+		//锟斤拷���ワ拷锟芥�锟斤拷锟介��濮�锟窖��凤拷杈炬��
 		Class.forName("org.gjt.mm.mysql.Driver").newInstance();
-		//杩��ュ��绗�涓�	  
+		//锟解���烽��濮�锟姐���烽����锟介���ワ拷��锟�	  
 		String url ="jdbc:mysql://localhost/movie"; 
-		//寤虹��杩���
+		//�点��锟界�告�烽���ワ拷���烽���ゆ��
 		Connection conn= DriverManager.getConnection(url,"root","Nimakengdie1"); 
-		//寤虹��Statement
+		//�点��锟界�告�烽��锟�Statement
 		Statement stmt=conn.createStatement();
-		//�ц��ヨ�㈠缓绔�ResultSet
+		//��绐�锟介���ゆ�凤拷锟介��濮�锟斤拷缂�锟界�锟介��锟�ResultSet
 		ResultSet rs=stmt.executeQuery("select userid,username,password from user where username = '"
 			+username+"'");
-		//�ゆ���ㄦ�锋����瀛��ㄤ互��瀵�������姝ｇ‘
+		//��濮�锟斤拷���ゆ�烽��濮�锟斤拷��浠�锟斤拷���ゆ�烽���ゆ�凤拷锟介���ゆ�凤拷��锟介���ゆ�凤拷纰��烽���ゆ�烽���ゆ�烽���ゆ�锋慨锟介��锟斤拷锟�
 		while(rs!=null && rs.next()){
 			if(password.equals(rs.getString("password"))){
 				userExisted = 1;
 				userid=rs.getInt("userid");
 			}
 		}
-		//�抽��杩��ャ�����捐�婧�
+		//���ワ拷�ゆ�烽���ワ拷���烽��濮�锟斤��烽���ゆ�烽���ゆ�凤拷锟介��������锟�
 		rs.close();
 		stmt.close();
 		conn.close();
@@ -49,13 +49,13 @@
 %>
   <%
 	
-   if(userExisted == 1){//楠�璇��ㄦ�蜂俊��
+   if(userExisted == 1){//濡わ拷����锟斤拷���ゆ�凤拷锟介����锟斤拷娣�锟介���ゆ��
 	  session.setAttribute("username",username);
 	  session.setAttribute("userid",userid);
-	  response.sendRedirect("index.jsp");//杩��ユ�㈣�椤甸��
+	  response.sendRedirect("index.jsp");//锟解���烽��濮�锟斤拷��濮�锟斤��峰���锟介�╂�烽��锟�
    }
    else{ 
-	  response.sendRedirect("signin.jsp");//杩��ョ�婚��椤甸��
+	  response.sendRedirect("signin.jsp");//锟解���烽��濮�锟窖��锋�锟介���ゆ�峰���锟介�╂�烽��锟�
    }
   %>
 </body>

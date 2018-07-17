@@ -16,7 +16,9 @@ import Service.MovieService;
 import Service.UserService;
 
 /**
- * Servlet implementation class collectionServlet
+ * Start
+ * 返回该用户收藏的电影表单的信息
+ * @author 李耀鹏
  */
 @WebServlet(name="collectionServlet",urlPatterns= {"/collect"})
 public class collectionServlet extends HttpServlet {

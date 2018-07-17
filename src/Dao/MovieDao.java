@@ -25,6 +25,7 @@ public interface MovieDao {
 	public List<MovieBean> getAllMovieFromViewRecord(int userId);
 	public void addCollectMovie(int userId,int movieId);
 	public List<MovieBean> getAllMovieFromCollect(int userId);
+	public void cancelCollectMovie(int movieId);
 
 }
 /**

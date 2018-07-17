@@ -1,6 +1,10 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,9 +16,11 @@ import Bean.MovieBean;
 import Bean.UserBean;
 import Service.MovieService;
 import Service.UserService;
-
+import net.sf.json.JSONObject;
 /**
- * Servlet implementation class collectDetailServlet
+ * Start
+ * 通过界面传来的电影名称判断该用户是否收藏过该电影，如果未收藏则收藏，已收藏会在jsp中给出提示
+ * @author 李耀鹏
  */
 @WebServlet(name="collectDetailServlet",urlPatterns= {"/collectDetail"})
 public class collectDetailServlet extends HttpServlet {
@@ -33,21 +39,42 @@ public class collectDetailServlet extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
+    	HttpSession session = request.getSession();
 		String moviename=request.getParameter("moviename");
-		
-		System.out.print(moviename);
 		
 		MovieService movieService=new MovieService();
 		UserService userService=new UserService();
 		
 		MovieBean movie=movieService.getTheMovieByName(moviename);
 		int userID=(int) session.getAttribute("userid");
-		System.out.println((String) session.getAttribute("username"));
 		
-		UserBean user = userService.getUser(userID);
-		System.out.println("duiying :" + user.getUserId());
-		movieService.addCollectMovie(user.getUserId(), movie.getMovieId());			//���û�id�Լ��û��ղص�id�������ݿ���
+		List<MovieBean> MovieList = movieService.getAllMovieFromCollect(userID);
+		List<String> MovieNames = new ArrayList();
+		
+		for(int i = 0;i < MovieList.size();i++) {
+			MovieNames.add(MovieList.get(i).getName());
+		}
+		
+		JSONObject jsonObject = new JSONObject();
+		PrintWriter out = response.getWriter();
+		
+		if(!MovieNames.contains(movie.getName())) {			//如果用户为收藏该电影则插入数据库
+			movieService.addCollectMovie(userID, movie.getMovieId());			//���û�id�Լ��û��ղص�id�������ݿ���
+			jsonObject.put("isCollect", "0");
+			response.setContentType("application/json");
+			out.print(jsonObject);
+			out.flush();
+			out.close();
+		}
+		
+		else {
+			
+			jsonObject.put("isCollect", "1");
+			response.setContentType("application/json");
+			out.print(jsonObject);
+			out.flush();
+			out.close();	
+		}
 	}
 
 	/**

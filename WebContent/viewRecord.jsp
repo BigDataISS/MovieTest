@@ -3,7 +3,7 @@
 
 <!-- 
 	START
-	功能描述：person.jsp，按关键字、类别检索电影
+	功能描述：viewRecord.jsp,展示用户浏览的电影表单的信息
 	@author 毛恺 
 -->
 <html lang="en">
@@ -12,43 +12,46 @@
 <!--
 	Start
 	实现信息的传输以及界面的跳转
-	@author 宁志豪
+	@author 李耀鹏
 -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function(){
-	    
-	    /**
-			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
-		*/
-	    $(".col-md-4 .btn").click(function() {
-	    	var a=$(this).parent().next();
-	    	
-	    	console.log(a.attr("name"))
-			$.ajax({
-			    type: "POST",
-			    url: "${pageContext.request.contextPath}/movieDetailServlet",
-			    data: {"name":a.attr("name")},
-			    /* dataType: "json", */			   
-			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-			    success: function(data){
-			    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
-			    },
-				error: function(data){
-			    	alert("失败");
-			    },
-			}); 
-						
-		});
-	    
-	});
+$(document).ready(function(){
+    
+    /**
+	用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
+*/
+$(".col-md-4 .btn").click(function() {
+	var a=$(this).parent().next();
+	
+	console.log(a.attr("name"))
+	$.ajax({
+	    type: "POST",
+	    url: "${pageContext.request.contextPath}/movieDetailServlet",
+	    data: {"name":a.attr("name")},
+	    /* dataType: "json", */			   
+	    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+	    success: function(data){
+	    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
+	    },
+		error: function(data){
+	    	alert("失败");
+	    },
+	}); 
+				
+});
+    
+    
+ 
+    
+});
 </script>
 
 <!--
 	End
-	@author 宁志豪
+	@author 李耀鹏
 -->
 
 
@@ -73,7 +76,7 @@
 			%>
 			<div class="col-md-4">
 				<div class="card mb-4 box-shadow">
-					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="140">
+					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="440">
 					<div class="card-body">
 						<p class="card-text">
 						<% if(movie.getDescription().length()>60){
@@ -97,6 +100,17 @@
 							%>
 							</small>
 						</div>
+						
+						<div>
+								<small class="text-muted">
+								<%
+								if(movie.getViewTime() != null){
+									out.print(movie.getViewTime());
+								}
+								%>
+								</small>
+						</div>
+						
 					</div>
 				</div>
 			</div>
