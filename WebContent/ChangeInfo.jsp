@@ -3,7 +3,7 @@
 
 <!-- 
 	START
-	功能描述：signup.html，按关键字、类别检索电影
+	ChangeInfo.jsp，修改个人资料
 	Created by —— 马雨昂 
 -->
 <html lang="en">
@@ -153,6 +153,12 @@
 <div class="jumbotron">
 <div class="container">
 <div class="row">
+
+	<div class="col-lg-6">
+		<img src="image/person.jpg" width="500" height="600"></image>
+	</div>
+	
+	<div class="col-lg-6">
 	<h4 class="mb-3">修改你的账户</h4>
 	<form class="needs-validation" id="userinfo" novalidate>
 
@@ -210,9 +216,11 @@
 
 	
 	<hr class="mb-4">
-	<button class="btn btn-primary btn-lg btn-block" onclick="ajaxAll()" type="button" id="signup">修改</button>
+	<button class="btn btn-lg btn-primary" onclick="ajaxAll()" type="button" id="signup">修改</button>
+	<a class="btn btn-lg btn-primary" href="persion.jsp">返回</a>
 	<div class="invalid-feedback" style="color:red" id="sucAppointment"></div>
 	</form>
+	</div>
 </div>
 </div><!--end container-->
 </div><!--end jumbotron-->
