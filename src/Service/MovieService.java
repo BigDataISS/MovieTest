@@ -112,9 +112,13 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	 */
 	public List<MovieBean> getMovieByName(String name){		
 		String newName="%";		
+		String[] names;
+		name.replace(",", " ");
+		name.replace(";", " ");
+		names=name.split(" ");
 		
-		for(int i=0;i<name.length();i++) {			
-			newName+=name.charAt(i)+"%";			
+		for(String str:names) {			
+			newName+=str+"%";			
 		}
 		String sql = "select * from movie where name like '"+newName+"' or "
 				+ "type like '"+newName+"' or description like '"+newName+"' or"

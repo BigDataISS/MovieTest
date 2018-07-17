@@ -64,7 +64,7 @@
 			<div class="row">
 				<!-- left column;picture,time -->
 				<div class="col-lg-4">
-					<img class="card-img" src="pics/girl.jpg" alt="Generic placeholder image" width="140" height="200">
+					<img class="card-img" src="pics/client.jpeg" alt="Generic placeholder image" width="300" height="300">
 					<h2><%=user.getUserName() %> </h2>
 					<p>
 					<a class="btn btn-success" href="#" role="button" id="change-infobutton">修改资料 &raquo;</a>
@@ -74,16 +74,21 @@
 				<!-- right column;details -->
 				<div class="col-lg-8">
 					<p>
-					<font size="3">用户名:<%=user.getUserName() %>&nbsp </font>
+					<font size="10">用户名:<%=user.getUserName() %>&nbsp </font><br>
 					<br>
-					<font size="3">性别：<%=user.getSex() %>&nbsp</font>
+					<font size="10">性别：<%=user.getSex() %>&nbsp</font><br>
 					<br>
-					<font size="3">年龄：<%=user.getAge() %>&nbsp </font>
+					<font size="10">年龄：<%=user.getAge() %>&nbsp </font><br>
 					<br>
-					<font size="3">职业：<%=user.getProfession() %>&nbsp </font>
+					<font size="10">职业：<%=user.getProfession() %>&nbsp </font><br>
 					<br>
 					</p>
-					<p><span id="description">简介:<%=user.getDescription() %></span></p>
+					<p><font size="7">简介:<%if(null == user.getDescription()){%>
+					这家伙很懒，什么也没有留下...<%}%>
+					<%if(null != user.getDescription()){%>
+					<%=user.getDescription()%>
+					<%}%>
+					</font></p>
 				</div><!-- /.col-lg-6 -->
 				
 			</div><!--end row-->

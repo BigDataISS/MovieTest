@@ -54,15 +54,6 @@
 		})
 	});
     function check() {
-	       var name=$("#username").val();
-	       if(name==""||$.trim(name)==""){
-	    	   $("#nameErrorMsg").html("用户名不能为空");
-	    	   $("#nameErrorMsg").show();
-	    	   console.log(name)
-	       }
-	       else{
-	    	   $("#nameErrorMsg").hide();
-	       }
 	       if($("#password").val()==""||$.trim($("#password").val())==""){
 	    	   $("#passwordErrorMsg").html("密码不能为空");
 	    	   $("#passwordErrorMsg").show();
@@ -87,8 +78,7 @@
 	 }
     
     function ajaxAll() {
-    	var userName=$("#username").val();
-		if(userName==""||$.trim(userName)==""||$("#password").val()!=$("#passwordConfirm").val()
+		if($("#password").val()!=$("#passwordConfirm").val()
 				||$("#password").val()==""||$.trim($("#password").val())=="")
 			check();					
 		else{
@@ -99,11 +89,7 @@
             	dataType: "json",
             	contentType: "application/x-www-form-urlencoded; charset=utf-8",
            	 	success: function (data) {
-					if(data.error==="1"){
-					 	$("#nameErrorMsg").html("用户名已存在");
-			    	 	$("#nameErrorMsg").show();			    	 
-					}//endif
-					else if(data.error==="2"){
+					if(data.error==="2"){
 						$("#ageErrorMsg").html("年龄必须是整数");
 			    	 	$("#ageErrorMsg").show();	
 					}
@@ -164,12 +150,8 @@
 
 
 	<div class="mb-3">
-		<label for="new_username">用户名</label>
-		<div class="input-group">
-			<input type="text" class="form-control" id="username" name="username"
-				onclick="check()" onblur="check()" placeholder="<%user.getUserName();%>" required>
-			<div class="invalid-feedback" style="display:none" id="nameErrorMsg"></div>
-		</div>
+		<label for="new_username">用户名:</label>
+		<font size="6"><%=user.getUserName() %>&nbsp </font><br><br>
 	</div>
 	<div class="mb-3">
 		<label for="password">新密码</label>
@@ -198,7 +180,7 @@
 	
 
 	<div class="mb-3">
-		<label for="age">年龄 <span class="text-muted">(Optional)</span></label>
+		<label for="age">年龄 <span class="text-muted"></span></label>
 		<input type="text" class="form-control" id="age" name="age" placeholder="<%user.getAge();%>">
 		<div class="invalid-feedback" style="display:none" id="ageErrorMsg"></div>
 	</div>
