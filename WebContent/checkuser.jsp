@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=gb2312" import="Bean.UserBean" import="Service.UserService" language="java"%> 
+<%@ page contentType="text/html; charset=utf-8" import="Bean.UserBean" import="Service.UserService" language="java"%> 
 <%@ page import="java.sql.*"%>
 <!-- 
 	START
@@ -59,12 +59,12 @@
 	  response.sendRedirect("index.jsp");
    }
    else{ 
-		  %>
-		  <script>
-		  alert("用户名或密码错误！");
-		  </script>
-		  <%
-	  response.sendRedirect("signin.jsp");
+	   %>
+	   <script type="text/javascript" language="javascript">
+	   alert("用户名或密码错误，请重试！");
+	   window.document.location.href="signin.jsp";
+	   </script> 
+	  <%
    }
   %>
 </body>
