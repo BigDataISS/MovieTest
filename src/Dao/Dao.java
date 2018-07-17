@@ -13,7 +13,7 @@ import Service.DbConnectionService;
 
 /**
  * 模板类。总体控制与数据库的连接以及对sql语句的处理
- * 
+ * 提供从数据库查询数据并赋值到实体类的方法模板
  * @author 宁志豪
  *
  * @param <T>

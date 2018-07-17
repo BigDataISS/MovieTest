@@ -6,8 +6,9 @@ import java.util.List;
 import Bean.MovieBean;
 /**
  * Start
- * 鎺ュ彛绫伙紝鎻愪緵瀵筸ovie鐩稿叧琛ㄨ繘琛屾搷浣滅殑鏂规硶
- * @author 瀹佸織璞�
+ * 接口类
+ * 提供从数据库获取电影相关数据的方法
+ * @author 宁志豪
  *
  */
 
@@ -30,5 +31,5 @@ public interface MovieDao {
 }
 /**
  * END
- * @author 瀹佸織璞�
+ * @author 宁志豪
  */

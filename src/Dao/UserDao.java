@@ -5,7 +5,7 @@ import Bean.UserBean;
 /**
  * Start
  * 接口类，提供对user表进行操作的方法
- * @author ��־��
+ * @author 宁志豪
  *
  */
 public interface UserDao {

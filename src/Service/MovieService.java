@@ -9,8 +9,8 @@ import Dao.Dao;
 import Dao.MovieDao;
 /**
  * Start
- * 閫氳繃sql瀹炵幇瀵筸ovie鐩稿叧琛ㄧ殑鎿嶄綔
- * @author 閿熸枻鎷峰織閿熸枻鎷�
+ * 实现从数据库获得数据的方法
+ * @author 宁志豪
  *
  */
 
@@ -18,8 +18,8 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 
 	@Override
 	/**
-	 * 鑾峰緱movie琛ㄧ殑鎵�鏈変俊鎭苟瀛樺偍鍦↙ist涓�
-	 * @return 瀛樺偍movie淇℃伅鐨凩ist
+	 * 从数据库获得所有电影的数据
+	 * @return 存有电影数据的MovieList
 	 */
 	public List<MovieBean> getMovie() {
 		// TODO Auto-generated method stub
@@ -120,11 +120,21 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		for(String str:names) {			
 			newName+=str+"%";			
 		}
-		String sql = "select * from movie where name like '"+newName+"' or "
-				+ "type like '"+newName+"' or description like '"+newName+"' or"
-				+ " direction  like '"+newName+"' or actors like '"+newName+"' or scenarist like '"+newName+"'";
+		/**
+		 * 设置显示顺序优先度，由电影名、导演、演员、类型、简介的相关排序
+		 */
+		String sql = "select * from movie where name like '"+newName+"'";
+		List<MovieBean> movieList=getForList(sql);
+		sql="select * from movie where Direction like '"+newName+"'";
+		movieList.addAll(getForList(sql));
+		sql="select * from movie where Actors like '"+newName+"'";
+		movieList.addAll(getForList(sql));
+		sql="select * from movie where Type like '"+newName+"'";
+		movieList.addAll(getForList(sql));
+		sql="select * from movie where Description like '"+newName+"'";
+		movieList.addAll(getForList(sql));
 		
-		return getForList(sql);		
+		return movieList;		
 	}
 	
 	
