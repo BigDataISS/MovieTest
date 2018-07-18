@@ -151,6 +151,13 @@
 <div class="jumbotron">
 <div class="container">
 <div class="row">
+
+	<div class="col-lg-6">
+		<img src="image/signup.jpg" width="500" height="600"></image>
+	</div>
+	
+	<div class="col-lg-6">
+
 	<h4 class="mb-3">注册你的账户</h4>
 	<form class="needs-validation" id="userinfo" novalidate>
 
@@ -211,6 +218,9 @@
 	<button class="btn btn-primary btn-lg btn-block" onclick="ajaxAll()" type="button" id="signup">注册</button>
 	<div class="invalid-feedback" style="color:red" id="sucAppointment"></div>
 	</form>
+	
+	</div>
+	
 </div>
 </div><!--end container-->
 </div><!--end jumbotron-->
