@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Bean.MovieBean;
-import Bean.UserBean;
 import Service.MovieService;
-import Service.UserService;
 import net.sf.json.JSONObject;
 /**
  * Start
@@ -43,13 +41,12 @@ public class collectDetailServlet extends HttpServlet {
 		String moviename=request.getParameter("moviename");
 		
 		MovieService movieService=new MovieService();
-		UserService userService=new UserService();
 		
 		MovieBean movie=movieService.getTheMovieByName(moviename);
 		int userID=(int) session.getAttribute("userid");
 		
 		List<MovieBean> MovieList = movieService.getAllMovieFromCollect(userID);
-		List<String> MovieNames = new ArrayList();
+		List<String> MovieNames = new ArrayList<String>();
 		
 		for(int i = 0;i < MovieList.size();i++) {
 			MovieNames.add(MovieList.get(i).getName());

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import Bean.MovieBean;
 import Bean.UserBean;
 import Service.MovieService;
-import Service.RateService;
 import Service.UserService;
 
 /**

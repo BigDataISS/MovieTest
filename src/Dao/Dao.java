@@ -27,6 +27,7 @@ public class Dao<T> {
 	/**
 	 * 初始化函数
 	 */
+	@SuppressWarnings("unchecked")
 	public Dao() {
 		Type superClass = getClass().getGenericSuperclass();
 		if (superClass instanceof ParameterizedType) {

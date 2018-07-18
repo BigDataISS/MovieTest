@@ -1,6 +1,16 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName()
+			+ ":" + request.getServerPort()	+ path + "/";
+%>
 <!DOCTYPE>
+<!-- 
+	START
+	功能描述：echart显示
+	@author 张子健
+-->
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>兴趣报表</title>
@@ -68,3 +78,9 @@
 
 </body>
 </html>
+
+<!-- 
+	END
+	功能描述：echart显示
+	@author 张子健
+-->
