@@ -42,48 +42,42 @@ public class ChartServlet extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		try {
-			HttpSession session = request.getSession();
-			MovieService ms = new MovieService();
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter writer = response.getWriter();
-			ArrayList<EchartMovie> echartDatas = new ArrayList<EchartMovie>();
-			Integer userid = (Integer) session.getAttribute("userid");
-			List<MovieBean> movielist = ms.getRecommendMovie(userid);
-			Map<String,Integer> typeMap = new HashMap<String,Integer>();
-			for(int i = 0; i < movielist.size(); i++) {
-				String[] types = movielist.get(i).getType().split(" ");
-				for(int j = 0; j < types.length; j++){
-					String type = types[j];
-					if(typeMap.containsKey(type))
-						typeMap.put(type, (Integer)typeMap.get(type) + 1);
-					else
-						typeMap.put(type, 1);
-				}
+		HttpSession session = request.getSession();
+		MovieService ms = new MovieService();
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter writer = response.getWriter();
+		ArrayList<EchartMovie> echartDatas = new ArrayList<EchartMovie>();
+		Integer userid = (Integer) session.getAttribute("userid");
+		List<MovieBean> movielist = ms.getAllMovieFromViewRecord(userid);
+		Map<String,Integer> typeMap = new HashMap<String,Integer>();
+		for(int i = 0; i < movielist.size(); i++) {
+			String[] types = movielist.get(i).getType().split(" ");
+			for(int j = 0; j < types.length; j++){
+				String type = types[j];
+				if(typeMap.containsKey(type))
+					typeMap.put(type, (Integer)typeMap.get(type) + 1);
+				else
+					typeMap.put(type, 1);
 			}
-			
-			@SuppressWarnings("rawtypes")
-			Iterator iterator = typeMap.keySet().iterator();
-			
-			while (iterator.hasNext()) {    
-	            Object key = iterator.next();    
-	            echartDatas.add(new EchartMovie((String)key,(Integer)typeMap.get(key)));
-	        }    
-			if(echartDatas.isEmpty())
-				echartDatas.add(new EchartMovie("还未评分电影，喜好不明..", 1));
-			
-			JSONArray json = JSONArray.fromObject(echartDatas);
-			System.out.println(json.toString());
-			//返回到JSP
-			writer.println(json);
-			writer.flush();
-			//关闭输出流
-			writer.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
+		@SuppressWarnings("rawtypes")
+		Iterator iterator = typeMap.keySet().iterator();
+		
+		while (iterator.hasNext()) {    
+		    Object key = iterator.next();    
+		    echartDatas.add(new EchartMovie((String)key,(Integer)typeMap.get(key)));
+		}    
+		if(echartDatas.isEmpty())
+			echartDatas.add(new EchartMovie("还未评分电影，喜好不明..", 1));
+		
+		JSONArray json = JSONArray.fromObject(echartDatas);
+		System.out.println(json.toString());
+		//返回到JSP
+		writer.println(json);
+		writer.flush();
+		//关闭输出流
+		writer.close();
 	}
 	
 }
