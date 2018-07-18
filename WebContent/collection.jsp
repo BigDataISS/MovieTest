@@ -128,7 +128,7 @@ $(".col-md-4 .btn_0").click(function() {
 					
 					<div class="container">
 							<div class="row">
-							<font color="darkgray" size="8">你还没有收藏任何电影
+							<font color="darkgray" size="5">你还没有收藏任何电影
 							<br/>去收藏一些自己喜欢的电影吧</font>
 							</div>
 							</div>
@@ -150,8 +150,8 @@ $(".col-md-4 .btn_0").click(function() {
 							%></p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-								<button type="button" class="btn_0 btn-sm btn-outline-secondary">Cancel Collection</button>
+								<button type="button" class="btn btn-sm btn-default">View</button>
+								<button type="button" class="btn btn-sm btn-default">Cancel Collection</button>
 							</div>
 							<small class="text-muted" name="<%=movie.getName() %>">
 							<%

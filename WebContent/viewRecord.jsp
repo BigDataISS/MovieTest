@@ -87,9 +87,18 @@ $(".col-md-4 .btn").click(function() {
 				@author 宁志豪
 			-->		
 			<% List<MovieBean> movieList = (List<MovieBean>)session.getAttribute("movieList"); 
-				if(movieList == null){
-					movieList = new ArrayList<MovieBean>();
-				}
+			
+			if(movieList.size() == 0){%>
+			
+			<div class="container">
+					<div class="row">
+					<font color="darkgray" size="5">你还没有收藏任何电影
+					<br/>去浏览一些自己感兴趣的电影吧</font>
+					</div>
+					</div>
+			
+			<%movieList = new ArrayList<MovieBean>();
+		}
 				for(MovieBean movie : movieList){
 			%>
 			<div class="col-md-4">

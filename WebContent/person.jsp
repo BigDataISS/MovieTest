@@ -79,6 +79,27 @@
 			});
 						
 		});
+    	
+	    /**
+		用户点击Chart按钮,显示报表
+	*/
+    $("#echart").click(function() {
+    	output=$(this).parent().next();
+    	
+		$.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/ChartServlet",			    
+		    /* dataType: "json", */			   
+		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    success: function(data){
+		    	$("#mainbody").load("${pageContext.request.contextPath}/echart.jsp");		    	
+		    },
+			error: function(data){
+		    	alert("失败");
+		    },
+		});
+					
+	});
 	    
 	    /**
 			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
@@ -292,7 +313,10 @@
 							href="#browse-record" id="collect"> <span data-feather="users"></span>
 								我的收藏
 						</a></li>
-						
+						<li class="nav-item"><a class="nav-link"
+							href="#browse-record" id="echart"> <span data-feather="users"></span>
+								兴趣报表
+						</a></li>
 					</ul>
 
 				</div>
