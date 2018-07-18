@@ -45,14 +45,15 @@
     	/**
 			用户点击search按钮，传输输入栏信息，并跳转到搜索结果界面  	
 		*/
-	    $(".jumbotron .navbar-form .btn").click(function() {
-	    	var input=$(this).prev(".form-control");
+	    $("#searchBtn").click(function() {
+	    	var input=$("#search");
 	    	
 	    	console.log(input.val())
 			$.ajax({
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/findMovie",
 			    data: {"name":input.val()},
+			    async:false,
 			    /* dataType: "json", */			   
 			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
 			    success: function(data){
@@ -61,10 +62,18 @@
 				error: function(data){
 			    	
 			    },
-			}); 
-						
+			}); 		
 		});
-	    
+    	
+	    /**
+			给搜索框添加回车事件 	
+		*/
+	    $('#search').bind('keypress', function (event) { 
+	    	   if (event.keyCode == "13") { 
+	    	    $("#searchBtn").click();
+	    	   }
+	    	  });
+    	
 	    /**
 			用户点击不同的分类，跳转到不同的分类电影信息界面  	
 		*/
@@ -151,10 +160,10 @@
 		<center>
 		<h1>Hello!</h1>
 		<p>
-		<form class="navbar-form">
-			<input type="text" placeholder="Search" class="form-control">
-			<a class="btn btn-success" href="#" role="button" id="#search">Search &raquo;</a>
-		</form>
+		<div class="navbar-form">
+			<input type="text" placeholder="Search" class="form-control" id="search">
+			<a class="btn btn-success" href="#" role="button" id="searchBtn">Search &raquo;</a>
+		</div>
 		</p>
 		<a class="btn btn-secondary my-2">剧情</a>
 		<a class="btn btn-secondary my-2">喜剧</a>

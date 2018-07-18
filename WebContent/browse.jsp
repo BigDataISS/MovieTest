@@ -38,8 +38,8 @@
     	/**
     		用户点击search按钮，传输输入栏信息，并跳转到搜索结果界面  	
     	*/
-    	$("#search").click(function() {
-	    	var input=$(this).prev(".form-control");
+    	$("#searchBtn").click(function() {
+	    	var input=$("#search");
 	    	
 	    	console.log(input.val())
 			$.ajax({
@@ -59,6 +59,15 @@
 		});
     	
     	/**
+			给搜索框添加回车事件 	
+		*/
+   		 $('#search').bind('keypress', function (event) { 
+    	   	if (event.keyCode == "13") { 
+    	    	$("#searchBtn").click();
+    	   	}
+    	  });
+    	
+    	/**
 			用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
 		*/
 	    $(".col-md-4 .btn").click(function() {
@@ -69,10 +78,11 @@
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/movieDetailServlet",
 			    data: {"name":output.attr("name")},
+			    async: false,
 			    /* dataType: "json", */			   
 			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
 			    success: function(data){
-			    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
+			    	window.open("${pageContext.request.contextPath}/movie.jsp");
 			    },
 				error: function(data){
 			    	alert("失败");
@@ -268,10 +278,10 @@
 		<h1 class="jumbotron-heading">Movie Browser</h1>
 		<p class="lead text-muted">Search and browse movies here</p>
 		<p>
-			<form class="navbar-form">
-				<input type="text" placeholder="Search" class="form-control">
-				<a class="btn btn-success" href="#" role="button" id="search">Search &raquo;</a>
-			</form>
+			<div class="navbar-form">
+				<input type="text" placeholder="Search" class="form-control" id="search">
+				<a class="btn btn-success" href="#" role="button" id="searchBtn">Search &raquo;</a>
+			</div>
 		</p>
 	</div>
 </section>
@@ -344,7 +354,6 @@
 
 </main>
 
-<div class="btn btn-default" id="up-to-top">回到顶端</div>
 
 <!-- footer -->
 <footer class="text-muted">

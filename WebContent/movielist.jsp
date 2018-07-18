@@ -25,10 +25,11 @@
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/movieDetailServlet",
 			    data: {"name":output.attr("name")},
+			    async: false,
 			    /* dataType: "json", */			   
 			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
 			    success: function(data){
-			    	window.location.href="${pageContext.request.contextPath}/movie.jsp";
+			    	window.open("${pageContext.request.contextPath}/movie.jsp");
 			    },
 				error: function(data){
 			    	alert("失败");
