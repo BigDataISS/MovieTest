@@ -2,13 +2,11 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import Bean.EchartMovie;
-import Service.DbConnectionService;
+import Bean.MovieBean;
+import Service.MovieService;
 import net.sf.json.JSONArray;
 
 /**
@@ -46,17 +45,15 @@ public class ChartServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		try {
 			HttpSession session = request.getSession();
+			MovieService ms = new MovieService();
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter writer = response.getWriter();
 			ArrayList<EchartMovie> echartDatas = new ArrayList<EchartMovie>();
 			Integer userid = (Integer) session.getAttribute("userid");
-			Connection conn = DbConnectionService.getConnection();
-			Statement stmt=conn.createStatement();
-			ResultSet rs=stmt.executeQuery("select movie.Type from recommend join movie on recommend.MovieId = movie.MovieId where recommend.UserId = "
-					+userid);
+			List<MovieBean> movielist = ms.getRecommendMovie(userid);
 			Map<String,Integer> typeMap = new HashMap<String,Integer>();
-			while(rs!=null && rs.next()) {
-				String[] types = rs.getString("Type").split(" ");
+			for(int i = 0; i < movielist.size(); i++) {
+				String[] types = movielist.get(i).getType().split(" ");
 				for(int j = 0; j < types.length; j++){
 					String type = types[j];
 					if(typeMap.containsKey(type))
@@ -64,9 +61,7 @@ public class ChartServlet extends HttpServlet{
 					else
 						typeMap.put(type, 1);
 				}
-				System.out.print(rs.getString("Type")+" ");
 			}
-			System.out.println();
 			
 			@SuppressWarnings("rawtypes")
 			Iterator iterator = typeMap.keySet().iterator();
@@ -85,8 +80,6 @@ public class ChartServlet extends HttpServlet{
 			writer.flush();
 			//关闭输出流
 			writer.close();
-			rs.close();
-			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
