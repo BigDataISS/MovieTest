@@ -15,6 +15,15 @@
 
 <body>
 <%
+	//验证是否已经登录，防止直接输入url访问登陆页面
+	String name = (String)session.getAttribute("username");
+	if(name!=null && name!="")
+		%>
+	   <script type="text/javascript" language="javascript">
+	   alert("请不要直接输入url访问页面！");
+	   window.document.location.href="person.jsp";
+	   </script> 
+	  <%
 
 	//从request获取用户输入的用户名和密码
 

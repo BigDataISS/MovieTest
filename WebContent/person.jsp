@@ -43,7 +43,22 @@
 	src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
 
+	/**
+	* START 检测是否已登录，防止用户直接输入url访问
+	* @author 毛恺
+	*/
+	window.onload=function(){ 
+		var usid=<%= session.getAttribute("userid")%>;
+		if(usid==null || usid=="")
+    		window.location.href='signin.jsp';
+	}
+	/**
+	* END
+	* @author 毛恺
+	*/
+	
     $(document).ready(function(){
+    	
     	/**
 			用户点击home按钮，返回主页
 		*/
@@ -246,7 +261,7 @@
 				</ul>
 
 				<form class="navbar-form navbar-right">
-					<button class="btn btn-success" type="button" id="search">search</button>
+					<button class="btn btn-success" type="button" id="search">返回查询</button>
 				</form>
 			</div>
 		</div>

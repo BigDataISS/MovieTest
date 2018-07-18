@@ -21,6 +21,21 @@
 	src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript">
 
+/**
+* START 检测是否已登录，防止用户直接输入url访问
+* @author 毛恺
+*/
+window.onload=function(){ 
+	var usid=<%= session.getAttribute("userid")%>;
+	if(usid==null || usid=="")
+		window.location.href='signin.jsp';
+}
+/**
+* END
+* @author 毛恺
+*/
+
+
 $(document).ready(function(){
     
     /**
