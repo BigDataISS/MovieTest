@@ -67,8 +67,18 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 						+ " order by ratingNum desc limit "+(loopTime+1)+" , "+(loopTime+2);
 				System.out.println(sql);
 				
+				boolean isdiff=true;
 				MovieBean mvb=get(sql);
+				//
 				if(mvb!=null) {
+					for(MovieBean mv:mvbs) {
+						if(mv.getMovieId()==mvb.getMovieId()) {
+							isdiff=false;
+							break;
+						}
+					}
+				}
+				if(isdiff&&mvb!=null) {
 					mvbs.add(mvb);
 					System.out.println(mvb.getName());
 					hasAdd++;
@@ -133,6 +143,13 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 		movieList.addAll(getForList(sql));
 		sql="select * from movie where Description like '"+newName+"'";
 		movieList.addAll(getForList(sql));
+		//除去重复数据
+		for(int i=0;i<movieList.size();i++) {
+			for(int j=movieList.size()-1;j>i;j--) {
+				if(movieList.get(i).getMovieId()==movieList.get(j).getMovieId())
+					movieList.remove(j);
+			}
+		}
 		
 		return movieList;		
 	}

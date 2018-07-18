@@ -91,11 +91,11 @@
 	    $(".marketing .col-lg-4 .btn").click(function() {
 	    	var output=$(this).parent().siblings("h2");
 	    	
-	    	console.log(output.html())
+	    	console.log(output.attr("name"))
 			$.ajax({
 			    type: "POST",
 			    url: "${pageContext.request.contextPath}/movieDetailServlet",
-			    data: {"name":output.html()},
+			    data: {"name":output.attr("name")},
 			    /* dataType: "json", */			   
 			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
 			    success: function(data){
@@ -204,7 +204,14 @@
 					
 					<div class="col-lg-4">
 						<img class="img-circle" src="pics/<%=movie.getName() %>.jpg" alt="Generic placeholder image" width="140" height="140">
-						<h2 id="h2"><%=movie.getName() %></h2>
+						<h2 id="h2" name="<%=movie.getName()%>">
+						<%
+						if(movie.getName().length()>15)
+							out.print(movie.getName().substring(0,13)+"......");
+						else
+							out.print(movie.getName());
+						%>
+						</h2>
 						<p><% if(movie.getDescription().length()>60){
 							out.print(movie.getDescription().substring(0,50)+"......");
 							}else	out.print(movie.getDescription());
@@ -231,7 +238,14 @@
 			<div class="col-lg-4">
 				<img class="img-circle" src="pics/<%=movie.getName()%>.jpg"
 					alt="Generic placeholder image" width="140" height="140">
-				<h2 id="h2"><%=movie.getName()%></h2>
+				<h2 id="h2" name="<%=movie.getName()%>">
+					<%
+					if(movie.getName().length()>15)
+						out.print(movie.getName().substring(0,13)+"......");
+					else
+						out.print(movie.getName());
+					%>
+				</h2>
 				<p>
 					<%
 						if (movie.getDescription().length() > 60) {
@@ -261,7 +275,14 @@
 			<div class="col-lg-4">
 				<img class="img-circle" src="pics/<%=movie.getName()%>.jpg"
 					alt="Generic placeholder image" width="140" height="140">
-				<h2 id="h2"><%=movie.getName()%></h2>
+				<h2 id="h2" name="<%=movie.getName()%>">
+					<%
+					if(movie.getName().length()>15)
+						out.print(movie.getName().substring(0,13)+"......");
+					else
+						out.print(movie.getName());
+					%>
+				</h2>
 				<p>
 					<%
 						if (movie.getDescription().length() > 60) {
