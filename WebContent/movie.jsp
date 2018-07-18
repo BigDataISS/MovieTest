@@ -187,7 +187,7 @@
 		</ul>
 		
 		
-		<form class="navbar-form navbar-right" action="checkstatus.jsp" method="post">
+		<form class="navbar-form navbar-right" action="person.jsp" method="post">
 			<button class="btn btn-success" type="button" id="search">search</button>
 			<button class="btn btn-success" type="submit">个人中心</button>
 		</form>
