@@ -48,7 +48,7 @@ public class FindMovieServlet extends HttpServlet {
 		List<MovieBean> movieList=movieService.getMovieByName(name);
 		HttpSession session = request.getSession();
 		
-		System.out.println(movieList.size());
+		System.out.println(name);
 		if(movieList.size()==0) {
 			String str="很抱歉，未找到与 '"+name+"' 相关的电影";
 			session.setAttribute("notfound", str);

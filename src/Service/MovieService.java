@@ -123,8 +123,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	public List<MovieBean> getMovieByName(String name){		
 		String newName="%";		
 		String[] names;
-		name.replace(",", " ");
-		name.replace(";", " ");
+		name=name.replace(",", " ");
+		name=name.replace(";", " ");
+		name=name.replace("'", "");
 		names=name.split(" ");
 		
 		for(String str:names) {			

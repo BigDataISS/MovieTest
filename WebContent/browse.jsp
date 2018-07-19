@@ -39,31 +39,15 @@
     		用户点击search按钮，传输输入栏信息，并跳转到搜索结果界面  	
     	*/
     	$("#searchBtn").click(function() {
-	    	var input=$("#search");
-	    	
-	    	console.log(input.val())
-			$.ajax({
-			    type: "POST",
-			    url: "${pageContext.request.contextPath}/findMovie",
-			    data: {"name":input.val()},
-			    /* dataType: "json", */			   
-			    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
-			    success: function(data){
-			    	$(".album .row").load("${pageContext.request.contextPath}/movielist.jsp");
-			    },
-				error: function(data){
-			    	alert("失败");
-			    },
-			}); 
-						
+	    	search(); 					
 		});
     	
     	/**
 			给搜索框添加回车事件 	
 		*/
-   		 $('#search').bind('keypress', function (event) { 
+   		 $('#search').keydown(function (event) { 
     	   	if (event.keyCode == "13") { 
-    	    	$("#searchBtn").click();
+    	    	search();
     	   	}
     	  });
     	
@@ -140,6 +124,24 @@
 	   
 	    
 });
+    function search(){
+    	var input=$("#search");
+    	
+    	console.log(input.val())
+		$.ajax({
+		    type: "POST",
+		    url: "${pageContext.request.contextPath}/findMovie",
+		    data: {"name":input.val()},
+		    /* dataType: "json", */			   
+		    /* contentType: "application/x-www-form-urlencoded; charset=utf-8", */
+		    success: function(data){
+		    	$(".album .row").load("${pageContext.request.contextPath}/movielist.jsp");
+		    },
+			error: function(data){
+		    	alert("失败");
+		    },
+		});
+    }
 </script>
 <!-- 
 	END
