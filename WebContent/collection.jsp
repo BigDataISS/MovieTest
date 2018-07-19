@@ -41,7 +41,7 @@
 	    /**
 		用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
 	*/
-    $(".col-md-4 .btn").click(function() {
+    $("#view").click(function() {
     	var a=$(this).parent().next();
     	
     	console.log(a.attr("name"))
@@ -65,7 +65,7 @@
     /**
 	用户点击Cancel Collection按钮，传输电影名，用户取消对该电影的收藏	
 	*/
-$(".col-md-4 .btn_0").click(function() {
+$("#cancel").click(function() {
 	var a=$(this).parent().next();
 	
 	console.log(a.attr("name"))
@@ -150,8 +150,8 @@ $(".col-md-4 .btn_0").click(function() {
 							%></p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-default">View</button>
-								<button type="button" class="btn btn-sm btn-default">Cancel Collection</button>
+								<button type="button" class="btn btn-sm btn-default" id="view">View</button>
+								<button type="button" class="btn btn-sm btn-default" id="cancel">Cancel Collection</button>
 							</div>
 							<small class="text-muted" name="<%=movie.getName() %>">
 							<%
