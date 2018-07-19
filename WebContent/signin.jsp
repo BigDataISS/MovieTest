@@ -44,10 +44,9 @@ window.onload=function(){
 					
 					if(name==null) name="";
 				}
-				out.println("<span>Session ID:"+session.getId()+"</span>");//输出会话编号
 			%>
 		</label>
-		<img class="mb-4" src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
+		<img class="mb-4" src="icon/lg.png" alt="" width="120" height="120"/>
 		<h1 class="h3 mb-3 font-weight-normal">请登录</h1>
 		<label for="inputName" class="sr-only">User Name</label>
 		<input type="text" name="username" class="form-control" placeholder="用户名" required autofocus></input>
