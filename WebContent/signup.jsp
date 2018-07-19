@@ -106,6 +106,14 @@
 						$("#ageErrorMsg").html("年龄必须是整数");
 			    	 	$("#ageErrorMsg").show();	
 					}
+					else if(data.error==="3"){
+						$("#nameErrorMsg").html("用户名只能包含字母或数字或'-'");
+			    	 	$("#nameErrorMsg").show();	
+					}
+					else if(data.error==="4"){
+						$("#passwordErrorMsg").html("密码只能包含字母或数字或'-'");
+			    	 	$("#passwordErrorMsg").show();	
+					}
 					else{
 						$("#ageErrorMsg").hide();	
 						countDown(2)

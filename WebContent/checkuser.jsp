@@ -7,7 +7,7 @@
 -->
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <link rel="icon" type="image/x-icon" href="icon/favicon.ico"/>
 <title>验证用户</title>
@@ -25,6 +25,8 @@
 	if(username==null) username="";
 	if(password==null) password="";
 	int userExisted = 0;
+	
+	System.out.println(username);
 
 	try{
 

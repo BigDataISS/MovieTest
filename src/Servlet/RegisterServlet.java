@@ -48,9 +48,13 @@ public class RegisterServlet extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		String name=request.getParameter("username");
 		String age=request.getParameter("age");
+		String password=request.getParameter("password");
+		
 		PrintWriter out = response.getWriter();
 		UserService userService=new UserService();
 		UserBean checkuser=userService.getUserByName(name);
+		String regex="^[A-Za-z0-9\\-]+$";
+		
 		/**
 		 * 如果用户名已存在，设置error=1
 		 */
@@ -70,12 +74,27 @@ public class RegisterServlet extends HttpServlet {
 			return;
 		}
 		/**
+		 * 用户名或密码只能是数字、字母、"-"
+		 */
+		else if(!name.matches(regex)) {
+			jsonObject.put("error", "3");
+			response.setContentType("application/json");
+			out.print(jsonObject);
+			return;
+		}
+		else if(!password.matches(regex)) {
+			jsonObject.put("error", "4");
+			response.setContentType("application/json");
+			out.print(jsonObject);
+			return;
+		}
+		/**
 		 * 若一切正常，则error为空
 		 */
 		else {
 			UserBean user=new UserBean();
 			user.setUserName(name);	
-			user.setPassword(request.getParameter("password"));
+			user.setPassword(password);
 			user.setSex(request.getParameter("sex"));
 			//若输入的age为空字符串，则默认设置age为0
 			if(age.length()==0)
