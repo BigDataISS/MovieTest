@@ -68,7 +68,7 @@ public class ChartServlet extends HttpServlet{
 		    echartDatas.add(new EchartMovie((String)key,(Integer)typeMap.get(key)));
 		}    
 		if(echartDatas.isEmpty())
-			echartDatas.add(new EchartMovie("还未评分电影，喜好不明..", 1));
+			echartDatas.add(new EchartMovie("还未浏览电影，喜好不明..", 1));
 		
 		JSONArray json = JSONArray.fromObject(echartDatas);
 		System.out.println(json.toString());
