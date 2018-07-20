@@ -5,8 +5,8 @@
 
 <!--
 	Start
-	实现信息的传输以及界面的跳转
-	@author 宁志豪
+	实现个人资料的显示
+	@author 马雨昂
 -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
@@ -88,16 +88,16 @@
 				<!-- right column;details -->
 				<div class="col-lg-8">
 					<p>
-					<font size="10">用户名:<%=user.getUserName() %>&nbsp </font><br>
+					<font size="6">用户名:<%=user.getUserName() %>&nbsp </font><br>
 					<br>
-					<font size="10">性别：<%=user.getSex() %>&nbsp</font><br>
+					<font size="6">性别：<%=user.getSex() %>&nbsp</font><br>
 					<br>
-					<font size="10">年龄：<%=user.getAge() %>&nbsp </font><br>
+					<font size="6">年龄：<%=user.getAge() %>&nbsp </font><br>
 					<br>
-					<font size="10">职业：<%=user.getProfession() %>&nbsp </font><br>
+					<font size="6">职业：<%=user.getProfession() %>&nbsp </font><br>
 					<br>
 					</p>
-					<p><font size="7">简介:<%if(null == user.getDescription()){%>
+					<p><font size="6">简介:<%if(null == user.getDescription()){%>
 					这家伙很懒，什么也没有留下...<%}%>
 					<%if(null != user.getDescription()){%>
 					<%=user.getDescription()%>
@@ -115,3 +115,7 @@
 	</div>
 </body>
 </html>
+<!-- 
+	END
+	@author 马雨昂
+-->

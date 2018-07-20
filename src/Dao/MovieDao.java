@@ -14,18 +14,31 @@ import Bean.MovieBean;
 
 public interface MovieDao {
 	public List<MovieBean> getMovie();
+	
 	public List<MovieBean> getMovieByName(String name);
+	
 	public List<MovieBean> getMovieByType(String type);
+	
 	public List<MovieBean> getListMovie();
+	
 	public List<MovieBean> getRecommendMovie(int i) throws SQLException;
+	
 	public MovieBean getTheMovieByName(String name);
+	
 	public void addRecommendMovie(int m,int n);
+	
 	public List<MovieBean> getListMovieByType(String type, int movieId);
+	
 	public void deleteRecommendMovie(int id);
+	
 	public void addViewRecordMovie(int userId,int movieId,String time);
+	
 	public List<MovieBean> getAllMovieFromViewRecord(int userId);
+	
 	public void addCollectMovie(int userId,int movieId);
+	
 	public List<MovieBean> getAllMovieFromCollect(int userId);
+	
 	public void cancelCollectMovie(int movieId);
 
 }

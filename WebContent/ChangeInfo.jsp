@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="java.util.List" import="Bean.MovieBean,Bean.UserBean" import="java.util.ArrayList" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 
-<!-- 
-	START
-	ChangeInfo.jsp，修改个人资料
-	Created by —— 马雨昂 
+<!--
+	Start
+	修改个人资料界面
+	@author 马雨昂
 -->
 <html lang="en">
 
@@ -251,5 +251,5 @@
 
 <!-- 
 	END
-	Created by —— 毛恺 
+	@author 马雨昂
 -->

@@ -17,7 +17,9 @@ import Service.UserService;
 import net.sf.json.JSONObject;
 
 /**
- * Servlet implementation class HandleUserChangeServlet
+ * Start
+ * 处理修改个人资料并返回
+ * @author 马雨昂
  */
 @WebServlet("/HandleUserChangeServlet")
 public class HandleUserChangeServlet extends HttpServlet {
@@ -54,3 +56,8 @@ public class HandleUserChangeServlet extends HttpServlet {
 	}
 
 }
+/**
+ * END
+ * 
+ * @author 马雨昂
+ */

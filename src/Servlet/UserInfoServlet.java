@@ -12,7 +12,9 @@ import Bean.UserBean;
 import Service.UserService;
 
 /**
- * Servlet implementation class UserInfoServlet
+ * Start
+ * 获得从界面传来的userid并显示个人信息
+ * @author 马雨昂
  */
 @WebServlet("/UserInfoServlet")
 public class UserInfoServlet extends HttpServlet {
@@ -37,3 +39,8 @@ public class UserInfoServlet extends HttpServlet {
 	}
 
 }
+/**
+ * END
+ * 
+ * @author 马雨昂
+ */

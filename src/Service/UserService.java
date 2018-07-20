@@ -5,16 +5,18 @@ import Dao.Dao;
 import Dao.UserDao;
 
 /**
- * Start �ṩ���û�����е���صĲ����ķ���
- * 
- * @author ��־��
+ * Start 
+ * 提供对user表操作的相关方法 
+ * @author 宁志豪、马雨昂
  *
  */
 public class UserService extends Dao<UserBean> implements UserDao {
 
 	@Override
 	/**
-	 * �����ݿ��ȡ��ǰ�û�����Ϣ
+	 * 通过id获取当前用户信息
+	 * @param i:用户id
+	 * @return 存储用户信息的UserBean类
 	 */
 	public UserBean getUser(int i) {
 		// TODO Auto-generated method stub
@@ -24,7 +26,8 @@ public class UserService extends Dao<UserBean> implements UserDao {
 	
 	@Override
 	/**
-	 * ���û�ע�����Ϣ���뵽���ݿ�
+	 * 添加用户到user表
+	 * @param user:存有用户信息的UserBean
 	 */
 	public void addUser(UserBean user) {
 		// TODO Auto-generated method stub
@@ -34,17 +37,11 @@ public class UserService extends Dao<UserBean> implements UserDao {
 
 	}
 	
-	public void UpdateUserWithnewname(int i, String UserName, String Password, String sex, int age, String Profession, String Description) {
-		String sql = "UPDATE user SET UserName='" + UserName +"',"
-								+" Password='" + Password + "',"
-								+" Sex='" + sex + "',"
-								+" Age=" + age + ","
-								+" Profession='" + Profession + "',"
-								+" Description='" + Description + "' WHERE UserID=" + i + ";";
-		update(sql);
-		System.out.println("COMPLETE updating user information by using " + sql);
-	}
-	
+	@Override
+	/**
+	 * 修改个人资料
+	 * @param name:用户id，新密码，性别，年龄，职业，描述等个人信息
+	 */
 	public void UpdateUserWitholdname(int i, String Password, String sex, int age, String Profession, String Description) {
 		String sql = "UPDATE user SET"
 								+" Password='" + Password + "',"
@@ -60,7 +57,9 @@ public class UserService extends Dao<UserBean> implements UserDao {
 	
 	@Override
 	/**
-	 * �����û����������ݿ����û���Ϣ
+	 * 通过用户名称获得用户信息
+	 * @param name:用户名称
+	 * @return 存储用户信息的UserBean类
 	 */
 	public UserBean getUserByName(String name) {
 		String sql="select * from user where UserName=?";
@@ -70,5 +69,5 @@ public class UserService extends Dao<UserBean> implements UserDao {
 /**
  * END
  * 
- * @author ��־��
+ * @author 宁志豪、马雨昂
  */

@@ -12,9 +12,7 @@ import javax.servlet.http.HttpSession;
  * 	切换用户
  * @author 毛恺
  */
-/**
- * Servlet implementation class SwitchUserServlet
- */
+
 @WebServlet(name="SwitchUserServlet",urlPatterns= {"/switchUserServlet"})
 public class SwitchUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

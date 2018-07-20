@@ -36,7 +36,7 @@
 
 <!--
 	Start
-	实现信息的传输以及界面的跳转
+	个人主页，实现各个按钮的功能，并展示相应信息
 	@author 宁志豪
 -->
 <script type="text/javascript"

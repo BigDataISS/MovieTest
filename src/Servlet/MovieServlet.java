@@ -38,12 +38,10 @@ public class MovieServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//MovieService movieService = new MovieService();
 		MovieService movieService = new MovieService();
 		List<MovieBean> movieList = movieService.getListMovie();
 		HttpSession session = request.getSession();
 		session.setAttribute("movieList", movieList);
-		//session.setAttribute("userid", 0);
 		request.getRequestDispatcher("index.jsp").forward(request,response);
 	}
 

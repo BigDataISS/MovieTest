@@ -6,15 +6,18 @@ import Dao.RateDao;
 
 /**
  * Start
- * ����sql���ʵ�ֶ����ݿ�Ĳ���
- * @author ��־��
+ * 提供对评分表操作的方法
+ * @author 宁志豪
  *
  */
 public class RateService extends Dao<RateBean> implements RateDao {
 
 	@Override
 	/**
-	 * ��ȡ�û�������
+	 * 获得用户对电影的评分
+	 * @param userId:用户id
+	 * @param movieId:电影id
+	 * @return 存储评分信息的RateBean类
 	 */
 	public RateBean getRate(int userId, int movieId) {
 		// TODO Auto-generated method stub
@@ -24,7 +27,10 @@ public class RateService extends Dao<RateBean> implements RateDao {
 	
 	@Override
 	/**
-	 * ����û������ֵ����ֱ�
+	 * 添加用户评分到评分表
+	 * @param userId:用户id
+	 * @param movieId:电影id
+	 * @param rate:评分
 	 */
 	public void addRatingByUser(int userId,int movieId,double rate){
 		String sql="insert into ratebyuser2 values (?,?,?)";
@@ -33,5 +39,5 @@ public class RateService extends Dao<RateBean> implements RateDao {
 }
 /**
  * END
- * @author ��־��
+ * @author 宁志豪
  */

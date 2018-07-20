@@ -124,6 +124,9 @@
 	   
 	    
 });
+    /**
+    	查询方法
+    **/
     function search(){
     	var input=$("#search");
     	

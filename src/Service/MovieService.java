@@ -10,7 +10,7 @@ import Dao.MovieDao;
 /**
  * Start
  * 实现从数据库获得数据的方法
- * @author 宁志豪
+ * @author 宁志豪、李耀鹏
  *
  */
 
@@ -30,8 +30,8 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * 鑾峰緱鐑棬鐢靛奖淇℃伅锛屽嵆褰撳墠movie琛ㄧ殑鍓嶄笁閮ㄧ數褰憋紝瀛樺偍鍦↙ist涓�
-	 * @return 瀛樺偍movie淇℃伅鐨凩ist
+	 * 获得热门电影信息，即当前movie表的前九部电影，存储在List中
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getListMovie() {
 		// TODO Auto-generated method stub
@@ -42,22 +42,23 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * 鑾峰緱涓庡綋鍓嶇數褰卞悓绫诲瀷鐨勯珮鍒嗙數褰�
-	 * @param type:褰撳墠鐢靛奖绫诲瀷
-	 * @param movieId:褰撳墠鐢靛奖鐨処D
-	 * @return 瀛樺偍movie淇℃伅鐨凩ist
+	 * 获得与当前电影同类型的高分电影
+	 * @param type:当前电影类型
+	 * @param movieId:当前电影的ID
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getListMovieByType(String type,int movieId) {
 		// TODO Auto-generated method stub
 		String[] types;
-		types=type.split(" ");		//褰撳墠鐢靛奖鐨勭被鍨嬪彲鑳戒細鏈夊涓紝瀵瑰畠杩涜鍒嗗壊鑾峰緱澶氫釜灏忔爣绛�
+		//当前电影的类型可能会有多个，对它进行分割获得多个小标签
+		types=type.split(" ");		
 		List<MovieBean> mvbs=new ArrayList<MovieBean>();
 		int hasAdd=0;
 		int loopTime=0;
 		
 		/**
-		 * 鑻ュ綋鍓嶇數褰辨湁澶氫釜鏍囩锛屽垯姣忎釜鏍囩杞祦鍙栦竴涓�
-		 * 鐩磋嚦鍙栧埌涓夐儴鐢靛奖
+		 * 若当前电影有多个标签，则每个标签轮流取一个
+		 * 直至取至九部电影
 		 */
 		while(hasAdd<9) {
 			for(String str:types) {
@@ -88,8 +89,8 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 				}
 			}
 			/**
-			 * 寰幆澶氭鍚庝緷鐒舵棤娉曞彇寰椾笁閮紝
-			 * 璇存槑鏁版嵁搴撳凡鏃犳暟鎹紝鎵撶牬寰幆
+			 * 循环多次后依然无法取得九部，
+			 * 说明数据库已无数据，打破循环
 			 */
 			loopTime++;
 			if(loopTime>9)
@@ -102,9 +103,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * 浠庢帹鑽愯〃涓幏寰楁帹鑽愮數褰�
-	 * @param i:褰撳墠session鐢ㄦ埛鐨刬d
-	 * @return 瀛樺偍movie淇℃伅鐨凩ist
+	 * 从推荐表中获得推荐电影
+	 * @param i:当前session用户的id
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getRecommendMovie(int i) throws SQLException {
 		// TODO Auto-generated method stub
@@ -116,9 +117,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/** 
-	 * 鏍规嵁鐢靛奖鐨勭浉鍏充俊鎭幏寰椾竴绯诲垪鐢靛奖锛屽瓨鍌ㄥ湪List涓�
-	 * @param name:鐢ㄦ埛杈撳叆鐨勫叧閿瓧
-	 * @return 瀛樺偍movie淇℃伅鐨凩ist
+	 * 根据电影的相关信息获得一系列电影，存储在List中
+	 * @param name:用户输入的关键字
+	 * @return 存储movie信息的List
 	 */
 	public List<MovieBean> getMovieByName(String name){		
 		String newName="%";		
@@ -158,8 +159,8 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * 鍒犻櫎鎺ㄨ崘琛ㄤ腑鐢ㄦ埛鐨勬帹鑽愪俊鎭�
-	 * @param id:褰撳墠session涓殑鐢ㄦ埛id
+	 * 删除推荐表中用户的推荐信息
+	 * @param id:当前session中的用户id
 	 */
 	public void deleteRecommendMovie(int id) {
 		String sql="delete from recommend where userId=?";
@@ -170,9 +171,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * 鑾峰彇鍚岀被鍨嬬殑鎵�鏈夌數褰�
-	 * @param type:鐢靛奖绫诲瀷
-	 * @return 鍚岀被鍨嬬數褰辩殑List
+	 * 获取同类型的所有电影
+	 * @param type:电影类型
+	 * @return 同类型电影的List
 	 */
 	public List<MovieBean> getMovieByType(String type){
 		
@@ -189,9 +190,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * 閫氳繃鐢靛奖鍚嶇О鑾峰彇璇ラ儴鐢靛奖鐨勬墍鏈変俊鎭�
-	 * @param name:鐢靛奖鍚嶇О
-	 * @return 瀛樺偍鐢靛奖淇℃伅鐨凪ovieBean绫�
+	 * 通过电影名称获取该部电影的所有信息
+	 * @param name:电影名称
+	 * @return 存储电影信息的MovieBean类
 	 */
 	public MovieBean getTheMovieByName(String name) {
 		String sql="select * from movie where name = ?";
@@ -201,9 +202,9 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * 鍚戞帹鑽愯〃涓姞鍏ユ帹鑽愮殑鐢靛奖
-	 * @param m:鐢ㄦ埛id
-	 * @param n:鐢靛奖id
+	 * 向推荐表中加入推荐的电影
+	 * @param m:用户id
+	 * @param n:电影id
 	 */
 	public void addRecommendMovie(int m,int n) {
 		String sql="insert into recommend values (?,?)";
@@ -213,7 +214,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 	
 	@Override
 	/**
-	 * ���û��������¼�������ݿ� 
+	 * 向浏览记录表中添加电影
 	 */
 	public void addViewRecordMovie(int userId,int movieId,String time) {
 		String sql="insert into viewrecord values (?,?,?)";
@@ -260,7 +261,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 }
 /**
  * END
- * @author 瀹佸織璞�
+ * @author 宁志豪、李耀鹏
  */
  
 

@@ -68,10 +68,12 @@ public class MovieDetailServlet extends HttpServlet {
 			
 			//获取响应view按钮的当前时间并格式化(有用户登入的情况下)
 			Date date=new Date();
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   //创建一个格式化日期对象
-			String time = simpleDateFormat.format(date);//格式化后的时间
-			
-			movieService.addViewRecordMovie(user.getUserId(), movie.getMovieId(),time);			//将用户id、浏览的电影id以及浏览的时间存入数据库
+			//创建一个格式化日期对象
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			//格式化后的时间
+			String time = simpleDateFormat.format(date);
+			//将用户id、浏览的电影id以及浏览的时间存入数据库
+			movieService.addViewRecordMovie(user.getUserId(), movie.getMovieId(),time);			
 			
 			if (rateBean != null) {
 				session.setAttribute("israte", new Double(rateBean.getRatingNum()).intValue());

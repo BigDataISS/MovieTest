@@ -52,3 +52,7 @@ public class cancelCollectiongServlet extends HttpServlet {
 	}
 
 }
+/**
+*	END
+*	@author 李耀鹏
+*/

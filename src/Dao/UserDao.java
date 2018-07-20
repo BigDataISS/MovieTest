@@ -15,8 +15,6 @@ public interface UserDao {
 
 	UserBean getUserByName(String name);
 	
-	void UpdateUserWithnewname(int i, String UserName, String Password, String sex, int age, String Profession, String Description);
-	
 	void UpdateUserWitholdname(int i, String Password, String sex, int age, String Profession, String Description);
 }
 

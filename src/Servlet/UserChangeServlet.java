@@ -12,7 +12,9 @@ import Bean.UserBean;
 import Service.UserService;
 
 /**
- * Servlet implementation class UserChangeServlet
+ * Start
+ * 获得从界面传来的userid并在修改资料界面显示用户名
+ * @author 马雨昂
  */
 @WebServlet("/UserChangeServlet")
 public class UserChangeServlet extends HttpServlet {
@@ -36,3 +38,8 @@ public class UserChangeServlet extends HttpServlet {
 	}
 
 }
+/**
+ * END
+ * 
+ * @author 马雨昂
+ */

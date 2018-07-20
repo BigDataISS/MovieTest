@@ -83,3 +83,7 @@ public class collectDetailServlet extends HttpServlet {
 	}
 
 }
+/**
+*	END
+*	@author 李耀鹏
+*/

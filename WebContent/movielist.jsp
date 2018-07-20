@@ -48,13 +48,17 @@
 	-->
 	<%
 		String notfound = (String) session.getAttribute("notfound");
-		System.out.println(notfound);
-		if (notfound == "1") {
-			List<MovieBean> movieList = (List<MovieBean>) session.getAttribute("movieList");
-			if (movieList == null) {
-				movieList = new ArrayList<MovieBean>();
+			if(notfound==null){
+		response.sendRedirect("MovieServlet");
 			}
-			for (MovieBean movie : movieList) {
+			else{
+			if (notfound == "1") {
+				List<MovieBean> movieList = (List<MovieBean>) session.getAttribute("movieList");
+				if (movieList == null) {
+					movieList = new ArrayList<MovieBean>();
+				}
+
+				for (MovieBean movie : movieList) {
 	%>
 	<div class="col-md-4">
 		<div class="card mb-4 box-shadow">
@@ -64,10 +68,10 @@
 				<p class="card-text">
 					<%
 						if (movie.getDescription().length() > 65) {
-									out.print(movie.getDescription().substring(0, 60) + "......");
-								} else {
-									out.print(movie.getDescription());
-								}
+							out.print(movie.getDescription().substring(0, 60) + "......");
+						} else {
+							out.print(movie.getDescription());
+						}
 					%>
 				</p>
 				<div class="d-flex justify-content-between align-items-center">
@@ -77,12 +81,12 @@
 					</div>
 					<small class="text-muted" name="<%=movie.getName()%>"> 
 					<%
- 						if (movie.getName().length() > 20) {
- 							out.print(movie.getName().substring(0, 15) + "......");
- 						} else {
- 							out.print(movie.getName());
- 						}
- 					%>
+	 					if (movie.getName().length() > 20) {
+	 						out.print(movie.getName().substring(0, 15) + "......");
+		 				} else {
+		 					out.print(movie.getName());
+		 				}
+					%>
 					</small>
 				</div>
 			</div>
@@ -90,11 +94,12 @@
 	</div>
 	<%
 		} //endfor
-		} //endif
-		else {
+			} //endif
+			else {
 	%>
 	<font color="darkgray" size="5"><%=notfound%></font>
 	<%
+		}
 		}
 	%>
 

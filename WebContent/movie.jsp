@@ -346,10 +346,7 @@
 						<p><a class="btn btn-default" href="#" role="button" >View details &raquo;</a></p>
 					</div><!-- /.col-lg-4 -->
 				<% } %>
-				<!--
-					End
-					@author 宁志豪
-				-->
+
 				</div><!-- /.row -->
 			</div>
 		</div>
@@ -429,8 +426,10 @@
 		</div>
 		</div>
 		</div>
-		
-
+		<!--
+			End
+			@author 宁志豪
+		-->
 	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 		<span class="sr-only">Previous</span>
