@@ -56,3 +56,7 @@ public class collectionServlet extends HttpServlet {
 	}
 
 }
+/**
+*	END
+*	@author 李耀鹏
+*/
