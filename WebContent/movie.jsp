@@ -32,6 +32,14 @@
 <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 <script src="js/ie-emulation-modes-warning.js"></script>
 
+<%
+	MovieBean movie=(MovieBean)session.getAttribute("movie");
+	if(movie==null){
+		response.sendRedirect("MovieServlet");		
+	}
+	else{
+%>
+
 <!--
 	Start
 	实现信息的传输以及界面的跳转
@@ -195,7 +203,7 @@
 </div>
 </nav>
 
-<%MovieBean movie=(MovieBean)session.getAttribute("movie"); %>
+
 
 <!--jumbotron 超大屏幕，内容居中显示，两边用底层内容补齐btn btn-primary btn-lg -->
 <div class="jumbotron">
@@ -417,7 +425,7 @@
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
-			<% } %>
+			<% }}%>
 		</div>
 		</div>
 		</div>

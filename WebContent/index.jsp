@@ -206,7 +206,9 @@
 					<% List<MovieBean> movieList = (List<MovieBean>)session.getAttribute("movieList"); 
 						if(movieList == null){
 							movieList = new ArrayList<MovieBean>();
+							response.sendRedirect("MovieServlet");
 						}
+						else{
 						for(int i=0;i<3;i++){
 							MovieBean movie=movieList.get(i);
 			%>
@@ -306,7 +308,7 @@
 				</p>
 			</div>
 			<!-- /.col-lg-4 -->
-			<% } %>
+			<% }} %>
 		</div>
 		</div>
 		</div>

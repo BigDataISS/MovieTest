@@ -57,7 +57,7 @@
    if(userExisted == 1){
 	  session.setAttribute("username",username);
 	  session.setAttribute("userid",userid);
-	  response.sendRedirect("index.jsp");
+	  response.sendRedirect("MovieServlet");
    }
    else if(session.getAttribute("username")!=null && (String)session.getAttribute("username")!=""){
 	   %>
