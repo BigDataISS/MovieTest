@@ -152,7 +152,7 @@ public class MovieService extends Dao<MovieBean> implements MovieDao{
 					movieList.remove(j);
 			}
 		}
-		
+		movieList=movieList.subList(0, 300);
 		return movieList;		
 	}
 	
