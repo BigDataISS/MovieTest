@@ -41,7 +41,7 @@
 	    /**
 		用户点击view按钮，传输电影名，并跳转到电影的具体信息页面 	
 	*/
-    $("#view").click(function() {
+    $(".view").click(function() {
     	var a=$(this).parent().next();
     	
     	console.log(a.attr("name"))
@@ -65,7 +65,7 @@
     /**
 	用户点击Cancel Collection按钮，传输电影名，用户取消对该电影的收藏	
 	*/
-$("#cancel").click(function() {
+$(".cancel").click(function() {
 	var a=$(this).parent().next();
 	
 	console.log(a.attr("name"))
@@ -142,21 +142,21 @@ $("#cancel").click(function() {
 					<img class="card-img-top" src="pics/<%=movie.getName() %>.jpg" alt="Card image cap" width="288" height="440">
 					<div class="card-body">
 						<p class="card-text">
-						<% if(movie.getDescription().length()>65){
-							out.print(movie.getDescription().substring(0,60)+"......");
+						<% if(movie.getDescription().length()>50){
+							out.print(movie.getDescription().substring(0,50)+"......");
 							}else{
 								out.print(movie.getDescription());
 							}
 							%></p>
 						<div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-default" id="view">View</button>
-								<button type="button" class="btn btn-sm btn-default" id="cancel">Cancel Collection</button>
+								<button type="button" class="btn btn-sm btn-default view">View</button>
+								<button type="button" class="btn btn-sm btn-default cancel">Cancel Collection</button>
 							</div>
 							<small class="text-muted" name="<%=movie.getName() %>">
 							<%
-								if(movie.getName().length()>20){
-									out.print(movie.getName().substring(0,15)+"......");
+								if(movie.getName().length()>10){
+									out.print(movie.getName().substring(0,10)+"......");
 								}else{
 									out.print(movie.getName());
 								}
